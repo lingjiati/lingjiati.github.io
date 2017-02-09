@@ -48,11 +48,12 @@
       width:90%;
     }
   }
-  #lower{
+main{
     left: 50%;
     transform: translate(-50%,0%);
 		top:100vh;
 		max-width:calc(100vw - 64px);
+	margin-bottom:40px;
   }
   #scroll{
     position:fixed;
@@ -70,16 +71,16 @@
 </head>
 <body style='overflow-x:hidden'>
   <!--Fixed Background-->
-  <section class='f-width f-height img-container w3-animate-fading' id='fixedbar' style="position:absolute;">
+  <header class='f-width f-height img-container w3-animate-fading' id='fixedbar' style="position:absolute;">
     <img src="http://ninjat.myweb.hinet.net/DSC_3874.jpg" class="f-height" id="fixedimg">
     <div class="w3-display-middle w3-text-white">
       <h1 class="w3-jumbo w3-animate-top">W3.CSS PLUS</h1>
       <hr class="w3-border-white" style="margin:auto;width:40%">
       <p class="w3-large w3-center type-process-1 " id='typing'></p>
     </div>
-  </section>
+  </header>
   <!--Lower Banner-->
-  <main class='w3-sand w3-padding w3-margin-0 card card-2'  id='lower'>
+  <main class='w3-sand w3-padding w3-margin-0 card card-2'>
     <!--Cards-->
     <section >
       <h2>Cards</h2>
