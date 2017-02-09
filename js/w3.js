@@ -168,19 +168,19 @@ var pagecount = (function() {
         return localStorage.visitcount;
     }
 })();
-window.onwheel=function(){
+setInterval(function(){
               var suspendNavigation = document.getElementById("fixedbar");//獲取待定位的元素
               window.onscroll = function(){ //綁定捲軸事件
                   suspendNavigation.style.top = (document.documentElement.scrollTop || document.body.scrollTop)/3.5 + "px";//將元素top定位
               }
-          };
+          });
           var type = function(text,element,speed,mode,callback){
               var input= text,
                   i = 0,
                   to = element,
                   typesrc=element.innerHTML,
                   open=0,
-									action=callback||function(){void(0)},
+		action=callback||function(){void(0)},
                   changeArrow = function(){
                       setInterval(function(){
                           if(element.className.includes('type-process-1'))element.className=element.className.replace('type-process-1','type-process-2')
@@ -212,6 +212,6 @@ window.onload=function(){
 var w = window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth;
 var h = window.innerHeight
 ||document.documentElement.clientHeight||document.body.clientHeight;
-	type('A CSS UI Kit Based On W3.CSS',document.getElementById('typing'),120,false);
+	type('A CSS UI Kit Based On W3.CSS',document.getElementById('typing'),120,false,function(){alert()});
 	if(w/h>1.7){addClass('#fixedimg','f-width');removeClass('#fixedimg','f-height');}
 }
