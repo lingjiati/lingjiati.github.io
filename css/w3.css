@@ -389,6 +389,7 @@ p{line-height: 1.5;}
     position: relative;
     height:40px;
     width:40px;
+    margin-top:50%;
 }
 .checkbox-custom + .checkbox-custom-label:before{
     content: '\e835';
@@ -402,7 +403,6 @@ p{line-height: 1.5;}
     margin-right: 10px;
     text-align: center;
   font-family: 'Material icons';
-  margin-top:0.3em;
 }
 .checkbox-custom:checked + .checkbox-custom-label:before {
     content: "\e834";
