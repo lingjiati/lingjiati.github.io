@@ -29,7 +29,7 @@ legend{color:inherit;display:table;max-width:100%;padding:0;white-space:normal}t
 ::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}
 /* End extract */
 strong,b{font-weight: 500;}
-h1,h2,h3,h4,h5,h6,.w3-slim,.w3-wide{font-family:'Noto Sans TC', 'Microsoft JhengHei', '微軟正黑體', Verdana, Arial, 'Microsoft YaHei',Arial,sans-serif}
+h1,h2,h3,h4,h5,h6,.w3-slim,.w3-wide{font-family:'微軟正黑體'}
 h1{font-size:36px}h2{font-size:30px}h3{font-size:24px}h4{font-size:20px}h5{font-size:18px}h6{font-size:16px}
 .w3-serif{font-family:"Times New Roman",Times,serif}
 h1,h2,h3,h4,h5,h6{font-weight:400;margin:10px 0}.w3-wide{letter-spacing:4px}
