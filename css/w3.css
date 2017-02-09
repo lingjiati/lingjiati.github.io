@@ -389,7 +389,6 @@ p{line-height: 1.5;}
     position: relative;
     height:40px;
     width:40px;
-    margin-top:50%;
 }
 .checkbox-custom + .checkbox-custom-label:before{
     content: '\e835';
