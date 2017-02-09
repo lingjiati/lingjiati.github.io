@@ -390,13 +390,13 @@ p{line-height: 1.5;}
     height:40px;
     width:40px;
 }
-[type="checkbox"] + .checkbox-custom-label:before{
+.checkbox-custom + .checkbox-custom-label:before{
     content: '\e835';
 }
-[type="radio"] + .radio-custom-label:before {
+.radio-custom + .radio-custom-label:before {
     content: '\e836';
 }
-[type="radio"] + .radio-custom-label:before,[type="checkbox"] + .checkbox-custom-label:before {
+.radio-custom + .radio-custom-label:before,.checkbox-custom + .checkbox-custom-label:before {
     display: inline-block;
     vertical-align: middle;
     margin-right: 10px;
@@ -404,11 +404,11 @@ p{line-height: 1.5;}
   font-family: 'Material icons';
   margin-top:-0.3em;
 }
-[type="checkbox"]:checked + .checkbox-custom-label:before {
+.checkbox-custom:checked + .checkbox-custom-label:before {
     content: "\e834";
     font-family: 'Material icons';
 }
-[type="radio"]:checked + .radio-custom-label:before {
+.radio-custom:checked + .radio-custom-label:before {
     content: "\e837";
     font-family: 'Material icons';
 }
