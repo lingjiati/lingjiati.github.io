@@ -208,7 +208,7 @@ setInterval(function(){
                 },speed)
           };
 //demo only
-window.onload=function(){
+function x(){
 var w = window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth;
 var h = window.innerHeight
 ||document.documentElement.clientHeight||document.body.clientHeight;
