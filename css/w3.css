@@ -387,5 +387,5 @@ p{line-height: 1.5;}
 .radio-custom + .radio-custom-label:before,.checkbox-custom + .checkbox-custom-label:before {display: inline-block;vertical-align: middle;margin-right: 10px;text-align: center;font-family: 'Material icons';margin-top:-0.5em;}
 .checkbox-custom:checked + .checkbox-custom-label:before {content: "\e834";font-family: 'Material icons';}
 .radio-custom:checked + .radio-custom-label:before {content: "\e837";font-family: 'Material icons';}
-.round-button{border-radius: 50%;font-size:24px;overflow:hidden;text-align: center;display:block;padding:32px!important;margin: 0 0 35px 35px;}.full-modal-content{width:100vw!important;height:100vh!important;margin:0!important;}
+.round-button{border-radius: 50%;font-size:24px;overflow:hidden;text-align: center;display:block;padding:32px!important;margin-right:35px;margin-bottom:35px;}.full-modal-content{width:100vw!important;height:100vh!important;margin:0!important;}
 .full-modal{overflow:hidden;padding:0 !important;margin:0!important;}
