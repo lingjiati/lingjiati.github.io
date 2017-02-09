@@ -1,1 +1,202 @@
-https://github.com/lingjiati/lingjiati.github.io/blob/master/css/w3.css
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href='https://github.com/lingjiati/lingjiati.github.io/blob/master/css/w3.css' rel='stylesheet'>
+  <script src='https://github.com/lingjiati/lingjiati.github.io/blob/master/js/w3.js'></script>
+  <style>
+  div.card{
+    width:180px;
+    height:180px;
+    background:#fff;
+  }
+  .f-height{
+    height:100%;
+  }
+  .f-width{
+    width:100%;
+  }
+  .img-container{
+    overflow:hidden;
+  }
+  @media (max-width:768px){
+    section{
+      text-align:center
+    }
+    .button{
+      margin:4px 30%;
+    }
+    .w3-animate-input{
+      width:100%!important;
+    }
+    [margin]{
+      float: none!important;
+    }
+  }
+  @media (min-width:993px){
+    .button{
+      margin:4px 18%;
+    }
+    [margin]{
+      margin-left:64px;
+      margin-right:64px;
+    }
+    [input-container]{
+      width:90%;
+    }
+  }
+main{
+    left: 50%;
+    transform: translate(-50%,0%);
+		top:100vh;
+		max-width:calc(100vw - 64px);
+	margin-bottom:40px;
+  }
+  #scroll{
+    position:fixed;
+    bottom:0;
+    right:0;
+    z-index: 2;
+  }
+  td,th{
+    border-color:#ccc
+  }
+  #snackbar>a{
+    color:white;
+  }
+</style>
+</head>
+<body style='overflow-x:hidden' onload="x()">
+  <!--Fixed Background-->
+  <header class='f-width f-height img-container w3-animate-fading' id='fixedbar' style="position:absolute;">
+    <img src="http://ninjat.myweb.hinet.net/DSC_3874.jpg" class="f-height" id="fixedimg">
+    <div class="w3-display-middle w3-text-white">
+      <h1 class="w3-jumbo w3-animate-top">W3.CSS PLUS</h1>
+      <hr class="w3-border-white" style="margin:auto;width:40%">
+      <p class="w3-large w3-center type-process-1 " id='typing'></p>
+    </div>
+  </header>
+  <!--Lower Banner-->
+  <main class='w3-sand w3-padding w3-margin-0 card card-2'>
+    <!--Cards-->
+    <section >
+      <h2>Cards</h2>
+      <div class='card card-1 w3-margin'></div>
+      <div class='card card-2 w3-margin'></div>
+      <div class='card card-3 w3-margin'></div>
+      <div class='card card-4 w3-margin'></div>
+      <div class='card card-5 w3-margin'></div>
+    </section>
+    <!--Buttons-->
+    <section>
+      <h2>Buttons</h2>
+      <div style='float:left' margin>
+        <a class='button flat' href='javascript:void(0)'>Button</a>
+        <a class='button flat ripple' href='javascript:void(0)'>Button</a>
+        <a class='button flat w3-text-indigo' href='javascript:void(0)'>Button</a>
+      </div>
+      <div style='float:right' margin>
+        <a class='button card-2' href='javascript:void(0)'>Button</a>
+        <a class='button card-2 ripple' href='javascript:void(0)'>Button</a>
+        <a class='button w3-indigo card-2' href='javascript:void(0)'>Button</a>
+      </div> 
+      <div style="clear:both"></div>
+    </section>
+    <!--Radio & Checkbox-->
+    <section>
+      <h2>Radio & Checkbox</h2>
+      <form style='text-align:center'>
+        <input id="radio-1" class="radio-custom" name="radio-group" type="radio" checked>
+        <label for="radio-1" class="radio-custom-label hoverable"></label>
+        <input id="radio-2" class="radio-custom" name="radio-group" type="radio">
+        <label for="radio-2" class="radio-custom-label hoverable"></label>
+        <input id="radio-3" class="radio-custom" name="radio-group" type="radio">
+        <label for="radio-3" class="radio-custom-label hoverable"></label><br>
+        <input id="checkbox-1" class="checkbox-custom" type="checkbox" checked>
+        <label for="checkbox-1" class="checkbox-custom-label hoverable"></label>
+        <input id="checkbox-2" class="checkbox-custom" name="checkbox-2" type="checkbox">
+        <label for="checkbox-2" class="checkbox-custom-label hoverable"></label>
+        <input id="checkbox-3" class="checkbox-custom" name="checkbox-3" type="checkbox">
+        <label for="checkbox-3" class="checkbox-custom-label hoverable"></label>
+      </form>
+    </section>
+    <!--Inputs-->
+    <section>
+      <h2>Inputs</h2>
+      <div input-container>
+        <input class='w3-input' placeholder="A Input">
+        <input class='w3-input w3-round' placeholder="Rounded">
+        <input class='w3-input w3-animate-input' style='width:40%' placeholder="Animate Input - Click Me!">
+      </div>
+    </section>
+    <!--Snackbar-->
+    <section>
+      <h2>Snackbar</h2>
+      <a href="javascript:toast('Hi!')" class='button flat ripple'>Snackbar</a>
+      <a href="javascript:toast('Hi! Click Me To Access ','Microsoft','http://microsoft.com')" class='button flat ripple'>With Link</a>
+    </section>
+    <!--Table-->
+    <section>
+      <h2>Filter Table</h2>
+      <input class="w3-input card card-2 w3-padding"  placeholder="Filter..." id="myInput" onkeyup="filterHTML('#myTable','[ex]',this.value)">
+      <table class="w3-table w3-hoverable w3-border-ccc w3-white card-2" rules="rows" id="myTable">
+        <tr>
+          <th style="width:60%;">Name</th>
+          <th style="width:40%;">Country</th>
+        </tr>
+        <tr ex>
+          <td>Alfreds Futterkiste</td>
+          <td>Germany</td>
+        </tr>
+        <tr ex>
+          <td>Berglunds snabbkop</td>
+          <td>Sweden</td>
+        </tr>
+        <tr ex>
+          <td>Island Trading</td>
+          <td>UK</td>
+        </tr>
+        <tr ex>
+          <td>Koniglich Essen</td>
+          <td>Germany</td>
+        </tr>
+        <tr ex>
+          <td>Laughing Bacchus Winecellars</td>
+          <td>Canada</td>
+        </tr>
+      </table>
+    </section>
+    <!--Modal-->
+    <section>
+      <h2>Open A Model</h2>
+      <a class='button' onclick='show("#id02")'>Modal</a>
+      <a class='button' onclick='show("#id01")'>Animated</a>
+    </section>
+  </main>
+  <modal id="id01" class="w3-modal ">
+    <div class="w3-modal-content w3-animate-zoom card-4 ">
+      <header class="w3-container w3-teal">
+        <i onclick="hide('#id01')" class="w3-closebtn material-icons">close</i>
+        <h2>Modal Header</h2>
+      </header>
+      <div class='w3-container'>
+        <h2>About...</h2>
+        <p>A modal made by javascript.</p>
+        <p>It is pretty useful!</p>
+      </div>
+    </div>
+  </modal>
+  <modal id="id02" class="w3-animate-left w3-modal full-modal">
+    <div class="w3-modal-content full-modal-content">
+      <header class="w3-container">
+        <i onclick="hide('#id02')" class="w3-closebtn material-icons">close</i>
+        <h2>Modal Header</h2>
+      </header>
+    </div>
+  </modal>
+  <hr class='divider w3-display-bottommiddle'>
+  <a id='scroll' href='javascript:window.scrollTo(0, 0);' class='w3-indigo ripple card-3 round-button'><i class='material-icons w3-display-middle'>arrow_upward</i></a>
+</body>
+</html>
+
