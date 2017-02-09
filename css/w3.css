@@ -220,7 +220,8 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
 .w3-animate-fading{-webkit-animation:fading 10s;animation:fading 10s}
 @-webkit-keyframes fading-if{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
 @-webkit-keyframes fading{0%{opacity:0}100%{opacity:1}}
-@keyframes fading{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+@keyframes fading-if{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+@keyframes fading{0%{opacity:0}100%{opacity:1}}
 .w3-animate-opacity{-webkit-animation:opac 0.8s;animation:opac 0.8s}
 @-webkit-keyframes opac{from{opacity:0} to{opacity:1}}
 @keyframes opac{from{opacity:0} to{opacity:1}}
