@@ -174,12 +174,12 @@ var pagecount = (function() {
         return localStorage.visitcount;
     }
 })();
-setInterval(function(){
+var unscroll = function(){setInterval(function(){
               var suspendNavigation = document.getElementById("fixedbar");//獲取待定位的元素
               window.onscroll = function(){ //綁定捲軸事件
                   suspendNavigation.style.top = (document.documentElement.scrollTop || document.body.scrollTop)/3.5 + "px";//將元素top定位
               }
-          });
+          })};
           var type = function(text,element,speed,mode,callback){
               var input= text,
                   i = 0,
