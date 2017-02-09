@@ -390,7 +390,7 @@ p{line-height: 1.5;}
 .checkbox-custom-label, .radio-custom-label {position:relative;height:40px;width:40px;}
 .checkbox-custom + .checkbox-custom-label:before{content: '\e835';}
 .radio-custom + .radio-custom-label:before {content: '\e836';}
-.radio-custom + .radio-custom-label:before,.checkbox-custom + .checkbox-custom-label:before {display: inline-block;vertical-align: middle;margin-right: 10px;text-align: center;font-family: 'Material icons';margin-top:-0.5em;}
+.radio-custom + .radio-custom-label:before,.checkbox-custom + .checkbox-custom-label:before {display: inline-block;vertical-align: middle;margin-right: 10px;text-align: center;font-family: 'Material icons';margin-top:-0.72em;}
 .checkbox-custom:checked + .checkbox-custom-label:before {content: "\e834";font-family: 'Material icons';}
 .radio-custom:checked + .radio-custom-label:before {content: "\e837";font-family: 'Material icons';}
 .round-button{border-radius: 50%;font-size:24px;overflow:hidden;text-align: center;display:block;padding:32px!important;margin-right:35px;margin-bottom:35px;}.full-modal-content{width:100vw!important;height:100vh!important;margin:0!important;}
