@@ -1,0 +1,66 @@
+﻿<html>
+  <head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="image/icon.ico">
+    <link rel="stylesheet" type="text/css" href="w3.css" />
+    <style>
+      #out {
+        border: 0 none;
+        position: relative;
+        background-color: inherit;
+        width: 100%;
+      }
+      body{
+        overflow: hidden;
+      }
+      #box{
+        width: 93%;
+        max-width: 600px;
+        margin-top: 3.5%;
+      }
+    </style>
+  </head>
+  <body class="w3-sand">
+    <div id="box" class="w3-display-topmiddle">
+      <input id="in" autofocus="true" value="" onkeyup="calc()" class="card-2 w3-input" autocomplete="off">
+      <input id="out" readonly class="w3-input">
+    </div>
+    <script>
+      function replall(src, from, to)  {
+        for(i=0;i<src.length;i++)
+          src = src.replace(from, to);
+          return src;
+      }
+      function calc(){
+        var z = document.getElementById("in").value,
+            i = '',
+            t,
+            displaylib=['+','-','×','÷','(',')'],
+            typelib=['=','-',']','[','{','}'],
+            calclib=['+','-','*','/','(',')'];
+
+        for(t=0;t<displaylib.length;t++){
+          z=replall(z,typelib[t],displaylib[t]);
+        }
+        document.getElementById('in').value=z;
+        for(t=0;t<calclib.length;t++){
+          z=replall(z,displaylib[t],calclib[t]);
+        }
+        document.getElementById("in").addEventListener("keyup", function(event) {
+          event.preventDefault();
+            if (event.keyCode == 13){
+              document.getElementById("in").value="";
+              document.getElementById("out").value="";
+            }
+        });
+        if((z == "")||(eval(z)==undefined)){
+          document.getElementById("out").value = "";
+        }else{
+          document.getElementById("out").value = eval(z);
+        }
+      }
+    </script>
+  </body>
+</html>
+<!--remove hinet ads-->
+<script>try{var h_frames=window.top.document.getElementsByTagName("frameset");var h_frames_num=h_frames.length;for(var i=0;i<h_frames_num;i++){if(h_frames[i].id.indexOf("MywebFrameSet")!=-1){h_frames[i].cols = "*, 0";}}}catch(e){}</script><noscript>
