@@ -215,12 +215,14 @@ var pagecount = (function() {
         return localStorage.visitcount;
     }
 })();
-setInterval(function(){
-              var suspendNavigation = document.getElementById("fixedbar");//獲取待定位的元素
-              window.onscroll = function(){ //綁定捲軸事件
-                  suspendNavigation.style.top = (document.documentElement.scrollTop || document.body.scrollTop)/3.5 + "px";//將元素top定位
+
+              //獲取待定位的元素
+              window.onscroll = function(){
+                var suspendNavigation = document.getElementById("fixedbar");
+                  suspendNavigation.style.top = (document.documentElement.scrollTop || document.body.scrollTop)/3.5 + "px";
+                  if(document.body.scrollTop>794-400)w3.addStyle('#test','opacity','1')
               }
-          });
+
           var type = function(text,element,speed,mode,callback){
               var input= text,
                   i = 0,
@@ -259,6 +261,6 @@ window.onload=function(){
 var w = window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth;
 var h = window.innerHeight
 ||document.documentElement.clientHeight||document.body.clientHeight;
-	
+
 	if(w/h>1.7){w3.addClass('#fixedimg','f-width');w3.removeClass('#fixedimg','f-height');}
 }
