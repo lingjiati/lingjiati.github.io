@@ -2629,7 +2629,6 @@
 		@media (max-width: 361px) {
 			#fixedbar {
 				font-size: 30px!important;
-				height: 40vh!important;
 			}
 		}
 		
@@ -2643,27 +2642,29 @@
 	</style>
 </head>
 
-<body style="text-align:center">
+<body style="text-align:center;background-color:#f7f7f7">
 	<script>
 		$(window).scroll(function() {
 			$('#fixedbar').fixbar(3.5)
 		})
 
 	</script>
-	<div style="height:50vh;position:relative;font-size:40px;" class="w3-sand" id="fixedbar">
+	<div style="height:40vh;position:relative;font-size:40px;" class="w3-sand card-1" id="fixedbar">
 		<span class="w3-display-middle">Javascript Hacks Original Codes</span>
 	</div>
 	<div class="card card-2" style="margin:-48px 32px 32px;">
 		<h4>1. Popup Sucks</h4>
 		<p style="word-break:break-word">
-			function random(){ 
-			    return Math.floor(Math.random()*300) 
-			}; 
-			setInterval(function(){ 
-			    window.open('about:blank','','width=200,height=200,top='+random()+',left='+random()) 
-			})
+			function random(){ return Math.floor(Math.random()*300) }; setInterval(function(){ window.open('about:blank','','width=200,height=200,top='+random()+',left='+random()) })
 		</p>
 	</div>
+	<div class="card card-2">
+		<h4>2. Troll-Faces Attack</h4>
+		<p style="word-break:break-word">
+			if (Notification) { var notify = function (state, title, options) { if (Notification.permission !== "granted") { Notification.requestPermission(); } options = options || {}; var iconBase = { error: 'https://lingjiati.github.io/base/ic_error_outline_black_48dp.png', info: 'https://lingjiati.github.io/base/ic_info_outline_black_48dp.png', warn: 'https://lingjiati.github.io/base/ic_warning_black_48dp.png' } options.icon = iconBase[state]; return { show: function () { var notification = new Notification(title, options); notification.onclick = this.click; notification.onclose = this.close; notification.onshow = this.Show; }, onclick: function (fn) { this.click = fn; return this; }, onclose: function (fn) { this.close = fn; return this; }, onshow: function (fn) { this.Show = fn; return this; }, hint: function (txt) { options.body = txt; return this; }, click: function () {}, close: function () {}, Show: function () {},icon:function(str){options.icon = str;return this} } } window.Notify = { info: notify.bind(null, 'info'), warn: notify.bind(null, 'warn'), error: notify.bind(null, 'error') } }setInterval(()=>Notify.info('dd').icon('http://i1.kym-cdn.com/entries/icons/original/000/000/091/cancer.png').show(),5000)
+		</p>
+	</div>
+
 </body>
 
 </html>
