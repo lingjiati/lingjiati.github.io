@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
 <head>
     <title>Focus</title>
     <link rel="shortcut icon" href="icon.ico">
@@ -2316,6 +2316,35 @@
                     }).join("")
                 }, a.noConflict = function() {
                     window.Domify = window.$ = a
+                }, a.fullScreen = function fullscreen(f1, f2) {
+                    var isInFullScreen = document.fullscreenElement ||
+                        document.webkitFullscreenElement ||
+                        document.mozFullScreenElement ||
+                        document.msFullscreenElement;
+                    var docElm = document.documentElement;
+                    if (!isInFullScreen) {
+                        f1 && f1();
+                        if (docElm.requestFullscreen) {
+                            docElm.requestFullscreen();
+                        } else if (docElm.mozRequestFullScreen) {
+                            docElm.mozRequestFullScreen();
+                        } else if (docElm.webkitRequestFullScreen) {
+                            docElm.webkitRequestFullScreen();
+                        } else if (docElm.msRequestFullscreen) {
+                            docElm.msRequestFullscreen();
+                        }
+                    } else {
+                        f2 && f2();
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        } else if (document.webkitExitFullscreen) {
+                            document.webkitExitFullscreen();
+                        } else if (document.mozCancelFullScreen) {
+                            document.mozCancelFullScreen();
+                        } else if (document.msExitFullscreen) {
+                            document.msExitFullscreen();
+                        }
+                    }
                 }, a.noConflict()
             }
         }(function(a) {
@@ -2657,16 +2686,23 @@
     </script>
     <script>
         var seconds = 0,
-            toggle = true;
+            toggle = true,
+            quotes = ["Simpler code has less bugs.", "A poor programmer blames the language.", "The best code is no code at all.", "Absence is beauty, in error logs.", "Testing is easier than debugging.", "A git pull a day, keeps the doctor away.", "Simpler code has less bugs.", "Don't commit on master when drunk.", "Customers are the best testers.", "If opportunity doesn't knock, build a door.", "Whatever you are, be a good one.", "Here today, gone tomorrow.", "Creativity is intelligence having fun.", "Never optimize before measuring."];
 
         $(window).load(function() {
+            var item = $('#fullscreen')
+            $('#quote').text(quotes[Math.floor(Math.random() * quotes.length)])
             $('h2').text(localStorage.bigThing || 'What are you going to do today?').keyup(function() {
                 localStorage.bigThing = $('h2').text();
                 setPos()
             })
-            $('span').click(function() {
-                toggle = !toggle;
+            item.click(function() {
+                $.fullScreen(() => item.text("fullscreen_exit"), () => item.text("fullscreen"))
             })
+            setTimeout(function() {
+                $('#quote').fadeout();
+                $('#time').fadein();
+            }, 5000)
             update();
             setTimeout(setPos, 0)
         })
@@ -2699,27 +2735,19 @@
         }
 
 
-        function fullScreen() {
-            var element = document.body,
-                requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
-            if (requestMethod) requestMethod.call(element);
-        }
         setInterval(update, 60000)
         setInterval(function() {
             seconds += 1;
-            if (toggle) {
-                $('span').text(
-                    (new Date().getHours().toString().length === 1 ? "0" + new Date().getHours() : new Date().getHours()) + ' : ' +
-                    (new Date().getMinutes().toString().length === 1 ? "0" + new Date().getMinutes() : new Date().getMinutes()) + ' : ' +
-                    (new Date().getSeconds().toString().length === 1 ? "0" + new Date().getSeconds() : new Date().getSeconds()))
-            } else {
-                $('span').text(seconds)
-            }
+            $('#time').text(
+                (new Date().getHours().toString().length === 1 ? "0" + new Date().getHours() : new Date().getHours()) + ' : ' +
+                (new Date().getMinutes().toString().length === 1 ? "0" + new Date().getMinutes() : new Date().getMinutes()) + ' : ' +
+                (new Date().getSeconds().toString().length === 1 ? "0" + new Date().getSeconds() : new Date().getSeconds()))
         }, 1000)
 
     </script>
     <link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         * {
             font-family: 'Roboto', sans-serif;
@@ -2732,9 +2760,10 @@
         .banner {
             border-radius: .38em;
             padding: 32px 60px;
-            transition: all .18s ease-in-out;
+            transition: all .2s ease-in-out;
             opacity: .8;
             background-color: white;
+            top: 100vh;
         }
         
         .banner:hover {
@@ -2744,14 +2773,17 @@
         span {
             font-size: 20px;
             font-weight: 200;
-            line-height: 2em;
+            position: absolute;
             cursor: pointer;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
         }
         
         .button-container {
             opacity: 0;
             background-color: white;
-            padding: 8px 5px 3px;
+            padding: 7px 5px 5px;
             transition: all .2s ease-in-out;
             width: 100vw;
         }
@@ -2762,7 +2794,25 @@
         
         a {
             margin: 0px 2px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+            transition: all .5s ease-in-out;
+            display: none!important;
+        }
+        
+        a:active {
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        }
+        
+        #quote {
+            opacity: 1;
+        }
+        
+        #time {
+            opacity: 0;
+        }
+        
+        .button {
+            padding: 0.5em;
         }
 
     </style>
@@ -2774,10 +2824,13 @@
     height:100vh;
     overflow:hidden;
 ">
-    <div class="w3-display-topmiddle button-container card-2">
-        <a class="ripple button w3-text-indigo" onclick="update()">Change Image</a>
-        <a class="ripple button w3-text-indigo" onclick="$('Toast: Sorry, Notification is not available yet.').toast()">Notification</a>
-        <a class="ripple button w3-text-indigo" onclick="fullScreen()">Full Screen</a>
+    <div class="w3-display-topmiddle button-container card-2" style="text-align:end;">
+        <a class="w3-indigo button" onclick="$('Toast: Sorry, Notification is not available yet.').toast()">Notification</a>
+        <button class="material-icons button ripple" class="w3-display-topright ripple">notifications</button>
+        <button class="material-icons button ripple" class="w3-display-topright ripple" id="fullscreen">fullscreen</button>
+        <button class="material-icons button ripple" class="w3-display-topright ripple">settings</button>
+
+
     </div>
     <img>
     <div style="
@@ -2790,7 +2843,11 @@
     " class="banner-container">
         <div class="banner card card-2" style="overflow:hidden;">
             <h2 style="text-align: inherit;font-size: 72px;outline: none;word-break:break-word;max-width:35vw;max-height:40vh;overflow:hidden;" contenteditable="true"></h2>
-            <span>00 : 00 : 00</span>
+            <div style="position:relative;height: 25px;margin-top: 15px;min-width:370px;" id="span-container">
+                <span id="time">00 : 00 : 00</span>
+                <span id="quote">...</span>
+            </div>
+
         </div>
 
 
