@@ -2685,12 +2685,18 @@
 
     </script>
     <script>
+        if ($.vw < 968) {
+            alert('The "Focus" webapp only supports computer.')
+            window.onload = () => document.body.innerHTML = 'The "Focus" webapp only supports computer.'
+            throw new Error('The "Focus" webapp only supports computer.');
+        }
         var seconds = 0,
             toggle = true,
             quotes = ["Simpler code has less bugs.", "A poor programmer blames the language.", "The best code is no code at all.", "Absence is beauty, in error logs.", "Testing is easier than debugging.", "A git pull a day, keeps the doctor away.", "Simpler code has less bugs.", "Don't commit on master when drunk.", "Customers are the best testers.", "If opportunity doesn't knock, build a door.", "Whatever you are, be a good one.", "Here today, gone tomorrow.", "Creativity is intelligence having fun.", "Never optimize before measuring."];
 
         $(window).load(function() {
             var item = $('#fullscreen')
+
             $('#quote').text(quotes[Math.floor(Math.random() * quotes.length)])
             $('h2').text(localStorage.bigThing || 'What are you going to do today?').keyup(function() {
                 localStorage.bigThing = $('h2').text();
@@ -2700,8 +2706,8 @@
                 $.fullScreen(() => item.text("fullscreen_exit"), () => item.text("fullscreen"))
             })
             setTimeout(function() {
-                $('#quote').fadeout();
-                $('#time').fadein();
+                $('#quote').fadeout(.8);
+                $('#time').fadein(.8);
             }, 5000)
             update();
             setTimeout(setPos, 0)
@@ -2763,7 +2769,7 @@
             transition: all .2s ease-in-out;
             opacity: .8;
             background-color: white;
-            top: 40vh;
+            top: 100vh;
         }
         
         .banner:hover {
@@ -2814,6 +2820,10 @@
         .button {
             padding: 0.5em;
         }
+        
+        .material-icons {
+            color: white;
+        }
 
     </style>
 </head>
@@ -2824,8 +2834,8 @@
     height:100vh;
     overflow:hidden;
 ">
-    <div class="w3-display-topmiddle button-container card-2" style="text-align:end;">
-        <div style="position:absolute;margin:8px 25px;font-size: 24px;">Tool Bar</div>
+    <div class="w3-display-topmiddle button-container card-2 w3-indigo" style="text-align:end;">
+        <div style="position:absolute;margin:7.5px 25px;font-size: 24px;">Tool Bar</div>
         <a class="w3-indigo button" onclick="$('Toast: Sorry, Notification is not available yet.').toast()">Notification</a>
         <button class="material-icons button ripple" class="w3-display-topright ripple">notifications</button>
         <button class="material-icons button ripple" class="w3-display-topright ripple" id="fullscreen">fullscreen</button>
