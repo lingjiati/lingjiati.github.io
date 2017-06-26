@@ -3,8 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <head>
-    <title>Focus - For Studing, Working...</title>
-    <link rel="shortcut icon" href="icon.ico">
+    <title>Focus - For Studying, Working...</title>
+    <link rel="shortcut icon" href="icon.png">
     <style>
         /*!
  * 
@@ -287,7 +287,7 @@
         h5,
         h6 {
             font-weight: 400;
-            margin: 10px 0
+            margin: 20px 0 10px;
         }
         
         .w3-wide {
@@ -456,6 +456,7 @@
             font-weight: bold;
             color: inherit;
             margin: 16px 8px;
+            transition: all 0.2s ease-in-out;
         }
         
         .full-modal {
@@ -563,37 +564,31 @@
         
         .w3-amber,
         .w3-hover-amber:hover {
-            color: #000!important;
             background-color: #ffc107!important
         }
         
         .w3-aqua,
         .w3-hover-aqua:hover {
-            color: #000!important;
             background-color: #00ffff!important
         }
         
         .w3-blue,
         .w3-hover-blue:hover {
-            color: #fff!important;
             background-color: #2196F3!important
         }
         
         .w3-light-blue,
         .w3-hover-light-blue:hover {
-            color: #000!important;
             background-color: #87CEEB!important
         }
         
         .w3-brown,
         .w3-hover-brown:hover {
-            color: #fff!important;
             background-color: #795548!important
         }
         
         .w3-cyan,
         .w3-hover-cyan:hover {
-            color: #000!important;
             background-color: #00bcd4!important
         }
         
@@ -601,103 +596,86 @@
         .w3-hover-blue-grey:hover,
         .w3-blue-gray,
         .w3-hover-blue-gray:hover {
-            color: #fff!important;
             background-color: #607d8b!important
         }
         
         .w3-green,
         .w3-hover-green:hover {
-            color: #fff!important;
             background-color: #4CAF50!important
         }
         
         .w3-light-green,
         .w3-hover-light-green:hover {
-            color: #000!important;
             background-color: #8bc34a!important
         }
         
         .w3-indigo,
         .w3-hover-indigo:hover {
-            color: #fff!important;
             background-color: #3f51b5!important
         }
         
         .w3-khaki,
         .w3-hover-khaki:hover {
-            color: #000!important;
             background-color: #f0e68c!important
         }
         
         .w3-lime,
         .w3-hover-lime:hover {
-            color: #000!important;
             background-color: #cddc39!important
         }
         
         .w3-orange,
         .w3-hover-orange:hover {
-            color: #000!important;
             background-color: #ff9800!important
         }
         
         .w3-deep-orange,
         .w3-hover-deep-orange:hover {
-            color: #fff!important;
             background-color: #ff5722!important
         }
         
         .w3-pink,
         .w3-hover-pink:hover {
-            color: #fff!important;
             background-color: #e91e63!important
         }
         
         .w3-purple,
         .w3-hover-purple:hover {
-            color: #fff!important;
             background-color: #9c27b0!important
         }
         
         .w3-deep-purple,
         .w3-hover-deep-purple:hover {
-            color: #fff!important;
             background-color: #673ab7!important
         }
         
         .w3-red,
         .w3-hover-red:hover {
-            color: #fff!important;
             background-color: #f44336!important
         }
         
         .w3-sand,
         .w3-hover-sand:hover {
-            color: #000!important;
             background-color: #f8f2e3!important
         }
         
         .w3-teal,
         .w3-hover-teal:hover {
-            color: #fff!important;
             background-color: #009688!important
         }
         
         .w3-yellow,
         .w3-hover-yellow:hover {
-            color: #000!important;
             background-color: #ffeb3b!important
         }
         
         .w3-white,
         .w3-hover-white:hover {
-            color: #000!important;
             background-color: #fff!important
         }
         
         .w3-black,
         .w3-hover-black:hover {
-            color: #fff!important;
             background-color: #000!important
         }
         
@@ -705,7 +683,6 @@
         .w3-hover-grey:hover,
         .w3-gray,
         .w3-hover-gray:hover {
-            color: #000!important;
             background-color: #9e9e9e!important
         }
         
@@ -713,7 +690,6 @@
         .w3-hover-light-grey:hover,
         .w3-light-gray,
         .w3-hover-light-gray:hover {
-            color: #000!important;
             background-color: #f1f1f1!important
         }
         
@@ -721,31 +697,26 @@
         .w3-hover-dark-grey:hover,
         .w3-dark-gray,
         .w3-hover-dark-gray:hover {
-            color: #fff!important;
             background-color: #616161!important
         }
         
         .w3-pale-red,
         .w3-hover-pale-red:hover {
-            color: #000!important;
             background-color: #ffdddd!important
         }
         
         .w3-pale-green,
         .w3-hover-pale-green:hover {
-            color: #000!important;
             background-color: #ddffdd!important
         }
         
         .w3-pale-yellow,
         .w3-hover-pale-yellow:hover {
-            color: #000!important;
             background-color: #ffffcc!important
         }
         
         .w3-pale-blue,
         .w3-hover-pale-blue:hover {
-            color: #000!important;
             background-color: #ddffff!important
         }
         
@@ -2698,8 +2669,8 @@
             var item = $('#fullscreen')
 
             $('#quote').text(quotes[Math.floor(Math.random() * quotes.length)])
-            $('h2').text(localStorage.bigThing || 'What are you going to do today?').keyup(function() {
-                localStorage.bigThing = $('h2').text();
+            $('h1').text(localStorage.bigThing || 'What are you going to do today?').keyup(function() {
+                localStorage.bigThing = $('h1').text();
                 setPos()
             })
             item.click(function() {
@@ -2711,6 +2682,29 @@
             }, 5000)
             update();
             setTimeout(setPos, 0)
+            document.querySelectorAll('span').forEach(function(span) {
+                span.onclick = function() {
+                    var self = this,
+                        result = localStorage.bgcolor = $(self).css('background-color')
+                    document.querySelectorAll('span').forEach(function(span) {
+                        span.style.borderWidth = "0";
+                    })
+                    setTimeout(function() {
+                        self.style.borderWidth = "4px";
+                        self.style.borderStyle = "solid";
+                        self.style.borderColor = "white";
+                    }, 0);
+                    $('header').each(function() {
+                        $(this).css('background-color', result)
+                    })
+                }
+            })
+            $('header').css('background-color', localStorage.bgcolor || 'rgb(63, 81, 181)')
+            $('#save').click(function() {
+                setTimeout(function() {
+                    $.Notify.info($('#autoperiod').val()).show()
+                }, parseInt($('#nTime').val() * 60000))
+            })
         })
 
         $(window).resize(function() {
@@ -2759,7 +2753,7 @@
             font-family: 'Roboto', sans-serif;
         }
         
-        h2 {
+        h1 {
             font-family: 'Noto serif', serif;
         }
         
@@ -2767,7 +2761,7 @@
             border-radius: .38em;
             padding: 32px 60px;
             transition: all .2s ease-in-out;
-            opacity: .8;
+            opacity: .83;
             background-color: white;
             top: 100vh;
         }
@@ -2776,7 +2770,8 @@
             opacity: 1!important;
         }
         
-        span {
+        #time,
+        #quote {
             font-size: 20px;
             font-weight: 200;
             position: absolute;
@@ -2817,12 +2812,40 @@
             opacity: 0;
         }
         
-        .button {
+        .button.material-icons {
             padding: 0.5em;
         }
         
         .material-icons {
             color: white;
+        }
+        
+        header {
+            color: white!important;
+            transition: all 0.4s ease-in-out;
+        }
+        
+        .w3-container>h2 {
+            margin: 20px 0 10px;
+        }
+        
+        span {
+            height: 45px;
+            width: 45px;
+            border-radius: 50%;
+            display: inline-block;
+            transition: all 0.3s ease-in-out;
+            opacity: .9;
+            margin: 8px;
+        }
+        
+        h1>div {
+            font-family: inherit;
+        }
+        
+        input {
+            outline: none;
+            border: none;
         }
 
     </style>
@@ -2834,15 +2857,13 @@
     height:100vh;
     overflow:hidden;
 ">
-    <div class="w3-display-topmiddle button-container card-2 w3-indigo" style="text-align:end;">
-        <div style="position:absolute;margin:7.5px 25px;font-size: 24px;">Tool Bar</div>
-        <a class="w3-indigo button" onclick="$('Toast: Sorry, Notification is not available yet.').toast()">Notification</a>
-        <button class="material-icons button ripple" class="w3-display-topright ripple">notifications</button>
+    <header class="w3-display-topmiddle button-container card-2 indigo" style="text-align:end;">
+        <div style="position:absolute;margin:7.75px 25px;font-size: 24px;">Tool Bar</div>
+        <button class="material-icons button ripple" class="w3-display-topright ripple" onclick="$('#notify').show('model')">notifications</button>
         <button class="material-icons button ripple" class="w3-display-topright ripple" id="fullscreen">fullscreen</button>
-        <button class="material-icons button ripple" class="w3-display-topright ripple">settings</button>
-
-
-    </div>
+        <button class="material-icons button ripple" class="w3-display-topright ripple" onclick="update()">cached</button>
+        <button class="material-icons button ripple" class="w3-display-topright ripple" onclick="$('#settings').show('model')">color_lens</button>
+    </header>
     <img>
     <div style="
         text-align: center;          	
@@ -2853,10 +2874,10 @@
         transition: all .2s ease-in-out;
     " class="banner-container">
         <div class="banner card card-2" style="overflow:hidden;">
-            <h2 style="text-align: inherit;font-size: 72px;outline: none;word-break:break-word;max-width:35vw;max-height:40vh;overflow:hidden;" contenteditable="true"></h2>
+            <h1 style="text-align: inherit;font-size: 68px;outline: none;word-break:break-word;max-width:35vw;max-height:40vh;overflow:hidden;" contenteditable="true"></h1>
             <div style="position:relative;height: 25px;margin-top: 15px;min-width:370px;" id="span-container">
-                <span id="time">00 : 00 : 00</span>
-                <span id="quote">...</span>
+                <div id="time">00 : 00 : 00</div>
+                <div id="quote">...</div>
             </div>
 
         </div>
@@ -2864,6 +2885,36 @@
 
 
     </div>
+    <modal id="settings" class="w3-modal w3-left-align">
+        <div class="w3-modal-content w3-animate-zoom card-4 ">
+            <header class="w3-container indigo">
+                <i onclick="$('#settings').hide()" class="w3-closebtn material-icons">close</i>
+                <i class="w3-closebtn material-icons w3-left">color_lens</i>
+            </header>
+            <div class='w3-container' style="border-bottom: 1px #ccc solid;">
+                <h3>Pick a Theme</h3>
+                <span class="w3-cyan"></span>
+                <span class="w3-pink"></span>
+                <span class="w3-green"></span>
+                <span class="w3-orange"></span>
+                <span class="w3-indigo"></span>
+            </div>
+        </div>
+    </modal>
+    <modal id="notify" class="w3-modal w3-left-align">
+        <div class="w3-modal-content w3-animate-zoom card-4 ">
+            <header class="w3-container indigo">
+                <i onclick="$('#notify').hide()" class="w3-closebtn material-icons">close</i>
+                <i class="w3-closebtn material-icons w3-left">notifications</i>
+            </header>
+            <div class='w3-container'>
+                <h3>Notifications</h3>
+                <p>After <input placeholder="1" style="width:8px" id="nTime"> minutes, remind me to <input placeholder="Do something." id="autoperiod">
+                    <header class="card card-2 button ripple" style="font-size: 90%;margin:-4px 0px;" id="save">Save</header>
+                </p>
+            </div>
+        </div>
+    </modal>
 </body>
 
 </html>
