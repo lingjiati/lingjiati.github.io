@@ -4,15 +4,8 @@
 
 <head>
     <title>Focus - For Studying, Working...</title>
-    <link rel="shortcut icon" href="icon.ico">
+    <link rel="shortcut icon" href="icon.png">
     <style>
-        /*!
- * 
- * Includes W3.CSS
- * Includes Normalize.css
- *
-*/
-        /* Normalize */
         
         html {
             box-sizing: border-box
@@ -2682,15 +2675,15 @@
             }, 5000)
             update();
             setTimeout(setPos, 0)
-            document.querySelectorAll('span').forEach(function(span) {
+            document.querySelectorAll('.w3-container span').forEach(function(span) {
                 span.onclick = function() {
                     var self = this,
                         result = localStorage.bgcolor = $(self).css('background-color')
-                    document.querySelectorAll('span').forEach(function(span) {
+                    document.querySelectorAll('.w3-container span').forEach(function(span) {
                         span.style.borderWidth = "0";
                     })
                     setTimeout(function() {
-                        self.style.borderWidth = "4px";
+                        self.style.borderWidth = "5px";
                         self.style.borderStyle = "solid";
                         self.style.borderColor = "white";
                     }, 0);
@@ -2702,7 +2695,7 @@
             $('header').css('background-color', localStorage.bgcolor || 'rgb(63, 81, 181)')
             $('#save').click(function() {
                 setTimeout(function() {
-                    $.Notify.info($('#autoperiod').val()).show()
+                    notify($('#autoperiod').val())
                 }, parseInt($('#nTime').val() * 60000))
             })
         })
@@ -2720,11 +2713,11 @@
             setTimeout(function() {
                 ontime = true;
             }, 500)
-            $('img').fadeout(.6).attr('src', ('https://source.unsplash.com/random/' + screen.width + 'x' + screen.height + '?time=' + new Date().getTime())).load(function() {
+            $('#unsplash').fadeout(.6).attr('src', ('https://source.unsplash.com/random/' + screen.width + 'x' + screen.height + '?time=' + new Date().getTime())).load(function() {
                 function fadein() {
                     if (ontime) {
                         ontime = false;
-                        return $('img').fadein(.6);
+                        return $('#unsplash').fadein(.6);
                     }
                     setTimeout(function() {
                         fadein()
@@ -2734,7 +2727,11 @@
             })
         }
 
-
+        function notify(text) {
+            text = text || "Untitled Task"
+            var basetext = $('script').nth(2).text();
+            $('body').append($(basetext.replace('MX', text))).delay(0).callback(()=>$('#notification').css('opacity', '0').fadein())
+        }
         setInterval(update, 60000)
         setInterval(function() {
             seconds += 1;
@@ -2758,7 +2755,7 @@
         }
         
         .banner {
-            border-radius: .38em;
+            border-radius: .28em;
             padding: 32px 60px;
             transition: all .2s ease-in-out;
             opacity: .83;
@@ -2795,9 +2792,7 @@
         
         a {
             margin: 0px 2px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
             transition: all .5s ease-in-out;
-            display: none!important;
         }
         
         a:active {
@@ -2829,7 +2824,7 @@
             margin: 20px 0 10px;
         }
         
-        span {
+        .w3-container span {
             height: 45px;
             width: 45px;
             border-radius: 50%;
@@ -2846,8 +2841,14 @@
         input {
             outline: none;
             border: none;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            padding: 2px 1px;
+            transition: all 0.3s ease-in-out;
         }
-
+        
+        input:focus{
+            box-shadow: none;
+        }
     </style>
 </head>
 
@@ -2857,6 +2858,7 @@
     height:100vh;
     overflow:hidden;
 ">
+    <img src="https://lingjiati.github.io/base/ic_check_black_48dp.png" style="position:absolute;opacity:0;">
     <header class="w3-display-topmiddle button-container card-2 indigo" style="text-align:end;">
         <div style="position:absolute;margin:7.75px 25px;font-size: 24px;">Tool Bar</div>
         <button class="material-icons button ripple" class="w3-display-topright ripple" onclick="$('#notify').show('model')">notifications</button>
@@ -2864,7 +2866,7 @@
         <button class="material-icons button ripple" class="w3-display-topright ripple" onclick="update()">cached</button>
         <button class="material-icons button ripple" class="w3-display-topright ripple" onclick="$('#settings').show('model')">color_lens</button>
     </header>
-    <img>
+    <img id="unsplash">
     <div style="
         text-align: center;          	
         position: absolute;
@@ -2898,6 +2900,8 @@
                 <span class="w3-green"></span>
                 <span class="w3-orange"></span>
                 <span class="w3-indigo"></span>
+                <span class="w3-black"></span>
+                <span class="w3-teal"></span>
             </div>
         </div>
     </modal>
@@ -2909,12 +2913,31 @@
             </header>
             <div class='w3-container'>
                 <h3>Notifications</h3>
-                <p>After <input placeholder="1" style="width:8px" id="nTime"> minutes, remind me to <input placeholder="Do something." id="autoperiod">
+                <p>After <input style="width:28px;" id="nTime"> minutes, remind me to <input id="autoperiod" style="width:150px;">
                     <header class="card card-2 button ripple" style="font-size: 90%;margin:-4px 0px;" id="save">Save</header>
                 </p>
             </div>
         </div>
     </modal>
+    <script type="plaintext">
+        <div class="w3-row card card-2" style="position:fixed;bottom:0;right:0;background-color:white;width:320px;margin:32px;z-index:3;" id="notification">
+            <div style="float:left;width:96px">
+                <img src="https://lingjiati.github.io/base/ic_check_black_48dp.png" style="width:88px;">
+            </div>
+            <div style="width:224px;text-align:start;font-size:20px;float:left;padding:16px 10px;">
+                <span>MX</span>
+                <span class="material-icons ripple" style="float:right;color:black;font-size:18px;cursor:pointer" onclick="$('#notification').fadeout().callback(() => $('#notification').remove())">close</span>
+                <a style="font-size: 15px;
+                      text-decoration: underline;
+                      bottom: 16px;
+                      left: 105px;
+                      position: absolute;
+                      cursor: pointer;
+            " onclick="$('#notify').show('model')">Settings</a>
+            </div>
+        </div>
+    </script>
+
 </body>
 
 </html>
