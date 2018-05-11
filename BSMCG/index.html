@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="Shortcut Icon" type="image/png" href="http://icons.iconarchive.com/icons/papirus-team/papirus-mimetypes/512/app-vnd.insync.link.drive.form-icon.png"/>
+    <title>BSMCG</title>
+    <style>
+        * {
+            font-family: monospace;
+            font-size: 18px;
+        }
+        
+        .console {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            top: 5px;
+            padding: 2px 8px;
+            outline: none !important;
+        }
+        
+        body {
+            margin: 10px 0px 0px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 750px;
+            position: absolute;
+            left: 25px;
+            right: 25px;
+            margin: 0 auto;
+        }
+        
+        input {
+            border: 0;
+            outline: 0;
+        }
+
+    </style>
+    <script>
+        var testmode = false,
+            answer = [],
+            problem = [],
+            choices = [];
+        var container,
+            g = 0,
+            correct,
+            score = 0;
+
+        function makeProblemAnswer(value) {
+            answer = [];
+            problem = [];
+            var problemQuestion = value.split("|"),
+                pair = [];
+            for (i in problemQuestion) {
+                pair = problemQuestion[i].split(":");
+                problem.push(pair[0]);
+                answer.push(pair[1]);
+            }
+            if (answer.length < 4) return false;
+        }
+
+        function random(range) {
+            return Math.floor(Math.random() * range);
+        }
+
+        function shuffle(a) {
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        function test(value) {
+            console.log(choices)
+            console.log(correct)
+            if (choices[Number(value) - 1] == correct) {
+                con("Your answer is correct.")
+                score++;
+            } else {
+                con("Your answer is wrong.")
+                con("The definition of " + problem[g] + " is " + correct + ".", "wrong")
+            }
+            g++;
+            choice();
+        }
+
+        function choice() {
+            var repeat,
+                randList = [],
+                i = 0,
+                rand,
+                j;
+            choices = [];
+            choices.push(correct = answer[g]);
+            randList[0] = g;
+            for (i = 0; i < 3; i++) {
+                repeat = false;
+                rand = random(answer.length);
+                for (j = 0; j < randList.length; j++) {
+                    if (rand === randList[j]) {
+                        repeat = repeat || true;
+                    }
+                }
+                if (repeat === true) {
+                    i--;
+                } else {
+                    randList.push(rand);
+                    choices.push(answer[rand]);
+                }
+
+            }
+            choices = shuffle(choices);
+
+            con("What is the definition of " + problem[g] + "?")
+            for (i = 0; i < 4; i++) {
+                con((i + 1) + ". " + choices[i])
+            };
+            con("&gt;<input id='input' autofocus>", "con")
+            getValue()
+        }
+
+        function con(val, id) {
+            var text = id ? "<div class='console' id=" + id + ">" : "<div class='console'>"
+            container.innerHTML += (text + val + "</div>")
+        }
+
+        function analysis(value) {
+            console.log(g)
+
+            if (!testmode) {
+                if (makeProblemAnswer(value) == false) {
+                    alert("You should enter at least 4 problems.");
+                    return;
+                }
+                testmode = true;
+                choice(value);
+            } else {
+                if (g === answer.length - 1) {
+                    document.getElementById("title").innerHTML = Math.floor(score / answer.length * 100);
+                    do {
+                        var f = document.querySelector(".console:not(#wrong):not(#title)");
+                        f.style.display = "none";
+                        f.id="wrong"
+                    }
+                    while (document.querySelector(".console:not(#wrong):not(#title)"))
+                        return;
+
+                }
+                test(value)
+            }
+
+        }
+
+        function getValue() {
+            var input = document.getElementById("input");
+            input.addEventListener("keyup", function(event) {
+                event.preventDefault();
+                if (event.keyCode === 13) {
+                    analysis(input.value)
+                    var t = document.getElementById("con")
+                    t.style.display = "none";
+                    t.id = "";
+
+                }
+            })
+            input.id = ""
+        }
+        window.onload = function() {
+            getValue();
+            container = document.getElementById("container")
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div class="console" id="title">
+            Bumgyu Style Multiple Choice Generater (BSMCG)
+        </div>
+        <div class="console" id="con">
+            &gt;
+            <input autofocus id="input">
+        </div>
+    </div>
+
+</body>
+
+</html>
