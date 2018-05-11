@@ -118,6 +118,17 @@
                 con((i + 1) + ". " + choices[i])
             };
             con("&gt;<input id='input' autofocus>", "con")
+            document.getElementById("input").focus()            
+            if (g === answer.length) {
+                document.getElementById("title").innerHTML = "Your score is " + Math.floor(score / answer.length * 100);
+                do {
+                    var f = document.querySelector(".console:not(#wrong):not(#title)");
+                    f.style.display = "none";
+                    f.id = "wrong"
+                }
+                while (document.querySelector(".console:not(#wrong):not(#title)"))
+                return;
+            }
             getValue()
         }
 
@@ -138,17 +149,6 @@
                 testmode = true;
                 choice(value);
             } else {
-                if (g === answer.length - 1) {
-                    document.getElementById("title").innerHTML = Math.floor(score / answer.length * 100);
-                    do {
-                        var f = document.querySelector(".console:not(#wrong):not(#title)");
-                        f.style.display = "none";
-                        f.id="wrong"
-                    }
-                    while (document.querySelector(".console:not(#wrong):not(#title)"))
-                        return;
-
-                }
                 test(value)
             }
 
