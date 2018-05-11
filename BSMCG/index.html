@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <link rel="Shortcut Icon" type="image/png" href="http://icons.iconarchive.com/icons/papirus-team/papirus-mimetypes/512/app-vnd.insync.link.drive.form-icon.png"/>
+    <link rel="Shortcut Icon" type="image/png" href="app-vnd.insync.link.drive.form-icon.png"/>
     <title>BSMCG</title>
     <style>
         * {
@@ -123,7 +123,8 @@
 
         function con(val, id) {
             var text = id ? "<div class='console' id=" + id + ">" : "<div class='console'>"
-            container.innerHTML += (text + val + "</div>")
+            container.innerHTML += (text + val + "</div>");
+            window.scrollTo(10000000)
         }
 
         function analysis(value) {
