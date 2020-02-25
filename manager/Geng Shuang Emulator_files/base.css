@@ -1,0 +1,118 @@
+* {
+    transition: all .2s;
+    font-family: 'Roboto Mono', '思源黑体', sans-serif;
+}
+
+body {
+    padding: 20px 30px 40px;
+    background: #EEE;
+    max-width: 700px;
+    margin: 0 auto;
+    color: #333333;
+}
+
+small.label {
+    display: block;
+    font-weight: bold;
+    color: #aaa;
+}
+
+.button {
+    cursor: pointer;
+    background: #333;
+    padding: 12px;
+    color: #EEE;
+    display: inline-block;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.clickable:hover {
+    opacity: 0.6;
+}
+
+input:hover {
+    opacity: 0.8;
+}
+
+input[type="text"] {
+    font-size: 20px;
+    margin: 10px 0 20px;
+    padding: 5px;
+}
+
+input[type="radio"] {
+    font-size: 20px;
+    margin: 10px 0 20px;
+    padding: 5px;
+}
+
+h1 {
+    font-size: 40px;
+}
+#text {
+    padding: 10px 20px;
+    background: #f6f6f6;
+    box-shadow: 0 10px 30px 0 rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+    min-height: 200px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+}
+
+.slogan {
+    opacity: 0.1;
+    display: block;
+    max-width: 300px;
+    margin: 10px auto;
+}
+
+.about {
+    font-size: 10px;
+    display: block;
+    margin: 0 auto 5px;
+    text-align: center;
+    opacity: 0.2;
+}
+
+.actions {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.shuffle {
+    margin-left: 10px;
+    height: 30px;
+}
+
+select {
+    margin: 10px 0 20px;
+    padding: 5px;
+}
+/*
+     FILE ARCHIVED ON 13:07:45 Dec 14, 2019 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 04:57:30 Feb 20, 2020.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  RedisCDXSource: 4.784
+  CDXLines.iter: 14.054 (3)
+  PetaboxLoader3.datanode: 1084.063 (5)
+  esindex: 0.024
+  captures_list: 1119.701
+  exclusion.robots: 0.215
+  LoadShardBlock: 1097.28 (3)
+  PetaboxLoader3.resolve: 91.674 (3)
+  exclusion.robots.policy: 0.2
+  load_resource: 307.503
+*/

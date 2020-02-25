@@ -1,0 +1,35 @@
+input[type="text"] {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #222;
+}
+
+input[type="text"]:focus {
+    outline: none;
+}
+
+a, a:link, a:hover, a:visited, a:active {
+    color: inherit;
+}
+
+/*
+     FILE ARCHIVED ON 12:53:20 Dec 14, 2019 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 04:57:30 Feb 20, 2020.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 1099.178
+  exclusion.robots.policy: 0.165
+  RedisCDXSource: 14.331
+  PetaboxLoader3.datanode: 1094.297 (5)
+  exclusion.robots: 0.175
+  load_resource: 268.423
+  LoadShardBlock: 1067.332 (3)
+  CDXLines.iter: 14.275 (3)
+  esindex: 0.012
+  PetaboxLoader3.resolve: 222.997 (2)
+*/
