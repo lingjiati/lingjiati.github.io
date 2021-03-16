@@ -1,0 +1,22 @@
+<script>
+	var x = ["w43.html", "w42.html", "w41.html", "w40.html", "w39.html", "w38.html", "w37.html", "w36.html", "w35.html", "w34.html", "w33.html", "w32.html", "w31.html", "w30.html", "w29.html", "w28.html", "w27.html", "w26.html", "w25.html", "w24.html", "w23.html", "w22.html", "w21.html", "w20.html", "w19.html", "w18.html", "w17.html", "w16.html", "w13.html", "w12.html", "w9.html", "w8.html", "w6.html", "w3.html", "w2.html"];
+	var y = ["不要被____掌控", "說與不說之間", "我看天才時間", "網路與人際互動", "對榮譽考試制度的看法", "我較為認同O國的讓座文化", "等待　　的日子裡（填入字數不限）", "這樣做其實並不傻", "我看網路世界中的人際互動", "從知道到做到", "值得堅持不懈的事", "何等珍貴的幸福時光", "在友善校園裡，我看見……", "我最滿意的作品", "我所認識的臺灣", "在那淚水中，我領悟......", "我終於懂得了他的感受", "那件事，真值得喝采", "我有勇氣拒絕......", "我對班級的付出", "一股撼動人心的力量", "我嘗試這樣解決問題", "我欣賞的生活態度", "我承認我錯了", "我看追星族", "讓自己變得更好", "我喜歡的裝扮", "獨處時", "閱讀的滋味", "一個屬於我的理想房間", "傷痕", "在玩樂中學習", "動人的笑", "爭吵之後", "發現學校的後花園"]
+	var z = Math.floor(Math.random()*x.length);
+	window.onload = function(){
+		document.querySelector('div').innerHTML = y[z]
+	}
+	
+	
+
+</script>
+<style>
+	button{
+	margin-top: 20px;
+    border: none;
+    padding: 10px;
+    margin-right: 10px;
+font-family: sans-serif;}</style>
+<h2 style="margin-bottom: 10px; font-family: sans-serif;">Random Prompt Generator</h2>
+<div></div>
+<button onclick="(function(){var z = Math.floor(Math.random()*x.length);document.querySelector('div').innerHTML = y[z]})()">Redraw</button>
+<button onclick="window.open('https://cap.rcpet.edu.tw/' + x[z])">Go</button>
