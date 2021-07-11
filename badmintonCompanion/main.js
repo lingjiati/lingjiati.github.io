@@ -110,8 +110,8 @@ window.addEventListener('resize', resize)
 //Sort Table
 
 function resize(){
-	if(document.documentElement.clientHeight > document.documentElement.clientWidth) $('body div').hide();
-	else $('body div').show(true);
+	if(document.documentElement.clientHeight > document.documentElement.clientWidth) $('body div').css("opacity", "0");
+	else $('body div').css("opaicty", 1);
 }
 
 function sortTable() {
