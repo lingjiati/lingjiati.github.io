@@ -111,7 +111,7 @@ window.addEventListener('resize', resize)
 
 function resize(){
 	if(document.documentElement.clientHeight > document.documentElement.clientWidth) $('body div').css("opacity", "0");
-	else $('body div').css("opaicty", 1);
+	else $('body div').css("opaicty", "1");
 }
 
 function sortTable() {
