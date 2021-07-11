@@ -181,9 +181,17 @@ button{
 .layer-1, .layer-2, .scoreKeeper{
 	  margin-top: 8vh;
     width: 100%;
-    height: 100%;
+    
     position: absolute;
 	transition: 0.5s;
+}
+
+.layer-1, .layer-2{
+	height: 92%;
+}
+
+.scoreKeeper{
+	height: 100%;
 }
 
 
