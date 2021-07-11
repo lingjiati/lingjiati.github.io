@@ -99,6 +99,11 @@ window.onload = function() {
 	
 }
 
+window.addEventListener('resize', function(){
+	if(document.documentElement.clientHeight > document.documentElement.clientWidth) $('body div').hide();
+	else $('body div').show(true);
+})
+
 //Functions
 
 //Sort Table
