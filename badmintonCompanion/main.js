@@ -9,6 +9,8 @@
 //DOM Setup
 window.onload = function() {
 
+	resize()
+
 	//Add Score
 	$(".scoreKeeper .card").click(function() {
 		
@@ -95,18 +97,23 @@ window.onload = function() {
 	var buttons = document.querySelectorAll('.clickable');
 	Array.prototype.forEach.call(buttons, function(b) {
 		b.addEventListener('click', createRipple);
-	})
+	});
+
+
 	
 }
 
-window.addEventListener('resize', function(){
-	if(document.documentElement.clientHeight > document.documentElement.clientWidth) $('body div').hide();
-	else $('body div').show(true);
-})
+window.addEventListener('resize', resize)
 
 //Functions
 
 //Sort Table
+
+function resize(){
+	if(document.documentElement.clientHeight > document.documentElement.clientWidth) $('body div').hide();
+	else $('body div').show(true);
+}
+
 function sortTable() {
   var table, rows, switching, i, x, y, shouldSwitch;
   table = document.querySelector(".layer-1 .left");
