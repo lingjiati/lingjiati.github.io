@@ -1,6 +1,6 @@
 const staticCacheName = "site-static";
 const assets = [
-  '/',
+  'manifest.json',
   'Eligo.js',
   'app.js',
   'index.html',
@@ -24,9 +24,9 @@ self.addEventListener('install', evt => {
 self.addEventListener('fetch', evt => {
   evt.respondWith(
     caches.match(evt.request).then(cacheRes => {
-      return cacheRes || fetch(evt.request)
+      return cacheRes || fetch(evt.request);
     })
-  )
+  );
 
 
 })
