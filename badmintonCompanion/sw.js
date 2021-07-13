@@ -1,5 +1,6 @@
 const staticCacheName = "site-static";
 const assets = [
+  '/badmintonCompanion',
   'manifest.json',
   'Eligo.js',
   'app.js',
