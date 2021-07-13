@@ -1,15 +1,15 @@
 const staticCacheName = "site-static";
 const assets = [
-  '/badmintonCompanion',
-  'manifest.json',
-  'Eligo.js',
-  'app.js',
-  'index.html',
-  'main.js',
-  'style.css',
-  'w3.css',
-  'https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&display=swap',
-  'https://fonts.gstatic.com/s/materialicons/v92/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2'
+  './',
+  './manifest.json',
+  './Eligo.js',
+  './app.js',
+  './index.html',
+  './main.js',
+  './style.css',
+  './w3.css',
+  './https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&display=swap',
+  './https://fonts.gstatic.com/s/materialicons/v92/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2'
 ];
 
 self.addEventListener('install', evt => {
