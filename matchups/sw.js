@@ -6,7 +6,10 @@ var filesToCache = [
   './js/main.js',
   './js/Eligo.js',
   './css/w3.css',
-  './js/bc.js'
+  './js/bc.js',
+  './fonts/RobotoMono.woff',
+  './fonts/RobotoMono500.woff',
+  './fonts/MaterialIcons.woff'
 ];
 
 /* Start the service worker and cache all of the app's content */
