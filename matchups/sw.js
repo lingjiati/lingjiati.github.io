@@ -3,7 +3,9 @@ var filesToCache = [
   './',
   './index.html',
   './css/style.css',
-  './js/main.js'
+  './js/main.js',
+  './js/Eligo.js',
+  './css/w3.css'
 ];
 
 /* Start the service worker and cache all of the app's content */
