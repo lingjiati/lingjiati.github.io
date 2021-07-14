@@ -272,7 +272,7 @@ span{
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url(/matchups//fonts/MaterialIcons.woff) format('woff');
+  src: url(/matchups/fonts/MaterialIcons.woff) format('woff');
 }
 
 .card .ripple{
