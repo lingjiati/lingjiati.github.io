@@ -5,7 +5,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(./fonts/RobotoMono.woff) format('woff');
+  src: url(/fonts/RobotoMono.woff) format('woff');
   unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 
@@ -14,7 +14,7 @@
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url(./fonts/RobotoMono500.woff) format('woff');
+  src: url(/fonts/RobotoMono500.woff) format('woff');
   unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 
@@ -23,7 +23,7 @@
   font-style: normal;
   font-weight: 600;
   font-display: swap;
-  src: url(./fonts/RobotoMono600.woff) format('woff');
+  src: url(/fonts/RobotoMono600.woff) format('woff');
   unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 
@@ -272,7 +272,7 @@ span{
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url(./fonts/MaterialIcons.woff) format('woff');
+  src: url(/fonts/MaterialIcons.woff) format('woff');
 }
 
 .card .ripple{
