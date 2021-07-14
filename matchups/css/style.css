@@ -29,7 +29,7 @@
 
 body{
 	background: #eee;
-	font-family: Roboto Mono;
+	font-family: 'Roboto Mono';
 	overflow: hidden;
 	height: 100vh;
    	width: 100vw;
@@ -121,7 +121,7 @@ button{
   top: 50%;
   transform: translate(-50%, -50%);
 	left: 50%;
-	font-family: Roboto Mono;
+	font-family: 'Roboto Mono';
 }
 
 .score, .lineup{
@@ -182,7 +182,7 @@ button{
 	padding-bottom: 24px;
 	position: relative;
 	border-bottom: 1px solid #ddd;
-	font-family: Roboto Mono;
+	font-family: 'Roboto Mono';
 }
 
 .column:last-child{
@@ -249,7 +249,7 @@ button{
 }
 
 .column:first-child, .column:first-child .points{
-	font-family: Roboto Mono;
+	font-family: 'Roboto Mono';
 	font-weight: 600;
 }
 
