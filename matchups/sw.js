@@ -1,4 +1,4 @@
-var cacheName = 'hello-pwa';
+var cacheName = 'hello-pwa-1';
 var filesToCache = [
   './',
   './index.html',
@@ -17,6 +17,17 @@ self.addEventListener('install', function(e) {
   e.waitUntil(
     caches.open(cacheName).then(function(cache) {
       return cache.addAll(filesToCache);
+    })
+  );
+});
+
+self.addEventListener('activate', function(e) {
+  e.waitUntil(
+    caches.keys().then(keys => {
+      return Promise.all(keys
+        .filter(key => key !== cacheName)
+        .map(key => caches.delete(key))
+      )
     })
   );
 });
