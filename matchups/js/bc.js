@@ -6,7 +6,39 @@
 
 */
 
+function expandClose() {
+		if (closed == true) {
+			$(".toolbar").show(true).fadeIn();
+			$(".layer-1, .layer-2, .scoreKeeper").css("margin-top", "8vh");
 
+			closed = false;
+		} else if ($(".scoreKeeper").css("display") !== "none") {
+			setTimeout(function() {
+				$(".toolbar").hide()
+			}, 500)
+			$(".toolbar").fadeOut();
+			$(".layer-1, .layer-2, .scoreKeeper").css("margin-top", "0")
+			closed = true;
+		}
+};
+
+function expandClose2(k) {
+		if (k == true) {
+			$(".toolbar").show(true).fadeIn();
+			$(".layer-1, .layer-2, .scoreKeeper").css("margin-top", "8vh");
+
+		} else{
+
+			if(closed == false) return;
+			setTimeout(function() {
+				$(".toolbar").hide()
+			}, 500)
+			$(".toolbar").fadeOut();
+			$(".layer-1, .layer-2, .scoreKeeper").css("margin-top", "0")
+		}
+};
+
+let closed = false;
 
 //DOM Setup
 window.addEventListener("load",  function() {
@@ -28,27 +60,13 @@ window.addEventListener("load",  function() {
 
 	let b = $(".layer-1"),
 		a = $(".layer-2"),
-		c = $(".scoreKeeper"),
-		closed = false;
+		c = $(".scoreKeeper");
+		
 
 	//Toolbar
-	function expandClose() {
-		if (closed == true) {
-			$(".toolbar").show(true).fadeIn();
-			$(".layer-1, .layer-2, .scoreKeeper").css("margin-top", "8vh");
+	
 
-			closed = false;
-		} else if (c.css("display") !== "none") {
-			setTimeout(function() {
-				$(".toolbar").hide()
-			}, 500)
-			$(".toolbar").fadeOut();
-			$(".layer-1, .layer-2, .scoreKeeper").css("margin-top", "0")
-			closed = true;
-		}
-	}
-
-	$('.scoreKeeper .rounded, .toucharea').dblclick(expandClose)
+	$('.scoreKeeper .rounded, .toucharea').dblclick(expandClose);
 
 	//Buttons
 	$('.toolbar-left .click:nth-child(1)').click(function() {
@@ -115,8 +133,14 @@ window.addEventListener('resize', resize)
 //Sort Table
 
 function resize(){
-	if(document.documentElement.clientHeight > document.documentElement.clientWidth) $('body div').css("opacity", "0");
-	else $('body div').css("opacity", "1");
+	if(document.documentElement.clientHeight > document.documentElement.clientWidth){
+		$('.card').css("opacity", "0");
+		expandClose2(true);
+	}
+	else {
+		$('.card').css("opacity", "1");
+		expandClose2(false);
+	};
 }
 
 function sortTable() {
