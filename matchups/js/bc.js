@@ -6,13 +6,13 @@
 
 */
 
-function expandClose() {
-		if (closed == true) {
+function expandClose(a) {
+		if (a == true || closed == true) {
 			$(".toolbar").show(true).fadeIn();
 			$(".layer-1, .layer-2, .scoreKeeper").css("margin-top", "8vh");
 
 			closed = false;
-		} else if ($(".scoreKeeper").css("display") !== "none") {
+		} else if (a == false || $(".scoreKeeper").css("display") !== "none") {
 			setTimeout(function() {
 				$(".toolbar").hide()
 			}, 500)
@@ -72,6 +72,7 @@ window.addEventListener("load",  function() {
 		a.show(true);
 		b.hide();
 		c.hide();
+        
 	})
 
 	$('.nav .click:nth-child(3)').click(function() {
@@ -84,7 +85,12 @@ window.addEventListener("load",  function() {
 		});
 		$('style').text(k);
 		sortTable();
+        
 	})
+    
+    $('.nav .click:not(:first-child)').click(function(){
+        $(".layer-1, .layer-2").css("margin-top", "8vh");
+    })
 
 	$('.ac .click:nth-child(3)').click(function(){
 		if(c.css("display")  == "block") main();
