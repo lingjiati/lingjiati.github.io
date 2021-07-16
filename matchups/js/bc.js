@@ -23,20 +23,12 @@ function expandClose() {
 };
 
 function expandClose2(k) {
-		if (k == true) {
-			$(".toolbar").show(true).fadeIn();
-			$(".layer-1, .layer-2, .scoreKeeper").css("margin-top", "8vh");
+    if(k == true) $(".toolbar-2").show(true)
+    else{
 
-		} else{
-
-			if(closed == false) return;
-			setTimeout(function() {
-				$(".toolbar").hide()
-			}, 500)
-			$(".toolbar").fadeOut();
-			$(".layer-1, .layer-2, .scoreKeeper").css("margin-top", "0")
-		}
-};
+        $(".toolbar-2").hide()
+    }
+}
 
 let closed = false;
 
@@ -69,20 +61,20 @@ window.addEventListener("load",  function() {
 	$('.scoreKeeper .rounded, .toucharea').dblclick(expandClose);
 
 	//Buttons
-	$('.toolbar-left .click:nth-child(1)').click(function() {
+	$('.nav .click:nth-child(1)').click(function() {
 		if (document.querySelector('.lineup').innerText == '-') main();
 		b.hide();
 		a.hide();
 		c.show(true);
 	})
 
-	$('.toolbar-left .click:nth-child(2)').click(function() {
+	$('.nav .click:nth-child(2)').click(function() {
 		a.show(true);
 		b.hide();
 		c.hide();
 	})
 
-	$('.toolbar-left .click:nth-child(3)').click(function() {
+	$('.nav .click:nth-child(3)').click(function() {
 		b.show(true);
 		a.hide();
 		c.hide();
@@ -94,11 +86,11 @@ window.addEventListener("load",  function() {
 		sortTable();
 	})
 
-	$('.toolbar-right .click:nth-child(3)').click(function(){
+	$('.ac .click:nth-child(3)').click(function(){
 		if(c.css("display")  == "block") main();
 	});
 
-	$('.toolbar-right .click:nth-child(2)').click(function(){
+	$('.ac .click:nth-child(2)').click(function(){
 		if(c.css("display")  == "block"){
 			queue[queue.length] = [document.querySelectorAll(".score")[0].innerText, document.querySelectorAll(".score")[1].innerText];
 			$(".score").each(function(){
@@ -108,7 +100,7 @@ window.addEventListener("load",  function() {
 		}
 	});
 
-	$('.toolbar-right .click:nth-child(1)').click(function(){
+	$('.ac .click:nth-child(1)').click(function(){
 		let v = queue.pop();
 		if(v){
 			document.querySelectorAll(".score")[0].innerText = v[0];
@@ -135,11 +127,13 @@ window.addEventListener('resize', resize)
 function resize(){
 	if(document.documentElement.clientHeight > document.documentElement.clientWidth){
 		$('.card').css("opacity", "0");
-		expandClose2(true);
+        $('.toolbar').hide();
+        expandClose2(true)
 	}
 	else {
 		$('.card').css("opacity", "1");
-		expandClose2(false);
+        $('.toolbar').show(true)
+        expandClose2(false)
 	};
 }
 
@@ -378,16 +372,24 @@ function newMatch() {
 }
 
 function addMatch() {
-	p = new Object(playersName);
+	if(!p) p = new Object(playersName);
 	var q = newMatch(),
 		playersList = [],
-		r;
+		r, repeated = false, o;
 	//Pick Players
 	for (var l in q) {
 		console.log(p[q[l]]);
 		if(p[q[l]].length == 0) p[q[l]] = playersName[q[l]];
-		r = Math.floor(Math.random() * p[q[l]].length);
-		playersList.push(p[q[l]][r]);
+        do{
+            r = Math.floor(Math.random() * p[q[l]].length);
+            o = p[q[l]][r];
+            repeated = false;
+            playersList.forEach(function(a){
+                if(a == o) repeated = true
+            })
+        } while(repeated == true)
+		
+		playersList.push(o);
 		p[q[l]].splice(r, 1)
 	}
 

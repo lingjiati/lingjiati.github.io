@@ -21,6 +21,17 @@
   src: url(/matchups/fonts/RobotoMono600.woff) format('woff');
 }
 
+.toolbar-2{
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    width: 100vw;
+    text-align: center;
+}
+
+
 body{
 	background: #eee;
 	font-family: 'Roboto Mono';
@@ -54,6 +65,7 @@ body{
 	height: 18vh;
 	z-index: 4;
 	transition: cubic-bezier(.42,0,.58,1) 0.5s;
+    display: none;
 }
 
 
@@ -124,11 +136,11 @@ button{
 }
 
 .score{
-	font-size: 80px;
+	font-size: calc(15vh + 50px);
 }
 
 .lineup{
-	font-size: 16px;
+	font-size: calc(2vh + 8px);
 	margin-top: 8vh;
 }
 

@@ -1,4 +1,4 @@
-var cacheName = 'hello-pwa-2';
+var cacheName = 'matchups-v0';
 var filesToCache = [
   './',
   './index.html',
