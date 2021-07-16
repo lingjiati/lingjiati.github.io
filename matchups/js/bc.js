@@ -61,10 +61,10 @@ window.addEventListener("load",  function() {
 	let b = $(".layer-1"),
 		a = $(".layer-2"),
 		c = $(".scoreKeeper");
-		
+
 
 	//Toolbar
-	
+
 
 	$('.scoreKeeper .rounded, .toucharea').dblclick(expandClose);
 
@@ -235,7 +235,8 @@ var teams = {
 		D: 0
 	},
 	playersName,
-	queue = [[0, 0]];
+	queue = [[0, 0]],
+	p;
 
 
 //Main Function
@@ -377,12 +378,14 @@ function newMatch() {
 }
 
 function addMatch() {
+	p = new Object(playersName);
 	var q = newMatch(),
-		p = new Object(playersName),
 		playersList = [],
 		r;
 	//Pick Players
 	for (var l in q) {
+		console.log(p[q[l]]);
+		if(p[q[l]].length == 0) p[q[l]] = playersName[q[l]];
 		r = Math.floor(Math.random() * p[q[l]].length);
 		playersList.push(p[q[l]][r]);
 		p[q[l]].splice(r, 1)
