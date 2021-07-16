@@ -95,17 +95,16 @@ window.addEventListener("load",  function() {
     })
 
 	$('.ac .click:nth-child(3)').click(function(){
-		if(c.css("display")  == "block") main();
+		main();
 	});
 
 	$('.ac .click:nth-child(2)').click(function(){
-		if(c.css("display")  == "block"){
+		
 			queue[queue.length] = [document.querySelectorAll(".score")[0].innerText, document.querySelectorAll(".score")[1].innerText];
 			$(".score").each(function(){
 				this.innerText = 0;
 			});
 
-		}
 	});
 
 	$('.ac .click:nth-child(1)').click(function(){
