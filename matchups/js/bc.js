@@ -24,10 +24,10 @@ function expandClose(a) {
 };
 
 function expandClose2(k) {
-    if(k == true) $(".toolbar-2").show(true)
+    if(k == true) $(".toolbar-2").show(true).fadeIn()
     else{
-
-        $(".toolbar-2").hide()
+	setTimeout($(".toolbar-2").hide, 500)
+        $(".toolbar-2").fadeOut
     }
 }
 
@@ -37,7 +37,8 @@ let closed = false;
 window.addEventListener("load",  function() {
 
 	resize();
-
+	
+	if(document.documentElement.clientHeight > 812 || document.documentElement.clientWidth > 812) $('.scoreKeeper .card').css('bottom', '20%')
 
 
 
