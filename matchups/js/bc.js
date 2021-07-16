@@ -89,7 +89,8 @@ window.addEventListener("load",  function() {
 	})
     
     $('.nav .click:not(:first-child)').click(function(){
-        $(".layer-1, .layer-2").css("margin-top", "8vh");
+        if(closed == true) $(".layer-1, .layer-2").css("margin-top", "4vh");
+        else $(".layer-1, .layer-2").css("margin-top", "8vh");
     })
 
 	$('.ac .click:nth-child(3)').click(function(){
