@@ -12,7 +12,7 @@ function expandClose(a) {
 			$(".layer-1, .layer-2, .scoreKeeper").css("margin-top", "8vh");
 
 			closed = false;
-		} else if (a == false || $(".scoreKeeper").css("display") !== "none") {
+		} else{
 			setTimeout(function() {
 				$(".toolbar").hide()
 			}, 500)
