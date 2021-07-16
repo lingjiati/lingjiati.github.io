@@ -27,7 +27,7 @@ function expandClose2(k) {
     if(k == true) $(".toolbar-2").show(true).fadeIn()
     else{
 	setTimeout(function(){
-		$(".toolbar-2").hide
+		$(".toolbar-2").hide()
 	}, 500)
         $(".toolbar-2").fadeOut()
     }
