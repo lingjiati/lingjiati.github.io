@@ -17,7 +17,8 @@ function expandClose(a) {
 				$(".toolbar").hide()
 			}, 500)
 			$(".toolbar").fadeOut();
-			$(".layer-1, .layer-2, .scoreKeeper").css("margin-top", "0")
+			$(".scoreKeeper").css("margin-top", "0");
+			$(".layer-1, .layer-2").css("margin-top", "4vh")
 			closed = true;
 		}
 };
