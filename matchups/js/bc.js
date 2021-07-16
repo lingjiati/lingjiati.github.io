@@ -26,7 +26,7 @@ function expandClose(a) {
 function expandClose2(k) {
     if(k == true) $(".toolbar-2").show(true).fadeIn()
     else{
-        $(".toolbar-2").hide()
+        $(".toolbar-2").hide().css("opacity", "0")
     }
 }
 
