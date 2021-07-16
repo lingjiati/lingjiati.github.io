@@ -58,7 +58,7 @@ window.addEventListener("load",  function() {
 	//Toolbar
 
 
-	$('.scoreKeeper .rounded, .toucharea').dblclick(expandClose);
+	$('.rounded, .toucharea').dblclick(expandClose);
 
 	//Buttons
 	$('.nav .click:nth-child(1)').click(function() {
