@@ -22,14 +22,17 @@
 }
 
 .toolbar-2{
-    top: 50%;
-    left: 50%;
     position: absolute;
-    transform: translate(-50%, -50%);
     z-index: 100;
     width: 100vw;
+    height: 100vh;
     text-align: center;
-    margin-top: -23px;
+    background: #eee;
+}
+
+.toolbar-2 div{
+	top: 50%;
+	transform: translate(0, -50%);
 }
 
 
