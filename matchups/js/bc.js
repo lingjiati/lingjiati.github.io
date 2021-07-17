@@ -286,9 +286,9 @@ function main() {
 			j = false;
 		y.querySelector('.points').innerHTML = x.length;
 
-		if (w[1].innerText > w[0].innerText) {
+		if (Number(w[1].innerText) > Number(w[0].innerText)) {
 			j = z[1].innerText
-		} else if (w[1].innerText < w[0].innerText) {
+		} else if (Number(w[1].innerText) < Number(w[0].innerText)) {
 			j = z[0].innerText
 		}
 		if (j) {
