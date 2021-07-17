@@ -21,7 +21,7 @@
   src: url(/matchups/fonts/RobotoMono600.woff) format('woff');
 }
 
-c{
+.tier div{
 	outline: none!important
 }
 .toolbar-2{
