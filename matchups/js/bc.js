@@ -30,14 +30,20 @@ function expandClose2(k) {
     }
 }
 
-let closed = false;
+let closed = false, tablet;
 
 //DOM Setup
 window.addEventListener("load",  function() {
 
 	resize();
 	
-	if(document.documentElement.clientHeight > 812 || document.documentElement.clientWidth > 812) $('.scoreKeeper .card').css('bottom', '20%')
+	if(document.documentElement.clientHeight > 812 || document.documentElement.clientWidth > 812) {
+		$('.scoreKeeper .card').css('bottom', '20%');
+		tablet = true;
+	}
+	else{
+		expandClose()
+	}
 
 
 
@@ -59,7 +65,6 @@ window.addEventListener("load",  function() {
 	//Toolbar
 
 
-	$('.rounded, .toucharea').dblclick(expandClose);
 
 	//Buttons
 	$('.nav .click:nth-child(1)').click(function() {
