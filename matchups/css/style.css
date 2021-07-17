@@ -40,6 +40,9 @@
 	margin-top: -23px;
 }
 
+.tier span{
+	margin-left: 0
+}
 
 body{
 	background: #eee;
