@@ -88,7 +88,6 @@ window.addEventListener("load",  function() {
 		let k = '';
 		$('.layer-1 .card').forEach(function(a){
 			if(a.scrollHeight > a.clientHeight) k += ('.' + a.classList[2] + ' .column:last-child {border-bottom: none;}');
-			console.log(a.scrollHeight, a.clientHeight)
 		});
 		$('style').text(k);
 		sortTable();
@@ -148,6 +147,7 @@ function resize(){
         $('.toolbar').show(true)
         expandClose2(false)
 	};
+	if(a.scrollHeight > a.clientHeight) k += ('.' + a.classList[2] + ' .column:last-child {border-bottom: none;}');
 }
 
 function sortTable() {
