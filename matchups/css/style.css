@@ -21,6 +21,9 @@
   src: url(/matchups/fonts/RobotoMono600.woff) format('woff');
 }
 
+c{
+	outline: none!important
+}
 .toolbar-2{
     position: absolute;
     z-index: 100;
