@@ -147,9 +147,11 @@ function resize(){
         $('.toolbar').show(true)
         expandClose2(false)
 	};
+	let k = "";
 	$('.layer-1 .card').forEach(function(a){
 		if(a.scrollHeight > a.clientHeight) k += ('.' + a.classList[2] + ' .column:last-child {border-bottom: none;}');
 	});
+	$('style').text(k);
 }
 
 function sortTable() {
