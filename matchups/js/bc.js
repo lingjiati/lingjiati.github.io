@@ -147,7 +147,9 @@ function resize(){
         $('.toolbar').show(true)
         expandClose2(false)
 	};
-	if(a.scrollHeight > a.clientHeight) k += ('.' + a.classList[2] + ' .column:last-child {border-bottom: none;}');
+	$('.layer-1 .card').forEach(function(a){
+		if(a.scrollHeight > a.clientHeight) k += ('.' + a.classList[2] + ' .column:last-child {border-bottom: none;}');
+	});
 }
 
 function sortTable() {
