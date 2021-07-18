@@ -1,4 +1,4 @@
-var cacheName = 'matchups_v1.0';
+var cacheName = 'matchups_v1.01';
 var filesToCache = [
   './',
   './index.html',
