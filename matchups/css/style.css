@@ -343,10 +343,10 @@ span{
 	background: white;
 	width: 42.5vw;
 	position: fixed;
-	padding-top: 28px;
+	padding-top: 24px;
 	background: white;
 	z-index: 2;
-	margin-top: -0.5px;
+	margin-top: 4px;
 	border-radius: 8px 8px 0 0;
 }
 
