@@ -86,7 +86,7 @@ window.addEventListener("load",  function() {
 		c.hide();
 		let k = '';
 		$('.layer-1 .card .container').forEach(function(a){
-			if(a.scrollHeight > a.clientHeight) k += ('.' + a.classList[1] + ' .column:last-child {border-bottom: none; padding-bottom: 28px}')
+			if(a.scrollHeight > a.clientHeight) k += ('.' + a.classList[1] + ' .column:last-child {border-bottom: none; margin-bottom: 4px}')
             console.log(a.scrollHeight, a.clientHeight)
 		});
 		$('style').text(k);
@@ -149,7 +149,7 @@ function resize(){
 	};
 	let k = "";
 	$('.layer-1 .card .container').forEach(function(a){
-		if(a.scrollHeight > a.clientHeight) k += ('.' + a.classList[1] + ' .column:last-child {border-bottom: none;}');
+		if(a.scrollHeight > a.clientHeight) k += ('.' + a.classList[1] + ' .column:last-child {border-bottom: none; margin-bottom: 4px}');
 	});
 	$('style').text(k);
 }
