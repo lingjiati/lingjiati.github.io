@@ -24,6 +24,10 @@
 .tier div{
 	outline: none!important
 }
+
+.container .column:last-child{
+	padding-bottom: 28px
+}
 .toolbar-2{
     position: absolute;
     z-index: 100;
