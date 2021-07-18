@@ -87,7 +87,7 @@ window.addEventListener("load",  function() {
 		c.hide();
 		let k = '';
 		$('.layer-1 .card').forEach(function(a){
-			if(a.scrollHeight > a.clientHeight) k += ('.' + a.classList[2] + ' .column:last-child {border-bottom: none;}');
+			if(a.scrollHeight > a.clientHeight) k += ('.' + a.classList[1] + ' .column:last-child {border-bottom: none;}');
 		});
 		$('style').text(k);
 		sortTable();
