@@ -359,5 +359,5 @@ span{
     margin-top: 52px;
     overflow-y: scroll;
     overflow-x: hidden;
-    height: calc(100% - 52px)
+    height: calc(100% - 48px)
 }
