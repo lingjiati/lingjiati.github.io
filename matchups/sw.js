@@ -1,12 +1,12 @@
-var cacheName = 'matchups_v0.1';
+var cacheName = 'matchups_v1.0';
 var filesToCache = [
   './',
   './index.html',
   './css/style.css',
-  './js/main.js',
+  './js/register.js',
   './js/Eligo.js',
   './css/w3.css',
-  './js/bc.js',
+  './js/main.js',
   './fonts/RobotoMono.woff',
   './fonts/RobotoMono500.woff',
   './fonts/MaterialIcons.woff'
