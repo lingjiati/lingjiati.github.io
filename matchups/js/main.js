@@ -161,7 +161,7 @@ function sortTable() {
   while (switching) {
     switching = false;
     rows = table.querySelectorAll('.column');
-    for (i = 0; i < rows.length; i++) {
+    for (i = 0; i < rows.length - 1; i++) {
       shouldSwitch = false;
       x = rows[i].querySelector(".team-3");
       y = rows[i + 1].querySelector(".team-3");
