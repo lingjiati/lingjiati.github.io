@@ -149,7 +149,7 @@ function resize(){
 	};
 	let k = "";
 	$('.layer-1 .card .container').forEach(function(a){
-		if(a.scrollHeight > a.clientHeight) k += ('.' + a.classList[2] + ' .column:last-child {border-bottom: none;}');
+		if(a.scrollHeight > a.clientHeight) k += ('.' + a.classList[1] + ' .column:last-child {border-bottom: none;}');
 	});
 	$('style').text(k);
 }
