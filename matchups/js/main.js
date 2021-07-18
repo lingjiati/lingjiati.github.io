@@ -86,7 +86,7 @@ window.addEventListener("load",  function() {
 		c.hide();
 		let k = '';
 		$('.layer-1 .card .container').forEach(function(a){
-			if(a.scrollHeight > a.clientHeight) k += ('.' + a.classList[1] + ' .column:last-child {border-bottom: none;}');
+			if(a.scrollHeight > a.clientHeight) k += ('.' + a.classList[1] + ' .column:last-child {border-bottom: none; padding-bottom: 28px}')
             console.log(a.scrollHeight, a.clientHeight)
 		});
 		$('style').text(k);
