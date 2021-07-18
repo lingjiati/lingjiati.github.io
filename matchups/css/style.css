@@ -155,7 +155,7 @@ button{
 }
 
 .lineup{
-	font-size: calc(2vh + 8px);
+	font-size: 16px;
 	margin-top: 8vh;
 }
 
@@ -206,9 +206,7 @@ button{
 	font-family: 'Roboto Mono';
 }
 
-.column:last-child{
 
-}
 
 .layer-1{
 	z-index: 3;
@@ -269,7 +267,7 @@ button{
 	z-index: 4;
 }
 
-.column:first-child, .column:first-child .points{
+.card >.column  {
 	font-family: 'Roboto Mono';
 	font-weight: 600;
 }
@@ -342,7 +340,7 @@ span{
 	text-align: right;
 }
 
-.column:first-child{
+.card > .column{
 	background: white;
 	width: 42.5vw;
 	position: fixed;
@@ -357,6 +355,9 @@ span{
 	left: 8%
 }
 
-.column:nth-child(2){
-	margin-top: 52px;
+.container{
+    margin-top: 52px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: calc(100% - 52px)
 }
