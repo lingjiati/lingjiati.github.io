@@ -190,8 +190,13 @@ function assignNumbers(){
 function getDev(numbers, round) {
 	let a = 0,
 		avg = 4 / total * round;
-	for (var i in numbers) a += Math.abs(avg - numbers[i]);
-
+	for (var i in numbers) {
+        if(playersName[i].length > 0){
+            a += Math.abs(avg - numbers[i]);
+        }
+        
+    };
+    console.log(numbers, playersName);
 	return a;
 }
 
@@ -247,22 +252,26 @@ var teams = {
 	},
 	playersName,
 	queue = [[0, 0]],
-	p;
+	p,
+    tiers = 0;
 
 
 //Main Function
 function main() {
 	queue = [[0, 0]];
 	console.log(queue);
-	var i = [];
+	var i = [], exist = false;
 	total = 0;
+    tiers = 0;
 	//Update Players
 	$('.tier').each(function(e, f) {
 		let g = this.querySelectorAll('.player');
 		i[e] = [];
+        exist = false;
 		for (let h in g) {
 			if (g[h].innerText && g[h].innerText != '\n') {
-				i[e].push(g[h].innerText)
+				i[e].push(g[h].innerText);
+                exist = true;
 				total++;
 				if (!document.getElementsByClassName(g[h].innerText).length) {
 					var r = $(".layer-1 .left .column").item().cloneNode(true);
@@ -273,6 +282,7 @@ function main() {
 				}
 			}
 		}
+        if(exist) tiers += 1;
 	})
 	players = {
 		A: i[0].length,
@@ -362,10 +372,11 @@ function init() {
 
 function newMatch() {
 	round++;
-	if (round == 1 || getDev(graph2, round) < 2.1) {
+	if (round == 1 || getDev(graph2, round) < (2.5 / 4 * tiers)) {
 		//Random Match
 		let r = randomProperty(graph);
 		graph2 = pushByPlayer(graph, graph2, r);
+        console.log('surprise')
 		return r;
 	} else {
 		//Optimized Match
