@@ -342,7 +342,7 @@ span{
 .card > .column{
 	background: white;
 	width: 42.5vw;
-	position: fixed;
+	position: absolute;
 	padding-top: 24px;
 	background: white;
 	z-index: 2;
