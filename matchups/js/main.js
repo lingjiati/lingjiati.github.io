@@ -87,7 +87,6 @@ window.addEventListener("load",  function() {
 		let k = '';
 		$('.layer-1 .card .container').forEach(function(a){
 			if(a.scrollHeight > a.clientHeight) k += ('.' + a.classList[1] + ' .column:last-child {border-bottom: none; margin-bottom: 4px}')
-            console.log(a.scrollHeight, a.clientHeight)
 		});
 		$('style').text(k);
 		sortTable();
@@ -196,7 +195,6 @@ function getDev(numbers, round) {
         }
         
     };
-    console.log(numbers, playersName);
 	return a;
 }
 
@@ -259,7 +257,6 @@ var teams = {
 //Main Function
 function main() {
 	queue = [[0, 0]];
-	console.log(queue);
 	var i = [], exist = false;
 	total = 0;
     tiers = 0;
@@ -315,7 +312,6 @@ function main() {
 			j = j.split("/");
 			j.forEach(function(k) {
 				var n = ('.' + k + ' .team-3');
-				console.log(document.querySelectorAll(n));
 				document.querySelector(n).innerText = (Number(document.querySelector(n).innerText || '0') + 1)
 			})
 		}
@@ -383,6 +379,7 @@ function newMatch() {
 		var current = 0,
 			currentMatch = [],
 			c = new Object(graph2);
+        console.log('no surprise')
 		for (var i in graph) {
 			let k = pushByPlayer(graph, c, i);
 			if (current == 0 || current > getDev(k, round)) {
@@ -406,7 +403,6 @@ function addMatch() {
 		r, repeated = false, o;
 	//Pick Players
 	for (var l in q) {
-		console.log(p[q[l]]);
 		if(p[q[l]].length == 0) p[q[l]] = playersName[q[l]];
         do{
             r = Math.floor(Math.random() * p[q[l]].length);
