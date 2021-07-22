@@ -66,10 +66,12 @@ function swipedetect(el, callback){
         elapsedTime = new Date().getTime() - startTime // get time elapsed
         if (elapsedTime <= allowedTime){ // first condition for awipe met
             if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
-                swipedir = (distX < 0)? 'left' : 'right' // if dist traveled is negative, it indicates left swipe
+                swipedir = (distX < 0)? 'left' : 'right';
+                e.preventDefault() // if dist traveled is negative, it indicates left swipe
             }
             else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
-                swipedir = (distY < 0)? 'up' : 'down' // if dist traveled is negative, it indicates up swipe
+                swipedir = (distY < 0)? 'up' : 'down';
+                e.preventDefault(); // if dist traveled is negative, it indicates up swipe
             }
         }
         handleswipe(swipedir)
@@ -77,7 +79,7 @@ function swipedetect(el, callback){
 }
 
 
-let closed = false;
+var closed = false;
 
 //DOM Setup
 window.addEventListener("load",  function() {
@@ -85,7 +87,7 @@ window.addEventListener("load",  function() {
 	resize();
 	
 	if(document.documentElement.clientHeight > 812 || document.documentElement.clientWidth > 812) {    
-        $('.layer-2, .layer-1, .scoreKeeper').css('top', '6vh').css("height", "94%");
+        $('.layer-2, .layer-1, .scoreKeeper').css('top', '6vh').css("height", "92%");
 	}
 	else{
 		expandClose()
@@ -156,8 +158,10 @@ window.addEventListener("load",  function() {
             else if(index === 2) settings();
             else if(index === 3) home();
         }
-        else if(direction == "left") undo();
-        else if(direction == "up") main();
+        else if(index === 1){
+            if(direction == "left") undo();
+            else if(direction == "up") main();
+        }
     })
     
 	//Buttons
@@ -371,7 +375,6 @@ function main() {
 			j = z[0].innerText
 		}
         
-        j = z[1].innerText + '/' + z[0].innerText
 		if (j) {
 			j = j.split("/");
 			j.forEach(function(k) {

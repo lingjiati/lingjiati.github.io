@@ -63,13 +63,16 @@ body{
 }
 
 .title, .player{
-	margin: 12px 24px 12px;;
+	padding-left: 3.4vw;
+    padding-top: 13.5px;
+    padding-bottom: 13.5px;
 	font-size: 16px;
+    border-bottom: 1px solid #ddd;
 }
 
 .title{
-	font-weight: 500;
-	margin-top: 24px;
+	font-weight: 600;
+	margin-top: 4px;
 
 }
 
@@ -88,12 +91,18 @@ body{
 .click{
 	font-family: 'Material Icons';
 	font-size: 24px;
-	padding: 5px;
+	padding: 8px;
+    border-radius: 50%;
 }
 
-.click ~ .click{
-	left: 100%;
+.toolbar-left .click:not(:first-child){
+    margin-left: 8px;
 }
+
+.toolbar-right .click:not(:last-child){
+    margin-right: 8px;
+}
+
 
 .card{
 	border-radius: 8px;
@@ -171,11 +180,11 @@ button{
 }
 
 .tier{
-	width: calc(22.5% - 30px);
+	width: 18.75%;
 	height: 80%;
 	float: left;
-	margin-left: 20px;
-	margin-right: 20px;
+	margin-left: 2.5vw;
+	margin-right: 2.5vw;
 	background: white;
 	outline: none;
 	top: 10%;
@@ -207,13 +216,6 @@ button{
 
 
 
-.layer-1{
-	z-index: 3;
-}
-
-.lr-2{
-	z-index: 4;
-}
 
 .layer-1, .layer-2, .scoreKeeper{
     width: 100%;
@@ -270,20 +272,8 @@ button{
 	font-weight: 600;
 }
 
-spand{
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	position: absolute;
-	font-family: Material Icons;
-	font-size: 4vh;
-	color: white;
-}
 
-span{
-	margin: 0 8px;
-	display: inline-block;
-}
+
 
 @font-face {
   font-family: 'Material Icons';
@@ -327,11 +317,11 @@ span{
 
 
 .toolbar-left{
-	left: calc(5vw - 13px);
+	left: calc(5vw - 8px);
 }
 
 .toolbar-right{
-	right: calc(5vw - 13px);
+	right: calc(5vw - 8px);
 	text-align: right;
 }
 
