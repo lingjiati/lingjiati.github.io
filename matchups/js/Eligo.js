@@ -1,15 +1,4 @@
-/*!
- *
- * Eligo JavaScript Library
- *
- * Copyright 2017, Tim Ling
- * Released Under The GPL license 
- * Date: April 8, 2017
- *
- * Credits:
- * W3Schools( W3.JS )
- * Ivan Castellanos( StackOverflow: How to find event listeners on a DOM node when debugging or from the JavaScript code? )
- */
+
 "use strict";
 (function (fn) {
 	Element.prototype.realAddEventListener = Element.prototype.addEventListener;
@@ -544,4 +533,5 @@ function createRipple(e)
   circle.classList.add('ripple');
 	circle.style.left = e.clientX - this.offsetLeft - d / 2 + 'px';
   circle.style.top = e.clientY - this.offsetTop - d / 2 + 'px';
+    e.preventDefault;
 }

@@ -3,6 +3,8 @@
 	Matchups - an intelligent Badminton companion
 	Written By Tim Ling
 	7/11/2021
+    
+    Gestures detection from http://www.javascriptkit.com/javatutors/touchevents2.shtml
 
 */
 
@@ -18,7 +20,7 @@ function expandClose(a) {
 			}, 500)
 			$(".toolbar").fadeOut();
 			$(".scoreKeeper").css("margin-top", "0");
-			$(".layer-1, .layer-2").css("margin-top", "4vh")
+			$(".layer-1, .layer-2").css("margin-top", "0")
 			closed = true;
 		}
 };
@@ -30,6 +32,51 @@ function expandClose2(k) {
     }
 }
 
+function swipedetect(el, callback){
+  
+    var touchsurface = el,
+    swipedir,
+    startX,
+    startY,
+    distX,
+    distY,
+    threshold = 150, //required min distance traveled to be considered swipe
+    restraint = 100, // maximum distance allowed at the same time in perpendicular direction
+    allowedTime = 300, // maximum time allowed to travel that distance
+    elapsedTime,
+    startTime,
+    handleswipe = callback || function(swipedir){}
+  
+    touchsurface.addEventListener('touchstart', function(e){
+        var touchobj = e.changedTouches[0]
+        swipedir = 'none'
+        dist = 0
+        startX = touchobj.pageX
+        startY = touchobj.pageY
+        startTime = new Date().getTime() // record time when finger first makes contact with surface
+    }, false)
+  
+    touchsurface.addEventListener('touchmove', function(e){
+    }, false)
+  
+    touchsurface.addEventListener('touchend', function(e){
+        var touchobj = e.changedTouches[0]
+        distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
+        distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
+        elapsedTime = new Date().getTime() - startTime // get time elapsed
+        if (elapsedTime <= allowedTime){ // first condition for awipe met
+            if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
+                swipedir = (distX < 0)? 'left' : 'right' // if dist traveled is negative, it indicates left swipe
+            }
+            else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
+                swipedir = (distY < 0)? 'up' : 'down' // if dist traveled is negative, it indicates up swipe
+            }
+        }
+        handleswipe(swipedir)
+    }, false)
+}
+
+
 let closed = false;
 
 //DOM Setup
@@ -37,8 +84,8 @@ window.addEventListener("load",  function() {
 
 	resize();
 	
-	if(document.documentElement.clientHeight > 812 || document.documentElement.clientWidth > 812) {
-		$('.scoreKeeper .card').css('bottom', '20%');
+	if(document.documentElement.clientHeight > 812 || document.documentElement.clientWidth > 812) {    
+        $('.layer-2, .layer-1, .scoreKeeper').css('top', '6vh').css("height", "94%");
 	}
 	else{
 		expandClose()
@@ -58,30 +105,32 @@ window.addEventListener("load",  function() {
 
 	let b = $(".layer-1"),
 		a = $(".layer-2"),
-		c = $(".scoreKeeper");
+		c = $(".scoreKeeper"),
+        index = 3;
 
 
 	//Toolbar
 
+    
+    
 
-
-	//Buttons
-	$('.nav .click:nth-child(1)').click(function() {
-		if (document.querySelector('.lineup').innerText == '-') main();
+    function home(){
+        if (document.querySelector('.lineup').innerText == '-') main();
 		b.hide();
 		a.hide();
 		c.show(true);
-	})
-
-	$('.nav .click:nth-child(2)').click(function() {
-		a.show(true);
+        index = 1;
+    }
+    
+    function analytics(){
+        a.show(true);
 		b.hide();
 		c.hide();
-        
-	})
-
-	$('.nav .click:nth-child(3)').click(function() {
-		b.show(true);
+        index = 2;
+    }
+    
+    function settings(){
+        b.show(true);
 		a.hide();
 		c.hide();
 		let k = '';
@@ -90,17 +139,35 @@ window.addEventListener("load",  function() {
 		});
 		$('style').text(k);
 		sortTable();
-        
-	})
+        index = 3;
+    }
     
-    $('.nav .click:not(:first-child)').click(function(){
-        if(closed == true) $(".layer-1, .layer-2").css("margin-top", "4vh");
-        else $(".layer-1, .layer-2").css("margin-top", "8vh");
+    function undo(){
+        let v = queue.pop();
+		if(v){
+			document.querySelectorAll(".score")[0].innerText = v[0];
+			document.querySelectorAll(".score")[1].innerText = v[1];
+		}
+    }
+    
+    swipedetect(document.body, function(direction){
+        if(direction == "right"){
+            if(index === 1) analytics();
+            else if(index === 2) settings();
+            else if(index === 3) home();
+        }
+        else if(direction == "left") undo();
+        else if(direction == "up") main();
     })
+    
+	//Buttons
+	$('.nav .click:nth-child(1)').click(home)
 
-	$('.ac .click:nth-child(3)').click(function(){
-		main();
-	});
+	$('.nav .click:nth-child(2)').click(analytics)
+
+	$('.nav .click:nth-child(3)').click(settings)
+
+	$('.ac .click:nth-child(3)').click(main);
 
 	$('.ac .click:nth-child(2)').click(function(){
 		
@@ -111,18 +178,13 @@ window.addEventListener("load",  function() {
 
 	});
 
-	$('.ac .click:nth-child(1)').click(function(){
-		let v = queue.pop();
-		if(v){
-			document.querySelectorAll(".score")[0].innerText = v[0];
-			document.querySelectorAll(".score")[1].innerText = v[1];
-		}
-	});
+	$('.ac .click:nth-child(1)').click(undo);
 
 	//Ripple Effect
 	var buttons = document.querySelectorAll('.clickable');
 	Array.prototype.forEach.call(buttons, function(b) {
 		b.addEventListener('click', createRipple);
+        
 	});
 
 
@@ -308,6 +370,8 @@ function main() {
 		} else if (Number(w[1].innerText) < Number(w[0].innerText)) {
 			j = z[0].innerText
 		}
+        
+        j = z[1].innerText + '/' + z[0].innerText
 		if (j) {
 			j = j.split("/");
 			j.forEach(function(k) {
