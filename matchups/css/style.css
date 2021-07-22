@@ -7,12 +7,6 @@
   src: url(/matchups/fonts/RobotoMono.woff) format('woff');
 }
 
-@font-face {
-  font-family: 'Roboto Mono';
-  font-style: normal;
-  font-weight: 500;
-  src: url(/matchups/fonts/RobotoMono500.woff) format('woff');
-}
 
 @font-face {
   font-family: 'Roboto Mono';
@@ -64,16 +58,20 @@ body{
 
 .title, .player{
 	padding-left: 3.4vw;
+    
+}
+
+.title{
+	font-weight: 600;
+	margin-top: 4px;
     padding-top: 13.5px;
     padding-bottom: 13.5px;
 	font-size: 16px;
     border-bottom: 1px solid #ddd;
 }
 
-.title{
-	font-weight: 600;
-	margin-top: 4px;
-
+.player{
+    padding-top: 13.5px;
 }
 
 .toolbar{
