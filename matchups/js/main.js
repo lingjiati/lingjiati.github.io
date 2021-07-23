@@ -47,21 +47,26 @@ function swipedetect(el, callback){
     startTime,
     handleswipe = callback || function(swipedir){};
     
-    function preventDefault(e) {
-  e.preventDefault();
-}
+
 
 function disableScrolling(){
     var x = [];
     document.querySelectorAll('.container').forEach(function(a, b){
         x.push([a.scrollX, a.scrollY])
-        a.onscroll=function(){a.scrollTo(x[b][0], x[b][1])};
+        a.onscroll=function(){
+            a.scrollTo(x[b][0], x[b][1]);
+            a.style.overflowY = "hidden"
+        };
+        
     })
 }
 
 function enableScrolling(){
     document.querySelectorAll('.container').forEach(function(a){
-        a.onscroll=function(){};
+        a.style.overflowY = "scroll"
+        a.onscroll=function(){
+            
+        };
     })
 }
     
@@ -151,14 +156,14 @@ window.addEventListener("load",  function() {
         index = 1;
     }
     
-    function analytics(){
+    function settings(){
         a.show(true);
 		b.hide();
 		c.hide();
-        index = 2;
+        index = 3;
     }
     
-    function settings(){
+    function analytics(){
         b.show(true);
 		a.hide();
 		c.hide();
@@ -168,7 +173,7 @@ window.addEventListener("load",  function() {
 		});
 		$('style').text(k);
 		sortTable();
-        index = 3;
+        index = 2;
     }
     
     function undo(){

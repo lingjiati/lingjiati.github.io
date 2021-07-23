@@ -24,6 +24,11 @@
     overflow-y: scroll;
 }
 
+.start{
+    font-weight: 600;
+    font-size: 36px
+}
+
 .player:last-child{
     margin-bottom: 10.75px
 }
@@ -36,7 +41,7 @@
 	transition: 0.5s;
 }
 
-.toolbar-2 div{
+.toolbar-2 > div{
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
