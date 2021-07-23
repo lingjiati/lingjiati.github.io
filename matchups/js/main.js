@@ -45,8 +45,26 @@ function swipedetect(el, callback){
     allowedTime = 300, // maximum time allowed to travel that distance
     elapsedTime,
     startTime,
-    handleswipe = callback || function(swipedir){}
-  
+    handleswipe = callback || function(swipedir){};
+    
+    function preventDefault(e) {
+  e.preventDefault();
+}
+
+function disableScrolling(){
+    var x = [];
+    document.querySelectorAll('.container').forEach(function(a, b){
+        x.push([a.scrollX, a.scrollY])
+        a.onscroll=function(){a.scrollTo(x[b][0], x[b][1])};
+    })
+}
+
+function enableScrolling(){
+    document.querySelectorAll('.container').forEach(function(a){
+        a.onscroll=function(){};
+    })
+}
+    
     touchsurface.addEventListener('touchstart', function(e){
         var touchobj = e.changedTouches[0]
         swipedir = 'none'
@@ -60,15 +78,17 @@ function swipedetect(el, callback){
         var touchobj = e.changedTouches[0]
         distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
         distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
-        elapsedTime = new Date().getTime() - startTime // get time elapsed
+        elapsedTime = new Date().getTime() - startTime // get time elapsed;
+        var scrollX, scrollY;
         if (Math.abs(distX) >= Math.abs(distY)){ // 2nd condition for horizontal swipe met
-            e.preventDefault();
+            disableScrolling()
             console.log('stop!')
         }
         
     }, false)
   
     touchsurface.addEventListener('touchend', function(e){
+        enableScrolling();
         var touchobj = e.changedTouches[0]
         distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
         distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
