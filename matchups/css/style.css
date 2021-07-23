@@ -12,13 +12,21 @@
   font-family: 'Roboto Mono';
   font-weight: 600;
   font-display: swap;
-  src: url(/matchups/fonts/RobotoMono600.woff) format('woff');
+  src: url(/matchups/fonts/RobotoMonoBold.woff) format('woff');
 }
 
 .tier div{
 	outline: none!important
 }
 
+.wrapper{
+    height: calc(100% - 49px);
+    overflow-y: scroll;
+}
+
+.player:last-child{
+    margin-bottom: 10.75px
+}
 .toolbar-2{
     position: absolute;
     z-index: 100;

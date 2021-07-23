@@ -8,7 +8,7 @@ var filesToCache = [
   './css/w3.css',
   './js/main.js',
   './fonts/RobotoMono.woff',
-  './fonts/RobotoMono600.woff',
+  './fonts/RobotoMonoBold.woff',
   './fonts/MaterialIcons.woff'
 ];
 

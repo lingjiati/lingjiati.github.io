@@ -57,6 +57,15 @@ function swipedetect(el, callback){
     }, false)
   
     touchsurface.addEventListener('touchmove', function(e){
+        var touchobj = e.changedTouches[0]
+        distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
+        distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
+        elapsedTime = new Date().getTime() - startTime // get time elapsed
+        if (Math.abs(distX) >= Math.abs(distY)){ // 2nd condition for horizontal swipe met
+            e.preventDefault();
+            console.log('stop!')
+        }
+        
     }, false)
   
     touchsurface.addEventListener('touchend', function(e){
@@ -67,11 +76,9 @@ function swipedetect(el, callback){
         if (elapsedTime <= allowedTime){ // first condition for awipe met
             if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
                 swipedir = (distX < 0)? 'left' : 'right';
-                e.preventDefault() // if dist traveled is negative, it indicates left swipe
             }
             else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
                 swipedir = (distY < 0)? 'up' : 'down';
-                e.preventDefault(); // if dist traveled is negative, it indicates up swipe
             }
         }
         handleswipe(swipedir)
