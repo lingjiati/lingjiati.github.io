@@ -85,7 +85,8 @@ function enableScrolling(){
         distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
         elapsedTime = new Date().getTime() - startTime // get time elapsed;
         var scrollX, scrollY;
-        if (Math.abs(distX) >= Math.abs(distY)){ // 2nd condition for horizontal swipe met
+        if (elapsedTime > allowedTime) enableScrolling();
+        else if (Math.abs(distX) >= Math.abs(distY)){ // 2nd condition for horizontal swipe met
             disableScrolling()
             console.log('stop!')
         }
@@ -93,7 +94,7 @@ function enableScrolling(){
     }, false)
   
     touchsurface.addEventListener('touchend', function(e){
-        enableScrolling();
+        
         var touchobj = e.changedTouches[0]
         distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
         distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
@@ -118,11 +119,13 @@ window.addEventListener("load",  function() {
 
 	resize();
 	
-	if(document.documentElement.clientHeight > 812 || document.documentElement.clientWidth > 812) {    
+	if(document.documentElement.clientHeight > 1000 || document.documentElement.clientWidth > 1000) {    
         $('.layer-2, .layer-1, .scoreKeeper').css('top', '6vh').css("height", "92%");
+        $('.help-mobile').remove()
 	}
 	else{
-		expandClose()
+		expandClose();
+        $('.help-ipad').remove()
 	}
 
 
@@ -204,6 +207,10 @@ window.addEventListener("load",  function() {
 	$('.nav .click:nth-child(3)').click(settings)
 
 	$('.ac .click:nth-child(3)').click(main);
+    
+    $('i').click(function(){
+        $('.help, .splash').toggleShow()
+    })
 
 	$('.ac .click:nth-child(2)').click(function(){
 		
@@ -242,7 +249,8 @@ function resize(){
 	else {
 		$('.card').css("opacity", "1");
         $('.toolbar').show(true)
-        expandClose2(false)
+        expandClose2(false);
+        
 	};
 	let k = "";
 	$('.layer-1 .card .container').forEach(function(a){
