@@ -45,7 +45,8 @@ function swipedetect(el, callback){
     allowedTime = 300, // maximum time allowed to travel that distance
     elapsedTime,
     startTime,
-    handleswipe = callback || function(swipedir){};
+    handleswipe = callback || function(swipedir){},
+        isSwipe = false;
     
 
 
@@ -56,6 +57,7 @@ function disableScrolling(){
         a.onscroll=function(){
             a.scrollTo(x[b][0], x[b][1]);
             a.style.overflowY = "hidden"
+            a.style.background="red"
         };
         
     })
@@ -64,6 +66,7 @@ function disableScrolling(){
 function enableScrolling(){
     document.querySelectorAll('.container').forEach(function(a){
         a.style.overflowY = "scroll"
+        a.style.background="white"
         a.onscroll=function(){
             
         };
@@ -74,6 +77,7 @@ function enableScrolling(){
         var touchobj = e.changedTouches[0]
         swipedir = 'none'
         dist = 0
+        isSwipe = false
         startX = touchobj.pageX
         startY = touchobj.pageY
         startTime = new Date().getTime() // record time when finger first makes contact with surface
@@ -85,16 +89,18 @@ function enableScrolling(){
         distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
         elapsedTime = new Date().getTime() - startTime // get time elapsed;
         var scrollX, scrollY;
-        if (elapsedTime > allowedTime) enableScrolling();
-        else if (Math.abs(distX) >= Math.abs(distY)){ // 2nd condition for horizontal swipe met
-            disableScrolling()
-            console.log('stop!')
+        if (elapsedTime <= allowedTime && Math.abs(distX) >= Math.abs(distY)){ // 2nd condition for horizontal swipe met
+            isSwipe = true;
+            disableScrolling();
+        }
+        if(!isSwipe){
+            if(elapsedTime > allowedTime) enableScrolling();
         }
         
     }, false)
   
     touchsurface.addEventListener('touchend', function(e){
-        
+        enableScrolling();
         var touchobj = e.changedTouches[0]
         distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
         distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
@@ -125,7 +131,8 @@ window.addEventListener("load",  function() {
 	}
 	else{
 		expandClose();
-        $('.help-ipad').remove()
+        $('.help-ipad').remove();
+        $('.layer-2 > div').css('height', '88%')
 	}
 
 
