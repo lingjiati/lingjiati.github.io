@@ -57,7 +57,6 @@ function disableScrolling(){
         a.onscroll=function(){
             a.scrollTo(x[b][0], x[b][1]);
             a.style.overflowY = "hidden"
-            a.style.background="red"
         };
         
     })
@@ -66,7 +65,6 @@ function disableScrolling(){
 function enableScrolling(){
     document.querySelectorAll('.container').forEach(function(a){
         a.style.overflowY = "scroll"
-        a.style.background="white"
         a.onscroll=function(){
             
         };
@@ -118,7 +116,7 @@ function enableScrolling(){
 }
 
 
-var closed = false;
+var closed = false, random = false;
 
 //DOM Setup
 window.addEventListener("load",  function() {
@@ -126,13 +124,18 @@ window.addEventListener("load",  function() {
 	resize();
 	
 	if(document.documentElement.clientHeight > 1000 || document.documentElement.clientWidth > 1000) {    
-        $('.layer-2, .layer-1, .scoreKeeper').css('top', '6vh').css("height", "92%");
+        $('.layer-1, .scoreKeeper').css('top', '6vh').css("height", "92%");
+        $('.layer-2').css('top', '6vh')
+        $('.layer-2 > div').css("height", "84%");
+        $('.options').css('margin-top', '-8px');
+        $('.tier').css('top', '9.2vh');
+        $('#switch2').click(function(){random = !random})
         $('.help-mobile').remove()
 	}
 	else{
 		expandClose();
         $('.help-ipad').remove();
-        $('.layer-2 > div').css('height', '88%')
+        $('.layer-2 > div').css('height', '84%')
 	}
 
 
@@ -422,6 +425,7 @@ function main() {
 			j = z[0].innerText
 		}
         
+        j = z[1].innerText + '/' + z[0].innerText
 		if (j) {
 			j = j.split("/");
 			j.forEach(function(k) {
@@ -511,7 +515,7 @@ function newMatch() {
 }
 
 function addMatch() {
-	if(!p) p = new Object(playersName);
+	if(!p || random) p = new Object(playersName);
 	var q = newMatch(),
 		playersList = [],
 		r, repeated = false, o;
