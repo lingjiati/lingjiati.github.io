@@ -185,7 +185,7 @@ button{
 	pointer-events: none
 }
 
-.left, .right, .middle {
+.left, .right, .middle-left, .middle-right {
 	position: absolute;
 	top: 10%;
 	bottom: 10%;
@@ -194,20 +194,17 @@ button{
 	background: white;
 }
 
-.middle{
-    left: 28.75vw;
-    
-}
+
 .card{
 
 }
 
-.left {
+.left, .middle-left {
 	left: 5vw;
 	/*background-color: #b2ebf2;*/
 }
 
-.right {
+.right, .middle-right{
 	right: 5vw;
 	/*background-color: #f8bbd0;*/
 }

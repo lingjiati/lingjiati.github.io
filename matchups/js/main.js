@@ -154,11 +154,11 @@ window.addEventListener("load", function() {
 		if (document.getElementById('two').checked == true) {
 			mode = '2v2';
 			$('.layer-1 .left, .layer-1 .right').show(true);
-			$('.layer-1 .middle').hide();
+			$('.layer-1 .middle-left, .layer-1 .middle-right').hide();
 		} else {
 			mode = '1v1'
 			$('.layer-1 .left, .layer-1 .right').hide();
-			$('.layer-1 .middle').show(true);
+			$('.layer-1 .middle-left, .layer-1 .middle-right').show(true);
 		}
 	})
 
@@ -288,7 +288,7 @@ function resize() {
 
 function sortTable() {
 	var table, rows, switching, i, x, y, shouldSwitch;
-	table = mode == '1v1' ? document.querySelector(".layer-1 .middle .container") : document.querySelector(".layer-1 .left .container");
+	table = mode == '1v1' ? document.querySelector(".layer-1 .middle-left .container") : document.querySelector(".layer-1 .left .container");
 	switching = true;
 	while (switching) {
 		switching = false;
@@ -389,11 +389,74 @@ var teams = {
 	tiers = 0,
 	waitingList = [],
 	onTop = null,
-	round1 = 0;
+	round1 = 0,
+    lastGame = null;
 
 
 //Main Function
 function main() {
+    if(lastGame == '1v1'){
+        var z = document.querySelectorAll('.lineup'),
+				w = document.querySelectorAll('.score'),
+				j = false,
+                x = $(".layer-1 .middle-right .column"),
+				y = x.item().cloneNode(true);
+            y.querySelector('.points').innerHTML = x.length;
+			if (Number(w[1].innerText) > Number(w[0].innerText)) {
+				j = onTop = z[1].innerText;
+                waitingList.push(z[0].innerText)
+			} else if (Number(w[1].innerText) < Number(w[0].innerText)) {
+				j = onTop = z[0].innerText;
+                waitingList.push(z[1].innerText)
+			} else{
+                onTop = undefined;
+                waitingList.push(z[0].innerText);
+                waitingList.push(z[1].innerText)
+            }
+            
+            
+			if (j) {
+				var n = ('.middle-left .' + j + ' .team-3');
+				document.querySelector(n).innerText = (Number(document.querySelector(n).innerText || '0') + 1);
+                
+			}
+            for (var d in [0, 1]) {
+				y.querySelectorAll('.team-3 div')[d].innerHTML = w[d].innerText.length == 1 ? '0' + w[d].innerText : w[d].innerText;
+				y.querySelectorAll('.team-1 div')[d].innerHTML = z[d].innerText;
+                
+			}
+            $(".layer-1 .middle-right .container").append(y);
+            clear();
+    }
+    else if(lastGame == '2v2'){
+        var x = $(".layer-1 .right .column"),
+				y = x.item().cloneNode(true),
+				z = document.querySelectorAll('.lineup'),
+				w = document.querySelectorAll('.score'),
+				j = false;
+			y.querySelector('.points').innerHTML = x.length;
+
+			if (Number(w[1].innerText) > Number(w[0].innerText)) {
+				j = z[1].innerText
+			} else if (Number(w[1].innerText) < Number(w[0].innerText)) {
+				j = z[0].innerText
+			}
+
+			if (j) {
+				j = j.split("/");
+				j.forEach(function(k) {
+					var n = ('.left .' + k + ' .team-3');
+					document.querySelector(n).innerText = (Number(document.querySelector(n).innerText || '0') + 1)
+				})
+			}
+
+			for (var d in [0, 1]) {
+				y.querySelectorAll('.team-3 div')[d].innerHTML = w[d].innerText.length == 1 ? '0' + w[d].innerText : w[d].innerText;
+				y.querySelectorAll('.team-1 div')[d].innerHTML = z[d].innerText;
+				w[d].innerText = 0;
+			}
+			$(".layer-1 .right .container").append(y);
+    }
 	if (mode === '2v2') {
 		queue = [
 			[0, 0]
@@ -436,52 +499,23 @@ function main() {
 			D: i[3]
 		};
 
-		//Push Data
-		if (round != 0) {
-			var x = $(".layer-1 .right .column"),
-				y = x.item().cloneNode(true),
-				z = document.querySelectorAll('.lineup'),
-				w = document.querySelectorAll('.score'),
-				j = false;
-			y.querySelector('.points').innerHTML = x.length;
-
-			if (Number(w[1].innerText) > Number(w[0].innerText)) {
-				j = z[1].innerText
-			} else if (Number(w[1].innerText) < Number(w[0].innerText)) {
-				j = z[0].innerText
-			}
-
-			if (j) {
-				j = j.split("/");
-				j.forEach(function(k) {
-					var n = ('.left .' + k + ' .team-3');
-					document.querySelector(n).innerText = (Number(document.querySelector(n).innerText || '0') + 1)
-				})
-			}
-
-			for (var d in [0, 1]) {
-				y.querySelectorAll('.team-3 div')[d].innerHTML = w[d].innerText.length == 1 ? '0' + w[d].innerText : w[d].innerText;
-				y.querySelectorAll('.team-1 div')[d].innerHTML = z[d].innerText;
-				w[d].innerText = 0;
-			}
-			$(".layer-1 .right .container").append(y);
-		}
 
 		//Create Matchup Data
 		init();
 
 		//Generate Match
 		addMatch();
+        lastGame = '2v2'
 	} else {
 
 		$('.player').each(function() {
-			if (this.innerText && this.innerText != '\n' && !document.querySelector('.middle').querySelector('.' + this.innerText)) {
+			if (this.innerText && this.innerText != '\n' && !document.querySelector('.middle-left').querySelector('.' + this.innerText)) {
 
 
 				waitingList.push(this.innerText);
 				var r = $(".layer-1 .left .column").item().cloneNode(true);
 				r.classList.add(this.innerText);
-				$(".layer-1 .middle .container").item().appendChild(r);
+				$(".layer-1 .middle-left .container").item().appendChild(r);
 				r.querySelector('.team-3').innerHTML = 0;
 				r.querySelector('.team-1').innerHTML = this.innerText;
 
@@ -490,34 +524,12 @@ function main() {
 		})
 		if (round1 != 0) {
             
-			var z = document.querySelectorAll('.lineup'),
-				w = document.querySelectorAll('.score'),
-				j = false;
-
-			if (Number(w[1].innerText) > Number(w[0].innerText)) {
-				j = onTop = z[1].innerText;
-                waitingList.push(z[0].innerText)
-			} else if (Number(w[1].innerText) < Number(w[0].innerText)) {
-				j = onTop = z[0].innerText;
-                waitingList.push(z[1].innerText)
-			} else{
-                alert();
-                onTop = undefined;
-            }
-            
-            
-			if (j) {
-				var n = ('.middle .' + j + ' .team-3');
-				document.querySelector(n).innerText = (Number(document.querySelector(n).innerText || '0') + 1);
-                
-			}
-            clear();
+			
 		}
 		onTop = onTop || waitingList.shift();
 		$('.lineup')[0].innerText = onTop;
 		$('.lineup')[1].innerText = waitingList.shift();
-
-        round1 = 1;
+        lastGame = '1v1'
 	}
 
 }
