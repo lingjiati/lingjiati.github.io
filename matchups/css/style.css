@@ -185,7 +185,7 @@ button{
 	pointer-events: none
 }
 
-.left, .right {
+.left, .right, .middle {
 	position: absolute;
 	top: 10%;
 	bottom: 10%;
@@ -194,6 +194,10 @@ button{
 	background: white;
 }
 
+.middle{
+    left: 28.75vw;
+    
+}
 .card{
 
 }
@@ -316,6 +320,11 @@ button{
 
 .column ~ .column .team-3{
 	padding-right: 0;
+}
+
+
+.points{
+
 }
 
 .rounded{
@@ -466,4 +475,59 @@ button{
  .switch__input:checked + .switch__label:after {
 	 left: 16px;
 	 background-color: #3f51b5;
+}
+
+.radio {
+	 display: inline-block;
+	 position: relative;
+	 margin: 0 10px 10px 0;
+	 font-size: 16px;
+	 line-height: 24px;
+}
+ .radio__input {
+	 position: absolute;
+	 top: 4px;
+	 left: 0;
+	 width: 36px;
+	 height: 20px;
+	 opacity: 0;
+	 z-index: 0;
+}
+ .radio__label {
+	 display: block;
+	 padding: 0 0 0 24px;
+	 cursor: pointer;
+}
+ .radio__label:before {
+	 content: '';
+	 position: absolute;
+	 top: 4px;
+	 left: 0;
+	 width: 16px;
+	 height: 16px;
+	 background-color: transparent;
+	 border: 2px solid rgba(0, 0, 0, .54);
+	 border-radius: 14px;
+	 z-index: 1;
+	 transition: border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+ .radio__label:after {
+	 content: '';
+	 position: absolute;
+	 top: 8px;
+	 left: 4px;
+	 width: 8px;
+	 height: 8px;
+	 background-color: #3f51b5;
+	 border-radius: 50%;
+	 z-index: 2;
+	 transform: scale(0, 0);
+	 transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+ .radio__input:checked + .radio__label:before {
+	 border-color: #3f51b5;
+}
+ .radio__input:checked + .radio__label:after {
+	 transform: scale(1, 1);
+}
 }

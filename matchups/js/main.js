@@ -7,136 +7,160 @@
     Gestures detection from http://www.javascriptkit.com/javatutors/touchevents2.shtml
 
 */
-
 function expandClose(a) {
-		if (a == true || closed == true) {
-			$(".toolbar").show(true).fadeIn();
-			$(".layer-1, .layer-2, .scoreKeeper").css("margin-top", "8vh");
+	if (a == true || closed == true) {
+		$(".toolbar").show(true).fadeIn();
+		$(".layer-1, .layer-2, .scoreKeeper").css("margin-top", "8vh");
 
-			closed = false;
-		} else{
-			setTimeout(function() {
-				$(".toolbar").hide()
-			}, 500)
-			$(".toolbar").fadeOut();
-			$(".scoreKeeper").css("margin-top", "0");
-			$(".layer-1, .layer-2").css("margin-top", "0")
-			closed = true;
-		}
+		closed = false;
+	} else {
+		setTimeout(function() {
+			$(".toolbar").hide()
+		}, 500)
+		$(".toolbar").fadeOut();
+		$(".scoreKeeper").css("margin-top", "0");
+		$(".layer-1, .layer-2").css("margin-top", "0")
+		closed = true;
+	}
 };
 
-function expandClose2(k) {
-    if(k == true) $(".toolbar-2").show(true).fadeIn()
-    else{
-        $(".toolbar-2").hide().css("opacity", "0")
+function clear(){
+
+		queue[queue.length] = [document.querySelectorAll(".score")[0].innerText, document.querySelectorAll(".score")[1].innerText];
+		$(".score").each(function() {
+			this.innerText = 0;
+		});
+
+	
     }
+
+function expandClose2(k) {
+	if (k == true) $(".toolbar-2").show(true).fadeIn()
+	else {
+		$(".toolbar-2").hide().css("opacity", "0")
+	}
 }
 
-function swipedetect(el, callback){
-  
-    var touchsurface = el,
-    swipedir,
-    startX,
-    startY,
-    distX,
-    distY,
-    threshold = 150, //required min distance traveled to be considered swipe
-    restraint = 100, // maximum distance allowed at the same time in perpendicular direction
-    allowedTime = 300, // maximum time allowed to travel that distance
-    elapsedTime,
-    startTime,
-    handleswipe = callback || function(swipedir){},
-        isSwipe = false;
-    
+function swipedetect(el, callback) {
+
+	var touchsurface = el,
+		swipedir,
+		startX,
+		startY,
+		distX,
+		distY,
+		threshold = 150, //required min distance traveled to be considered swipe
+		restraint = 100, // maximum distance allowed at the same time in perpendicular direction
+		allowedTime = 300, // maximum time allowed to travel that distance
+		elapsedTime,
+		startTime,
+		handleswipe = callback || function(swipedir) {},
+		isSwipe = false;
 
 
-function disableScrolling(){
-    var x = [];
-    document.querySelectorAll('.container').forEach(function(a, b){
-        x.push([a.scrollX, a.scrollY])
-        a.onscroll=function(){
-            a.scrollTo(x[b][0], x[b][1]);
-            a.style.overflowY = "hidden"
-        };
-        
-    })
+
+	function disableScrolling() {
+		var x = [];
+		document.querySelectorAll('.container').forEach(function(a, b) {
+			a.style.overflowY = "hidden";
+			x.push([a.scrollX, a.scrollY]);
+			a.onscroll = function() {
+				a.scrollTo(x[b][0], x[b][1]);
+
+			};
+
+		})
+	}
+
+	function enableScrolling() {
+		document.querySelectorAll('.container').forEach(function(a) {
+			a.style.overflowY = "scroll"
+			a.onscroll = function() {
+
+			};
+		})
+	}
+
+	touchsurface.addEventListener('touchstart', function(e) {
+		var touchobj = e.changedTouches[0]
+		swipedir = 'none'
+		dist = 0
+		isSwipe = false
+		startX = touchobj.pageX
+		startY = touchobj.pageY
+		startTime = new Date().getTime() // record time when finger first makes contact with surface
+	}, false)
+
+	touchsurface.addEventListener('touchmove', function(e) {
+		var touchobj = e.changedTouches[0]
+		distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
+		distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
+		elapsedTime = new Date().getTime() - startTime // get time elapsed;
+		var scrollX, scrollY;
+		if (elapsedTime <= allowedTime && Math.abs(distX) >= Math.abs(distY)) { // 2nd condition for horizontal swipe met
+			isSwipe = true;
+			disableScrolling();
+		}
+		if (!isSwipe) {
+			if (elapsedTime > allowedTime) enableScrolling();
+		}
+
+	}, false)
+
+	touchsurface.addEventListener('touchend', function(e) {
+		enableScrolling();
+		var touchobj = e.changedTouches[0]
+		distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
+		distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
+		elapsedTime = new Date().getTime() - startTime // get time elapsed
+		if (elapsedTime <= allowedTime) { // first condition for awipe met
+			if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint) { // 2nd condition for horizontal swipe met
+				swipedir = (distX < 0) ? 'left' : 'right';
+			} else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint) { // 2nd condition for vertical swipe met
+				swipedir = (distY < 0) ? 'up' : 'down';
+			}
+		}
+		handleswipe(swipedir)
+	}, false)
 }
 
-function enableScrolling(){
-    document.querySelectorAll('.container').forEach(function(a){
-        a.style.overflowY = "scroll"
-        a.onscroll=function(){
-            
-        };
-    })
-}
-    
-    touchsurface.addEventListener('touchstart', function(e){
-        var touchobj = e.changedTouches[0]
-        swipedir = 'none'
-        dist = 0
-        isSwipe = false
-        startX = touchobj.pageX
-        startY = touchobj.pageY
-        startTime = new Date().getTime() // record time when finger first makes contact with surface
-    }, false)
-  
-    touchsurface.addEventListener('touchmove', function(e){
-        var touchobj = e.changedTouches[0]
-        distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
-        distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
-        elapsedTime = new Date().getTime() - startTime // get time elapsed;
-        var scrollX, scrollY;
-        if (elapsedTime <= allowedTime && Math.abs(distX) >= Math.abs(distY)){ // 2nd condition for horizontal swipe met
-            isSwipe = true;
-            disableScrolling();
-        }
-        if(!isSwipe){
-            if(elapsedTime > allowedTime) enableScrolling();
-        }
-        
-    }, false)
-  
-    touchsurface.addEventListener('touchend', function(e){
-        enableScrolling();
-        var touchobj = e.changedTouches[0]
-        distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
-        distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
-        elapsedTime = new Date().getTime() - startTime // get time elapsed
-        if (elapsedTime <= allowedTime){ // first condition for awipe met
-            if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
-                swipedir = (distX < 0)? 'left' : 'right';
-            }
-            else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
-                swipedir = (distY < 0)? 'up' : 'down';
-            }
-        }
-        handleswipe(swipedir)
-    }, false)
-}
 
-
-var closed = false, random = false;
+var closed = false,
+	random = false,
+	mode = '1v1';
 
 //DOM Setup
-window.addEventListener("load",  function() {
+window.addEventListener("load", function() {
 
 	resize();
-	
-	if(document.documentElement.clientHeight > 1000 || document.documentElement.clientWidth > 1000) {    
-        $('.layer-1, .scoreKeeper').css('top', '6vh').css("height", "92%");
-        $('.layer-2').css('top', '6vh')
-        $('.layer-2 > div').css("height", "84%");
-        $('.options').css('margin-top', '-8px');
-        $('.tier').css('top', '9.2vh');
-        $('#switch2').click(function(){random = !random})
-        $('.help-mobile').remove()
-	}
-	else{
+
+	if (document.documentElement.clientHeight > 1000 || document.documentElement.clientWidth > 1000) {
+		$('.layer-1, .scoreKeeper').css('top', '6vh').css("height", "92%");
+		$('.layer-2').css('top', '6vh')
+		$('.layer-2 > div').css("height", "84%");
+		$('.options').css('margin-top', '-1.8vh');
+		$('.tier').css('top', '9.2vh');
+		$('#switch2').click(function() {
+			random = !random
+		})
+		$('.help-mobile').remove()
+	} else {
 		expandClose();
-        $('.help-ipad').remove();
-        $('.layer-2 > div').css('height', '84%')
+		$('.help-ipad').remove();
+		$('.layer-2 > div').css('height', '84%')
 	}
+
+	$('.radio').click(function() {
+		if (document.getElementById('two').checked == true) {
+			mode = '2v2';
+			$('.layer-1 .left, .layer-1 .right').show(true);
+			$('.layer-1 .middle').hide();
+		} else {
+			mode = '1v1'
+			$('.layer-1 .left, .layer-1 .right').hide();
+			$('.layer-1 .middle').show(true);
+		}
+	})
 
 
 
@@ -153,62 +177,63 @@ window.addEventListener("load",  function() {
 	let b = $(".layer-1"),
 		a = $(".layer-2"),
 		c = $(".scoreKeeper"),
-        index = 3;
+		index = 3;
 
 
 	//Toolbar
 
-    
-    
 
-    function home(){
-        if (document.querySelector('.lineup').innerText == '-') main();
+
+
+	function home() {
+		if (document.querySelector('.lineup').innerText == '-') main();
 		b.hide();
 		a.hide();
 		c.show(true);
-        index = 1;
-    }
-    
-    function settings(){
-        a.show(true);
+		index = 1;
+	}
+
+	function settings() {
+		a.show(true);
 		b.hide();
 		c.hide();
-        index = 3;
-    }
-    
-    function analytics(){
-        b.show(true);
+		index = 3;
+	}
+
+	function analytics() {
+		b.show(true);
 		a.hide();
 		c.hide();
 		let k = '';
-		$('.layer-1 .card .container').forEach(function(a){
-			if(a.scrollHeight > a.clientHeight) k += ('.' + a.classList[1] + ' .column:last-child {border-bottom: none; margin-bottom: 4px}')
+		$('.layer-1 .card .container').forEach(function(a) {
+			if (a.scrollHeight > a.clientHeight) k += ('.' + a.classList[1] + ' .column:last-child {border-bottom: none; margin-bottom: 4px}')
 		});
 		$('style').text(k);
 		sortTable();
-        index = 2;
-    }
-    
-    function undo(){
-        let v = queue.pop();
-		if(v){
+		index = 2;
+	}
+
+	function undo() {
+		let v = queue.pop();
+		if (v) {
 			document.querySelectorAll(".score")[0].innerText = v[0];
 			document.querySelectorAll(".score")[1].innerText = v[1];
 		}
-    }
+	}
+
+	swipedetect(document.body, function(direction) {
+		if (direction == "right") {
+			if (index === 1) analytics();
+			else if (index === 2) settings();
+			else if (index === 3) home();
+		} else if (index === 1) {
+			if (direction == "left") undo();
+			else if (direction == "up") main();
+		}
+	})
     
-    swipedetect(document.body, function(direction){
-        if(direction == "right"){
-            if(index === 1) analytics();
-            else if(index === 2) settings();
-            else if(index === 3) home();
-        }
-        else if(index === 1){
-            if(direction == "left") undo();
-            else if(direction == "up") main();
-        }
-    })
     
+
 	//Buttons
 	$('.nav .click:nth-child(1)').click(home)
 
@@ -217,19 +242,12 @@ window.addEventListener("load",  function() {
 	$('.nav .click:nth-child(3)').click(settings)
 
 	$('.ac .click:nth-child(3)').click(main);
-    
-    $('i').click(function(){
-        $('.help, .splash').toggleShow()
-    })
 
-	$('.ac .click:nth-child(2)').click(function(){
-		
-			queue[queue.length] = [document.querySelectorAll(".score")[0].innerText, document.querySelectorAll(".score")[1].innerText];
-			$(".score").each(function(){
-				this.innerText = 0;
-			});
+	$('i').click(function() {
+		$('.help, .splash').toggleShow()
+	})
 
-	});
+	$('.ac .click:nth-child(2)').click(clear);
 
 	$('.ac .click:nth-child(1)').click(undo);
 
@@ -237,7 +255,7 @@ window.addEventListener("load",  function() {
 	var buttons = document.querySelectorAll('.clickable');
 	Array.prototype.forEach.call(buttons, function(b) {
 		b.addEventListener('click', createRipple);
-        
+
 	});
 
 
@@ -250,53 +268,52 @@ window.addEventListener('resize', resize)
 
 //Sort Table
 
-function resize(){
-	if(document.documentElement.clientHeight > document.documentElement.clientWidth){
-		$('.card').css("opacity", "0");
-        $('.toolbar').hide();
-        expandClose2(true)
-	}
-	else {
+function resize() {
+	if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
+		$('.card, .options').css("opacity", "0");
+		$('.toolbar').hide();
+		expandClose2(true)
+	} else {
 		$('.card').css("opacity", "1");
-        $('.toolbar').show(true)
-        expandClose2(false);
-        
+		$('.toolbar').show(true)
+		expandClose2(false);
+
 	};
 	let k = "";
-	$('.layer-1 .card .container').forEach(function(a){
-		if(a.scrollHeight > a.clientHeight) k += ('.' + a.classList[1] + ' .column:last-child {border-bottom: none; margin-bottom: 4px}');
+	$('.layer-1 .card .container').forEach(function(a) {
+		if (a.scrollHeight > a.clientHeight) k += ('.' + a.classList[1] + ' .column:last-child {border-bottom: none; margin-bottom: 4px}');
 	});
 	$('style').text(k);
 }
 
 function sortTable() {
-  var table, rows, switching, i, x, y, shouldSwitch;
-  table = document.querySelector(".layer-1 .left .container");
-  switching = true;
-  while (switching) {
-    switching = false;
-    rows = table.querySelectorAll('.column');
-    for (i = 0; i < rows.length - 1; i++) {
-      shouldSwitch = false;
-      x = rows[i].querySelector(".team-3");
-      y = rows[i + 1].querySelector(".team-3");
-      if (Number(x.innerHTML) < Number(y.innerHTML)) {
-        shouldSwitch = true;
-        break;
-      }
-    }
-    if (shouldSwitch) {
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
-    }
-  }
-	assignNumbers();
+	var table, rows, switching, i, x, y, shouldSwitch;
+	table = mode == '1v1' ? document.querySelector(".layer-1 .middle .container") : document.querySelector(".layer-1 .left .container");
+	switching = true;
+	while (switching) {
+		switching = false;
+		rows = table.querySelectorAll('.column');
+		for (i = 0; i < rows.length - 1; i++) {
+			shouldSwitch = false;
+			x = rows[i].querySelector(".team-3");
+			y = rows[i + 1].querySelector(".team-3");
+			if (Number(x.innerHTML) < Number(y.innerHTML)) {
+				shouldSwitch = true;
+				break;
+			}
+		}
+		if (shouldSwitch) {
+			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			switching = true;
+		}
+	}
+	assignNumbers(table);
 }
 
 //
-function assignNumbers(){
-	var table = document.querySelectorAll(".layer-1 .left .container .column");
-	Array.prototype.forEach.call(table, function(a, b){
+function assignNumbers(a) {
+	var table = a.querySelectorAll(".column");
+	Array.prototype.forEach.call(table, function(a, b) {
 		a.querySelector('.points').innerText = b + 1;
 	})
 }
@@ -306,11 +323,11 @@ function getDev(numbers, round) {
 	let a = 0,
 		avg = 4 / total * round;
 	for (var i in numbers) {
-        if(playersName[i].length > 0){
-            a += Math.abs(avg - numbers[i]);
-        }
-        
-    };
+		if (playersName[i].length > 0) {
+			a += Math.abs(avg - numbers[i]);
+		}
+
+	};
 	return a;
 }
 
@@ -365,88 +382,144 @@ var teams = {
 		D: 0
 	},
 	playersName,
-	queue = [[0, 0]],
+	queue = [
+		[0, 0]
+	],
 	p,
-    tiers = 0;
+	tiers = 0,
+	waitingList = [],
+	onTop = null,
+	round1 = 0;
 
 
 //Main Function
 function main() {
-	queue = [[0, 0]];
-	var i = [], exist = false;
-	total = 0;
-    tiers = 0;
-	//Update Players
-	$('.tier').each(function(e, f) {
-		let g = this.querySelectorAll('.player');
-		i[e] = [];
-        exist = false;
-		for (let h in g) {
-			if (g[h].innerText && g[h].innerText != '\n') {
-				i[e].push(g[h].innerText);
-                exist = true;
-				total++;
-				if (!document.getElementsByClassName(g[h].innerText).length) {
-					var r = $(".layer-1 .left .column").item().cloneNode(true);
-					r.classList.add(g[h].innerText);
-					$(".layer-1 .left .container").item().appendChild(r);
-					r.querySelector('.team-3').innerHTML = 0;
-					r.querySelector('.team-1').innerHTML = g[h].innerText;
+	if (mode === '2v2') {
+		queue = [
+			[0, 0]
+		];
+		var i = [],
+			exist = false;
+		total = 0;
+		tiers = 0;
+		//Update Players
+		$('.tier').each(function(e, f) {
+			let g = this.querySelectorAll('.player');
+			i[e] = [];
+			exist = false;
+			for (let h in g) {
+				if (g[h].innerText && g[h].innerText != '\n') {
+					i[e].push(g[h].innerText);
+					exist = true;
+					total++;
+					if (!document.querySelector('.layer-1 .left').getElementsByClassName(g[h].innerText).length) {
+						var r = $(".layer-1 .left .column").item().cloneNode(true);
+						r.classList.add(g[h].innerText);
+						$(".layer-1 .left .container").item().appendChild(r);
+						r.querySelector('.team-3').innerHTML = 0;
+						r.querySelector('.team-1').innerHTML = g[h].innerText;
+					}
 				}
 			}
-		}
-        if(exist) tiers += 1;
-	})
-	players = {
-		A: i[0].length,
-		B: i[1].length,
-		C: i[2].length,
-		D: i[3].length
-	};
-	playersName = {
-		A: i[0],
-		B: i[1],
-		C: i[2],
-		D: i[3]
-	};
+			if (exist) tiers += 1;
+		})
+		players = {
+			A: i[0].length,
+			B: i[1].length,
+			C: i[2].length,
+			D: i[3].length
+		};
+		playersName = {
+			A: i[0],
+			B: i[1],
+			C: i[2],
+			D: i[3]
+		};
 
-	//Push Data
-	if (round != 0) {
-		var x = $(".layer-1 .right .column"),
-			y = x.item().cloneNode(true),
-			z = document.querySelectorAll('.lineup'),
-			w = document.querySelectorAll('.score'),
-			j = false;
-		y.querySelector('.points').innerHTML = x.length;
+		//Push Data
+		if (round != 0) {
+			var x = $(".layer-1 .right .column"),
+				y = x.item().cloneNode(true),
+				z = document.querySelectorAll('.lineup'),
+				w = document.querySelectorAll('.score'),
+				j = false;
+			y.querySelector('.points').innerHTML = x.length;
 
-		if (Number(w[1].innerText) > Number(w[0].innerText)) {
-			j = z[1].innerText
-		} else if (Number(w[1].innerText) < Number(w[0].innerText)) {
-			j = z[0].innerText
-		}
-        
-        j = z[1].innerText + '/' + z[0].innerText
-		if (j) {
-			j = j.split("/");
-			j.forEach(function(k) {
-				var n = ('.' + k + ' .team-3');
-				document.querySelector(n).innerText = (Number(document.querySelector(n).innerText || '0') + 1)
-			})
+			if (Number(w[1].innerText) > Number(w[0].innerText)) {
+				j = z[1].innerText
+			} else if (Number(w[1].innerText) < Number(w[0].innerText)) {
+				j = z[0].innerText
+			}
+
+			if (j) {
+				j = j.split("/");
+				j.forEach(function(k) {
+					var n = ('.left .' + k + ' .team-3');
+					document.querySelector(n).innerText = (Number(document.querySelector(n).innerText || '0') + 1)
+				})
+			}
+
+			for (var d in [0, 1]) {
+				y.querySelectorAll('.team-3 div')[d].innerHTML = w[d].innerText.length == 1 ? '0' + w[d].innerText : w[d].innerText;
+				y.querySelectorAll('.team-1 div')[d].innerHTML = z[d].innerText;
+				w[d].innerText = 0;
+			}
+			$(".layer-1 .right .container").append(y);
 		}
 
-		for (var d in [0, 1]) {
-			y.querySelectorAll('.team-3 div')[d].innerHTML = w[d].innerText.length == 1 ? '0' + w[d].innerText : w[d].innerText;
-			y.querySelectorAll('.team-1 div')[d].innerHTML = z[d].innerText;
-			w[d].innerText = 0;
+		//Create Matchup Data
+		init();
+
+		//Generate Match
+		addMatch();
+	} else {
+
+		$('.player').each(function() {
+			if (this.innerText && this.innerText != '\n' && !document.querySelector('.middle').querySelector('.' + this.innerText)) {
+
+
+				waitingList.push(this.innerText);
+				var r = $(".layer-1 .left .column").item().cloneNode(true);
+				r.classList.add(this.innerText);
+				$(".layer-1 .middle .container").item().appendChild(r);
+				r.querySelector('.team-3').innerHTML = 0;
+				r.querySelector('.team-1').innerHTML = this.innerText;
+
+			}
+
+		})
+		if (round1 != 0) {
+            
+			var z = document.querySelectorAll('.lineup'),
+				w = document.querySelectorAll('.score'),
+				j = false;
+
+			if (Number(w[1].innerText) > Number(w[0].innerText)) {
+				j = onTop = z[1].innerText;
+                waitingList.push(z[0].innerText)
+			} else if (Number(w[1].innerText) < Number(w[0].innerText)) {
+				j = onTop = z[0].innerText;
+                waitingList.push(z[1].innerText)
+			} else{
+                alert();
+                onTop = undefined;
+            }
+            
+            
+			if (j) {
+				var n = ('.middle .' + j + ' .team-3');
+				document.querySelector(n).innerText = (Number(document.querySelector(n).innerText || '0') + 1);
+                
+			}
+            clear();
 		}
-		$(".layer-1 .right .container").append(y);
+		onTop = onTop || waitingList.shift();
+		$('.lineup')[0].innerText = onTop;
+		$('.lineup')[1].innerText = waitingList.shift();
+
+        round1 = 1;
 	}
 
-	//Create Matchup Data
-	init();
-
-	//Generate Match
-	addMatch();
 }
 
 //Create Matchup Data
@@ -483,21 +556,20 @@ function init() {
 
 
 
-
 function newMatch() {
 	round++;
 	if (round == 1 || getDev(graph2, round) < (2.5 / 4 * tiers)) {
 		//Random Match
 		let r = randomProperty(graph);
 		graph2 = pushByPlayer(graph, graph2, r);
-        console.log('surprise')
+		console.log('surprise')
 		return r;
 	} else {
 		//Optimized Match
 		var current = 0,
 			currentMatch = [],
 			c = new Object(graph2);
-        console.log('no surprise')
+		console.log('no surprise')
 		for (var i in graph) {
 			let k = pushByPlayer(graph, c, i);
 			if (current == 0 || current > getDev(k, round)) {
@@ -515,22 +587,23 @@ function newMatch() {
 }
 
 function addMatch() {
-	if(!p || random) p = new Object(playersName);
+	if (!p || random) p = new Object(playersName);
 	var q = newMatch(),
 		playersList = [],
-		r, repeated = false, o;
+		r, repeated = false,
+		o;
 	//Pick Players
 	for (var l in q) {
-		if(p[q[l]].length == 0) p[q[l]] = playersName[q[l]];
-        do{
-            r = Math.floor(Math.random() * p[q[l]].length);
-            o = p[q[l]][r];
-            repeated = false;
-            playersList.forEach(function(a){
-                if(a == o) repeated = true
-            })
-        } while(repeated == true)
-		
+		if (p[q[l]].length == 0) p[q[l]] = playersName[q[l]];
+		do {
+			r = Math.floor(Math.random() * p[q[l]].length);
+			o = p[q[l]][r];
+			repeated = false;
+			playersList.forEach(function(a) {
+				if (a == o) repeated = true
+			})
+		} while (repeated == true)
+
 		playersList.push(o);
 		p[q[l]].splice(r, 1)
 	}

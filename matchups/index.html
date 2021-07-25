@@ -19,8 +19,8 @@
 			<div class="toolbar-left nav">
 
 				<span class="click ripple2">home</span>
-				<span class="click">settings</span>
 				<span class="click">analytics</span>
+				<span class="click">settings</span>
 			</div>
 
 			<div class="toolbar-right ac">
@@ -49,7 +49,7 @@
             
             <div class="splash">
                 <div class="start">Matchups</div>
-                <div style="margin-top: 16px">v1.32</div>
+                <div style="margin-top: 16px">v1.4</div>
                 
             </div>
             <div class="help-mobile help" style="display: none">
@@ -128,7 +128,7 @@
 		</div>
 
 		<div class="fullScreenLayer layer-1">
-			<div class="card card-2 right">
+			<div class="card card-2 right" style="display: none">
 				<div class="column">
 					<div class="points">No.</div>
 					<div class="team-1">
@@ -142,7 +142,7 @@
 				</div>
                 <div class="container y"></div>
 			</div>
-			<div class="card card-2 left">
+			<div class="card card-2 middle" >
 
 				<div class="column">
 					<div class="points">No.</div>
@@ -150,6 +150,16 @@
 					<div class="team-3">Wins</div>
 				</div>
                 <div class="container x"></div>
+			</div>
+            
+            <div class="card card-2 left" style="display: none">
+
+				<div class="column">
+					<div class="points">No.</div>
+					<div class="team-1">Player</div>
+					<div class="team-3">Wins</div>
+				</div>
+                <div class="container z"></div>
 			</div>
 			<div class="card-3 rounded unselectable"></div>
 		</div>
@@ -190,14 +200,13 @@
 				</div>
 			</div>
 			<div class="options">
-                <div class="switch">
-                    <input type="checkbox" id="switch3" class="switch__input">
-                    <label for="switch3" class="switch__label">1v1 Mode</label>
+                <div class="radio">
+                    <input type="radio" name="radio" id="one" class="radio__input" checked>
+                    <label for="radio1" class="radio__label">1v1</label>
                 </div>
-                
-                <div class="switch">
-                    <input type="checkbox" id="switch2" class="switch__input">
-                    <label for="switch2" class="switch__label">Random</label>
+                <div class="radio">
+                    <input type="radio" name="radio" id="two" class="radio__input">
+                    <label for="radio2" class="radio__label">2v2</label>
                 </div>
             </div>
 		</div>
