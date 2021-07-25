@@ -56,7 +56,16 @@ i{
 }
 
 .help-mobile{
-    padding: 0px 30px
+    padding-left: 30px;
+}
+
+.help-mobile div{
+    height: 100vh;
+    overflow: scroll;
+}
+
+.help-mobile div *{
+    margin-right: 30px
 }
 
 .help-ipad div{
@@ -154,6 +163,10 @@ body{
 	z-index: 4;
 	transition: cubic-bezier(.42,0,.58,1) 0.5s;
     display: none;
+}
+
+p:last-child{
+    margin-bottom: 40px
 }
 
 
@@ -331,6 +344,7 @@ button{
 	left: 0;
 	right: 0;
 	z-index: 0;
+    display: none
 }
 
 .rounded ~ .rounded{
@@ -477,7 +491,7 @@ button{
 .radio {
 	 display: inline-block;
 	 position: relative;
-	 margin: 0 10px 10px 0;
+	 margin: 0 - 10px 0;
 	 font-size: 16px;
 	 line-height: 24px;
 }
@@ -488,7 +502,7 @@ button{
 	 width: 36px;
 	 height: 20px;
 	 opacity: 0;
-	 z-index: 0;
+	 z-index: 2;
 }
  .radio__label {
 	 display: block;
@@ -527,4 +541,7 @@ button{
  .radio__input:checked + .radio__label:after {
 	 transform: scale(1, 1);
 }
+
+.switch, .radio{
+    margin-right: 20px
 }

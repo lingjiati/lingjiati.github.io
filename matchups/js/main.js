@@ -140,17 +140,18 @@ window.addEventListener("load", function() {
 		$('.layer-2 > div').css("height", "84%");
 		$('.options').css('margin-top', '-1.8vh');
 		$('.tier').css('top', '9.2vh');
-		$('#switch2').click(function() {
-			random = !random
-		})
 		$('.help-mobile').remove()
 	} else {
 		expandClose();
 		$('.help-ipad').remove();
 		$('.layer-2 > div').css('height', '84%')
 	}
+    
+    $('#switch-2').click(function(){
+        random = !random
+    })
 
-	$('.radio').click(function() {
+	$('.radio input').change(function() {
 		if (document.getElementById('two').checked == true) {
 			mode = '2v2';
 			$('.layer-1 .left, .layer-1 .right').show(true);
@@ -274,7 +275,7 @@ function resize() {
 		$('.toolbar').hide();
 		expandClose2(true)
 	} else {
-		$('.card').css("opacity", "1");
+		$('.card, .options').css("opacity", "1");
 		$('.toolbar').show(true)
 		expandClose2(false);
 
