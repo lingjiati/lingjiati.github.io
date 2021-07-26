@@ -560,20 +560,19 @@ button{
     right: 0;
     top: 0;
     bottom: 0;
-    width: 150%;
-    height: 150%;
+    width: 125%;
+    height: 125%;
     margin: auto;
     opacity: 0.5;
     transition: all .5s;
-    transform: translateX(-16.6%);
-    transform-origin: bottom;
+    margin-left: -12.5%
 }
 .click:active:after {
     height: 0px;
     width: 0px;
     opacity: 1;
     transition: 0s;
-    transform: translateX(0)
+    margin-left: 25%
 }
 .click {
     position: relative;
