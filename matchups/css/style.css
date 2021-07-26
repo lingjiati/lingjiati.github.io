@@ -151,6 +151,10 @@ body{
 
 .title, .player{
 	padding-left: 3.4vw;
+    
+}
+
+.wrapper, .player{
     caret-color: black;
 }
 
