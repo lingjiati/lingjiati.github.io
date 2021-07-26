@@ -563,7 +563,7 @@ button{
     width: 150%;
     height: 150%;
     margin: auto;
-    opacity: 0;
+    opacity: 0.5;
     transition: all .5s;
     transform: translateX(-16.6%);
     transform-origin: bottom;
