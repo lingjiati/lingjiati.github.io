@@ -24,6 +24,10 @@ function expandClose(a) {
 	}
 };
 
+document.fonts.ready.then(function(){
+    $('.splash, i').fadeIn(0.5)
+})
+
 function clear(){
 
 		queue[queue.length] = [document.querySelectorAll(".score")[0].innerText, document.querySelectorAll(".score")[1].innerText];
@@ -37,7 +41,10 @@ function clear(){
 function expandClose2(k) {
 	if (k == true) $(".toolbar-2").show(true).fadeIn()
 	else {
-		$(".toolbar-2").hide().css("opacity", "0")
+		$(".toolbar-2").css("opacity", "0");
+        setTimeout(function(){
+            $(".toolbar-2").hide()
+        }, 500)
 	}
 }
 
@@ -127,12 +134,17 @@ function swipedetect(el, callback) {
 
 var closed = false,
 	random = false,
-	mode = '1v1';
+	mode = '1v1',
+    timeOut, countOver = false;
 
 //DOM Setup
 window.addEventListener("load", function() {
-
-	resize();
+    
+    
+	timeOut = setTimeout(function(){
+        countOver = true;
+        resize()
+    }, 3000);
 
 	if (document.documentElement.clientHeight > 1000 || document.documentElement.clientWidth > 1000) {
 		$('.layer-1, .scoreKeeper').css('top', '6vh').css("height", "92%");
@@ -245,7 +257,9 @@ window.addEventListener("load", function() {
 	$('.ac .click:nth-child(3)').click(main);
 
 	$('i').click(function() {
-		$('.help, .splash').toggleShow()
+		$('.help, .splash').toggleShow();
+        clearTimeout(timeOut);
+        $('i').click(resize);
 	})
 
 	$('.ac .click:nth-child(2)').click(clear);
@@ -270,6 +284,8 @@ window.addEventListener('resize', resize)
 //Sort Table
 
 function resize() {
+    if(countOver == false) return;
+    count
 	if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
 		$('.card, .options').css("opacity", "0");
 		$('.toolbar').hide();

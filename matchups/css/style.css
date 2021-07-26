@@ -57,15 +57,23 @@ i{
 
 .help-mobile{
     padding-left: 30px;
+    height: 100vh;
 }
 
-.help-mobile div{
-    height: 100vh;
+
+
+.help-mobile, .help-ipad{
     overflow: scroll;
+    height: 100vh
 }
 
 .help-mobile div *{
     margin-right: 30px
+}
+
+.help-mobile div, .help-ipad div{
+    height: auto
+    
 }
 
 .help-ipad div{
@@ -107,6 +115,7 @@ h3{
     height: 100vh;
     background: #eee;
 	transition: 0.5s;
+    z-index: 50
 }
 
 .toolbar-2 > div:first-child{
@@ -550,9 +559,16 @@ button{
     -webkit-tap-highlight-color: transparent;
 }
 
+.splash, i{
+    opacity: 0;
+    transition: 0.5s;
+
+}
+
+
 .click:after  {
     content: "";
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.8);
     display: block;
     position: absolute;
     border-radius: 50%;
@@ -564,7 +580,7 @@ button{
     height: 125%;
     margin: auto;
     opacity: 0;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     margin-left: -12.5%
 }
 .click:active:after {
