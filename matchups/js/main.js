@@ -150,7 +150,7 @@ window.addEventListener("load", function() {
 		$('.layer-1, .scoreKeeper').css('top', '6vh').css("height", "92%");
 		$('.layer-2').css('top', '6vh')
 		$('.layer-2 > div').css("height", "84%");
-		$('.options').css('margin-top', '-1.8vh');
+		$('.options').css('margin-top', '-1.9vh');
 		$('.tier').css('top', '9.2vh');
 		$('.help-mobile').remove()
 	} else {
