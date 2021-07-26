@@ -568,6 +568,10 @@ button{
 
 }
 
+.placeholder{
+    color: #999
+}
+
 
 .click:after  {
     content: "";
@@ -597,6 +601,6 @@ button{
     position: relative;
 }
 
-.toolbar-left .click:after{
+/*.toolbar-left .click:after{
     background-color: #283593
-}
+}*/

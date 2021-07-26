@@ -195,10 +195,10 @@ window.addEventListener("load", function() {
 
 	//Toolbar
     
-    $('.toolbar-left .click').click(function(){
+    /*$('.toolbar-left .click').click(function(){
         $('.click').css('color', 'black')
         $(this).css('color', '#3f51b5');
-    })
+    })*/
 
 
 
@@ -265,7 +265,7 @@ window.addEventListener("load", function() {
 		$('.help, .splash').toggleShow();
         clearTimeout(timeOut);
         countOver = true;
-        if(document.documentElement.clientHeight > 1000 || document.documentElement.clientWidth > 1000){
+        if(document.documentElement.clientHeight < document.documentElement.clientWidth){
             $('i').die().click(resize)
         } 
         
