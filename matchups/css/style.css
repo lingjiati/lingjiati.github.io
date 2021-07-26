@@ -552,7 +552,7 @@ button{
 
 .click:after  {
     content: "";
-    background: rgba(0,0,0,0.3);
+    background: rgba(0,0,0,0.5);
     display: block;
     position: absolute;
     border-radius: 50%;
@@ -564,7 +564,7 @@ button{
     height: 125%;
     margin: auto;
     opacity: 0;
-    transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     margin-left: -12.5%
 }
 .click:active:after {
