@@ -545,3 +545,35 @@ button{
 .switch, .radio{
     margin-right: 20px
 }
+
+.radio, .switch, .click{
+    -webkit-tap-highlight-color: transparent;
+}
+
+.click:after  {
+    content: "";
+    background: rgba(0,0,0,0.3);
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 150%;
+    height: 150%;
+    margin: auto;
+    opacity: 0;
+    transition: all 5s;
+    transform: translateX(-16.6%)
+}
+.click:active:after {
+    height: 0px;
+    width: 0px;
+    opacity: 1;
+    transition: 0s;
+    transform: translateX(0)
+}
+.click {
+    position: relative;
+}
