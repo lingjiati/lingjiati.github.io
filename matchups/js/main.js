@@ -194,6 +194,11 @@ window.addEventListener("load", function() {
 
 
 	//Toolbar
+    
+    $('.toolbar-left .click').click(function(){
+        $('.click').css('color', 'black')
+        $(this).css('color', '#3f51b5');
+    })
 
 
 
@@ -259,7 +264,11 @@ window.addEventListener("load", function() {
 	$('i').click(function() {
 		$('.help, .splash').toggleShow();
         clearTimeout(timeOut);
-        $('i').click(resize);
+        countOver = true;
+        if(document.documentElement.clientHeight > 1000 || document.documentElement.clientWidth > 1000){
+            $('i').die().click(resize)
+        } 
+        
 	})
 
 	$('.ac .click:nth-child(2)').click(clear);
