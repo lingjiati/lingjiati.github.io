@@ -1,4 +1,4 @@
-var cacheName = 'matchups_v1.48';
+var cacheName = 'matchups_v1.49';
 var filesToCache = [
   './',
   './index.html',
@@ -9,7 +9,7 @@ var filesToCache = [
   './js/main.js',
   './fonts/RobotoMono.woff',
   './fonts/RobotoMonoBold.woff',
-  './fonts/MaterialIcons.woff'
+  './fonts/MaterialIcons.woff'  
 ];
 
 /* Start the service worker and cache all of the app's content */
