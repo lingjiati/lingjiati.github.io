@@ -176,9 +176,9 @@ window.addEventListener("load", function() {
 		}
 	})
 
-	/*$('input[type="range"]').change(() => {
+	$('input[type="range"]').change(() => {
 		randomRate = $('input[type="range"]').item().value;
-	})*/
+	})
 
 	//Add Score
 	$(".scoreKeeper .card").click(function() {
@@ -195,13 +195,6 @@ window.addEventListener("load", function() {
 		c = $(".scoreKeeper"),
 		index = 3;
 
-
-	//Toolbar
-    
-    /*$('.toolbar-left .click').click(function(){
-        $('.click').css('color', 'black')
-        $(this).css('color', '#3f51b5');
-    })*/
 
 
 
