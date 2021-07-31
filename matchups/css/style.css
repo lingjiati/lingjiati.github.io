@@ -616,10 +616,7 @@ button{
 
 .pure-material-slider {
 	
-    --pure-material-safari-helper1: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.04);
-    --pure-material-safari-helper2: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.12);
-    --pure-material-safari-helper3: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.16);
-    --pure-material-safari-helper4: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.24);
+
     display: inline-block;
     width: 100px;
     color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.87);
@@ -688,7 +685,7 @@ button{
     background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
     transform: scale(6, 6);
     transition: box-shadow 0.2s;
-	margin-top: 1px;
+	margin-top: 0px;
 }
 
 /* Webkit | Hover, Focus */
@@ -867,6 +864,7 @@ button{
 }
 
 .test span{
+	transform: translateY(7.5px);
     display: inline-table;
 	
 }
