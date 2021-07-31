@@ -134,8 +134,9 @@ function swipedetect(el, callback) {
 
 var closed = false,
 	random = false,
-	mode = '1v1',
-    timeOut, countOver = false;
+	mode = '2v2',
+    timeOut, countOver = false,
+	randomRate = 2.4;
 
 //DOM Setup
 window.addEventListener("load", function() {
@@ -175,7 +176,9 @@ window.addEventListener("load", function() {
 		}
 	})
 
-
+	$('input[type="range"]').change(() => {
+		randomRate = $('input[type="range"]').item().value;
+	})
 
 	//Add Score
 	$(".scoreKeeper .card").click(function() {
@@ -490,7 +493,7 @@ function main() {
 		var i = [],
 			exist = false;
 		total = 0;
-		tiers = 0;
+		tiersTemp = 0;
 		//Update Players
 		$('.tier').each(function(e, f) {
 			let g = this.querySelectorAll('.player');
@@ -510,8 +513,15 @@ function main() {
 					}
 				}
 			}
-			if (exist) tiers += 1;
+			if (exist) tiersTemp += 1;
 		})
+		if(tiersTemp == 0) return;
+		if (tiers != tiersTemp) {
+			graph2 = {A: 0, B: 0, C: 0, D: 0};
+			round = 0;
+			tiers = tiersTemp
+		}
+		
 		players = {
 			A: i[0].length,
 			B: i[1].length,
@@ -596,7 +606,8 @@ function init() {
 
 function newMatch() {
 	round++;
-	if (round == 1 || getDev(graph2, round) < (2.5 / 4 * tiers)) {
+	console.log(getDev(graph2, (round - 1)), graph2)
+	if (round == 1 || getDev(graph2, round - 1) < (randomRate / 4 * tiers)) {
 		//Random Match
 		let r = randomProperty(graph);
 		graph2 = pushByPlayer(graph, graph2, r);
@@ -622,6 +633,7 @@ function newMatch() {
 		graph2 = pushByPlayer(graph, graph2, currentMatch);
 		return currentMatch;
 	}
+	
 }
 
 function addMatch() {
