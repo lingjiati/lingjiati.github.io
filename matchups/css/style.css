@@ -619,7 +619,7 @@ button{
 	--pure-material-safari-helper1: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.04);
     --pure-material-safari-helper2: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.12);
     --pure-material-safari-helper3: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.16);
-    --pure-material-safari-helper4: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.24);
+    --pure-material-safari-helper4: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.16);
     display: inline-block;
     width: 100px;
     color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.87);
@@ -693,15 +693,15 @@ button{
 
 /* Webkit | Hover, Focus */
 .pure-material-slider:hover > input::-webkit-slider-thumb {
-    box-shadow: 0 0 0 2px var(--pure-material-safari-helper1);
+    box-shadow: 0 0 0 0px var(--pure-material-safari-helper1);
 }
 
 .pure-material-slider > input:focus::-webkit-slider-thumb {
-    box-shadow: 0 0 0 2px var(--pure-material-safari-helper2);
+    box-shadow: 0 0 0 0px var(--pure-material-safari-helper2);
 }
 
 .pure-material-slider:hover > input:focus::-webkit-slider-thumb {
-    box-shadow: 0 0 0 2px var(--pure-material-safari-helper3);
+    box-shadow: 0 0 0 0px var(--pure-material-safari-helper3);
 }
 
 /* Webkit | Active */
@@ -878,4 +878,14 @@ button{
 
 .test span:last-child{
 	margin-left: 5px;
+}
+
+.radio:active .radio__label::after{
+	box-shadow: 0 0 0 0px rgba(63, 81, 181, 0.8);
+	transition: 0s
+}
+
+.radio__label::after{
+	box-shadow: 0 0 0 20px transparent;
+	transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
