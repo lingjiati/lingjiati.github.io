@@ -176,9 +176,9 @@ window.addEventListener("load", function() {
 		}
 	})
 
-	$('input[type="range"]').change(() => {
+	/*$('input[type="range"]').change(() => {
 		randomRate = $('input[type="range"]').item().value;
-	})
+	})*/
 
 	//Add Score
 	$(".scoreKeeper .card").click(function() {

@@ -868,7 +868,7 @@ button{
 }
 
 .test span{
-	transform: translateY(-12px);
+	transform: translateY(-0px);
     display: inline-table;
 	
 }
