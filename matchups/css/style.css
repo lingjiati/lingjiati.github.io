@@ -616,7 +616,10 @@ button{
 
 .pure-material-slider {
 	
-
+	--pure-material-safari-helper1: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.04);
+    --pure-material-safari-helper2: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.12);
+    --pure-material-safari-helper3: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.16);
+    --pure-material-safari-helper4: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.24);
     display: inline-block;
     width: 100px;
     color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.87);
@@ -857,22 +860,22 @@ button{
 }
 
 .test{
-	display: inline-table;
+	display: inline;
 	position: absolute;
 	transform: translateY(-6px);
 	margin-left: 9px;
 }
 
 .test span{
-	transform: translateY(7.5px);
-    display: inline-table;
-	
+	transform: translateY(6.5px);
+    display: inline-block;
+	vertical-align: top;
 }
 
 .test span:first-child{
-	margin-right: 15px
+	margin-right: 5px
 }
 
 .test span:last-child{
-	margin-left: 15px;
+	margin-left: 5px;
 }
