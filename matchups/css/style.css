@@ -687,8 +687,8 @@ button{
     width: 2px;
     background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
     transform: scale(6, 6);
-    transition: box-shadow 0.2s;
-	margin-top: 0px;
+    transition: box-shadow 0.2s, height 0.2s, width 0.2s;
+    transform-origin: center;
 }
 
 /* Webkit | Hover, Focus */
@@ -706,7 +706,9 @@ button{
 
 /* Webkit | Active */
 .pure-material-slider > input:active::-webkit-slider-thumb {
-     box-shadow: 0 0 0 2px var(--pure-material-safari-helper4) !important;
+     box-shadow: 0 0 0 0px var(--pure-material-safari-helper4) !important;
+    height: 2.5px;
+    width: 2.5px;
 }
 
 /* Webkit | Disabled */
