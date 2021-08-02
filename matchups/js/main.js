@@ -159,10 +159,6 @@ window.addEventListener("load", function() {
 		$('.help-ipad').remove();
 		$('.layer-2 > div').css('height', '84%')
 	}
-    
-    $('#switch-2').click(function(){
-        random = !random
-    })
 
 	$('.radio input').change(function() {
 		if (document.getElementById('two').checked == true) {
@@ -630,7 +626,7 @@ function newMatch() {
 }
 
 function addMatch() {
-	if (!p || random) p = new Object(playersName);
+	if (!p) p = new Object(playersName);
 	var q = newMatch(),
 		playersList = [],
 		r, repeated = false,
