@@ -689,6 +689,8 @@ button{
     transform: scale(6, 6);
     transition: box-shadow 0.2s, height 0.2s, width 0.2s, transform 0.2s;
     transform-origin: center;
+    box-shadow: 0 0 0 0.3px transparent,
+    0px 0 0 3px transparent;
 }
 
 /* Webkit | Hover, Focus */
@@ -706,8 +708,8 @@ button{
 
 /* Webkit | Active */
 .pure-material-slider > input:active::-webkit-slider-thumb {
-     box-shadow: 0 0 0 0px var(--pure-material-safari-helper4) !important;
-    transform: scale(8,8)
+     box-shadow: 0 0 0 0.3px rgba(63, 81, 181),
+     0 0 0 3px transparent !important;
 }
 
 /* Webkit | Disabled */
