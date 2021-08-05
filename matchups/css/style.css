@@ -889,3 +889,58 @@ button{
 	box-shadow: 0 0 0 20px transparent;
 	transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* Please note this CSS is currently in prototype form. We'll implement a cleaned up version in Web Starter Kit. */
+.paper-snackbar {
+    transition-property: opacity, bottom, left, right, width, margin, border-radius, transform;
+    transition-duration: 0.4s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Roboto Mono';
+    font-size: 14px;
+    min-height: 14px;
+    background-color: #3F51B5;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    line-height: 20px;
+    padding: 18px 24px;
+    bottom: -100px;
+    opacity: 0;
+    z-index: 2000;
+    border-radius: 4px 4px 0 0 ;
+}
+@media (min-width: 1000px) {
+   /* Desktop: Single-line snackbar height: 48 dp tall Minimum width: 288 dp Maximum width: 568 dp 2 dp rounded corner Text: Roboto Regular 14 sp Action button: Roboto Medium 14 sp, all-caps text Default background fill: #323232 100% */
+    .paper-snackbar {
+        min-width: 288px;
+        max-width: 360px;
+        display: inline-flex;
+        margin: auto;
+        left: 0;
+        right: 0;
+        bottom: -100px;
+   }
+}
+@media (max-width: 1000px) {
+   /* Mobile: Single-line snackbar height: 48 dp Multi-line snackbar height: 80 dp Text: Roboto Regular 14 sp Action button: Roboto Medium 14 sp, all-caps text Default background fill: #323232 100% */
+    .paper-snackbar {
+        margin: auto;
+        left: 0;
+        right: 0;
+        max-width: 320px;
+        line-height: 10px;
+   }
+}
+.paper-snackbar .action {
+    background: inherit;
+    display: inline-block;
+    border: none;
+    font-size: inherit;
+    text-transform: uppercase;
+    color: #ffeb3b;
+    margin: 0px 0px 0px 24px;
+    padding: 0px;
+    min-width: min-content;
+}

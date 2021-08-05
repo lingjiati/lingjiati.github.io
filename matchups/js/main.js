@@ -150,8 +150,8 @@ window.addEventListener("load", function() {
 	if (document.documentElement.clientHeight > 1000 || document.documentElement.clientWidth > 1000) {
 		$('.layer-1, .scoreKeeper').css('top', '6vh').css("height", "92%");
 		$('.layer-2').css('top', '6vh')
-		$('.layer-2 > div').css("height", "84%");
-		$('.options').css('margin-top', '-1.9vh');
+		$('.layer-2 > div').css("height", "82%");
+		$('.options').css('margin-top', '-2vh');
 		$('.tier').css('top', '9.2vh');
 		$('.help-mobile').remove()
 	} else {
@@ -547,15 +547,21 @@ function main() {
 			}
 
 		})
-		if (round1 != 0) {
-            
-			
-		}
 		onTop = onTop || waitingList.shift();
 		$('.lineup')[0].innerText = onTop;
 		$('.lineup')[1].innerText = waitingList.shift();
         lastGame = '1v1'
 	}
+
+	var k = document.querySelectorAll('.lineup')
+	k = Array.prototype.map.call(k, a => a.innerText).join('/').split('/')
+	var l = document.querySelectorAll((mode == '2v2' ? '.left' : '.middle-left') + ' .team-1');
+	l = Array.prototype.filter.call(l, function(d){
+		return !k.includes(d.innerText) && d.innerText != '' && d.innerText != '\n'
+	});
+	l.shift();
+	console.log()
+	createSnackbar(`New game! Judge: ${l[randomProperty(l)].innerText}`)
 
 }
 
@@ -630,7 +636,7 @@ function addMatch() {
 	var q = newMatch(),
 		playersList = [],
 		r, repeated = false,
-		o;
+		o, k;
 	//Pick Players
 	for (var l in q) {
 		if (p[q[l]].length == 0) p[q[l]] = playersName[q[l]];
@@ -651,3 +657,61 @@ function addMatch() {
 	document.querySelectorAll('.lineup')[1].innerHTML = playersList[2] + "/" + playersList[3];
 
 }
+
+var createSnackbar = (function() {
+	// Any snackbar that is already shown
+	var previous = null;
+	
+  /*
+  <div class="paper-snackbar">
+	<button class="action">Dismiss</button>
+	This is a longer message that won't fit on one line. It is, inevitably, quite a boring thing. Hopefully it is still useful.
+  </div>
+  */
+	
+	return function(message, actionText, action) {
+	  if (previous) {
+		previous.dismiss();
+	  }
+	  var snackbar = document.createElement('div');
+	  snackbar.className = 'paper-snackbar card-3';
+	  snackbar.dismiss = function() {
+		this.style.transform = 'translateY(100%)'
+	  };
+	  var text = document.createTextNode(message);
+	  snackbar.appendChild(text);
+	  if (actionText) {
+		if (!action) {
+		  action = snackbar.dismiss.bind(snackbar);
+		}
+		var actionButton = document.createElement('button');
+		actionButton.className = 'action';
+		actionButton.innerHTML = actionText;
+		actionButton.addEventListener('click', action);
+		snackbar.appendChild(actionButton);
+	  }
+	  setTimeout(function() {
+		if (previous === this) {
+		  previous.dismiss();
+		}
+	  }.bind(snackbar), 4000);
+	  
+	  snackbar.addEventListener('transitionend', function(event, elapsed) {
+		if (event.propertyName === 'transform' && this.style.transform == 'translateY(100%)') {
+		  this.parentElement.removeChild(this);
+		  if (previous === this) {
+			previous = null;
+		  }
+		}
+	  }.bind(snackbar));
+  
+	  
+	  
+	  previous = snackbar;
+	  document.body.appendChild(snackbar);
+	  // In order for the animations to trigger, I have to force the original style to be computed, and then change it.
+	  getComputedStyle(snackbar).bottom;
+	  snackbar.style.bottom = '0px';
+	  snackbar.style.opacity = 1;
+	};
+  })();
