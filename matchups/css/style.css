@@ -242,12 +242,8 @@ button{
 	/*background-color: #f8bbd0;*/
 }
 
-.right .ripple{
-	background-color: rgba(63,81,181,0.2);
-}
-
-.left .ripple{
-	background-color: rgba(244,67,54,0.2);
+.right .ripple, .left .ripple{
+	background-color: rgba(63,81,181,0.3);
 }
 
 .center{
@@ -621,7 +617,7 @@ button{
     --pure-material-safari-helper3: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.16);
     --pure-material-safari-helper4: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.16);
     display: inline-block;
-    width: 100px;
+    width: 90px;
     color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.87);
     font-family: var(--pure-material-font, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
     font-size: 16px;

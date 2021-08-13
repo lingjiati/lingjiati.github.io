@@ -136,7 +136,9 @@ var closed = false,
 	random = false,
 	mode = '2v2',
     timeOut, countOver = false,
-	randomRate = 2.4;
+	randomRate = 2.3,
+	comRate = 2,
+	referee;
 
 //DOM Setup
 window.addEventListener("load", function() {
@@ -173,7 +175,7 @@ window.addEventListener("load", function() {
 	})
 
 	$('input[type="range"]').change(() => {
-		randomRate = $('input[type="range"]').item().value;
+		comRate = $('input[type="range"]').item().value;
 	})
 
 	//Add Score
@@ -231,6 +233,10 @@ window.addEventListener("load", function() {
 		}
 	}
 
+	function _referee(){
+		createSnackbar(`Referee: ${referee}`)
+	}
+
 	swipedetect(document.body, function(direction) {
 		if (direction == "right") {
 			if (index === 1) analytics();
@@ -239,6 +245,7 @@ window.addEventListener("load", function() {
 		} else if (index === 1) {
 			if (direction == "left") undo();
 			else if (direction == "up") main();
+			else if(direction == "down") _referee()
 		}
 	})
     
@@ -263,7 +270,7 @@ window.addEventListener("load", function() {
         
 	})
 
-	$('.ac .click:nth-child(2)').click(clear);
+	$('.ac .click:nth-child(2)').click(_referee);
 
 	$('.ac .click:nth-child(1)').click(undo);
 
@@ -408,7 +415,8 @@ var teams = {
 	waitingList = [],
 	onTop = null,
 	round1 = 0,
-    lastGame = null;
+    lastGame = null,
+	prev;
 
 
 //Main Function
@@ -482,7 +490,7 @@ function main() {
 		var i = [],
 			exist = false;
 		total = 0;
-		tiersTemp = 0;
+		var tiersTemp = 0;
 		//Update Players
 		$('.tier').each(function(e, f) {
 			let g = this.querySelectorAll('.player');
@@ -501,15 +509,19 @@ function main() {
 						r.querySelector('.team-1').innerHTML = g[h].innerText;
 					}
 				}
+				
 			}
 			if (exist) tiersTemp += 1;
 		})
-		if(tiersTemp == 0) return;
-		if (tiers != tiersTemp) {
+		if(String(i) !== String(prev)){
 			graph2 = {A: 0, B: 0, C: 0, D: 0};
 			round = 0;
-			tiers = tiersTemp
+			p = false;
 		}
+		prev = [...i]
+
+		if (tiersTemp === 0) return;
+		tiers = tiersTemp;
 		
 		players = {
 			A: i[0].length,
@@ -518,11 +530,12 @@ function main() {
 			D: i[3].length
 		};
 		playersName = {
-			A: i[0],
-			B: i[1],
-			C: i[2],
-			D: i[3]
+			A: [...i[0]],
+			B: [...i[1]],
+			C: [...i[2]],
+			D: [...i[3]]
 		};
+
 
 
 		//Create Matchup Data
@@ -552,7 +565,7 @@ function main() {
 		$('.lineup')[1].innerText = waitingList.shift();
         lastGame = '1v1'
 	}
-
+	
 	var k = document.querySelectorAll('.lineup')
 	k = Array.prototype.map.call(k, a => a.innerText).join('/').split('/')
 	var l = document.querySelectorAll((mode == '2v2' ? '.left' : '.middle-left') + ' .team-1');
@@ -560,9 +573,7 @@ function main() {
 		return !k.includes(d.innerText) && d.innerText != '' && d.innerText != '\n'
 	});
 	l.shift();
-	console.log()
-	createSnackbar(`New game! Judge: ${l[randomProperty(l)].innerText}`)
-
+	referee = l[randomProperty(l)].innerText
 }
 
 //Create Matchup Data
@@ -570,7 +581,7 @@ function init() {
 	//Competitive Matchups
 	for (var i in teams) {
 		for (var j in teams) {
-			if ((teams[i] / teams[j] <= 2 && teams[i] >= teams[j]) && !(teams[i] == teams[j] && i > j)) matchesCompetitive.push(String(i + j));
+			if ((teams[i] / teams[j] <= comRate && teams[i] >= teams[j]) && !(teams[i] == teams[j] && i > j)) matchesCompetitive.push(String(i + j));
 		}
 	}
 
