@@ -138,7 +138,8 @@ var closed = false,
     timeOut, countOver = false,
 	randomRate = 2.3,
 	comRate = 2,
-	referee;
+	referee,
+	gestures;
 
 //DOM Setup
 window.addEventListener("load", function() {
@@ -155,11 +156,13 @@ window.addEventListener("load", function() {
 		$('.layer-2 > div').css("height", "82%");
 		$('.options').css('margin-top', '-2vh');
 		$('.tier').css('top', '9.2vh');
-		$('.help-mobile').remove()
+		$('.help-mobile').remove();
+		gestures = false;
 	} else {
 		expandClose();
 		$('.help-ipad').remove();
 		$('.layer-2 > div').css('height', '84%')
+		gestures = true;
 	}
 
 	$('.radio input').change(function() {
