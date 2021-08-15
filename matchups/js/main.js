@@ -49,6 +49,7 @@ function expandClose2(k) {
 }
 
 function update(){
+	document.querySelector('#eveness').step = 'any';
 	document.querySelector('#eveness').value = randomRate = 4.2 - 0.3 * Array.from(document.querySelectorAll('.player')).filter((a) => a.innerText!=='' && a.innerText!== '\n').length
 }
 
@@ -166,7 +167,7 @@ window.addEventListener("load", function() {
 	} else {
 		expandClose();
 		$('.help-ipad').remove();
-		$('.layer-2 > div').css('height', '84%')
+		$('.layer-2 > div').css('height', '80%')
 		gestures = true;
 	}
 
@@ -181,35 +182,28 @@ window.addEventListener("load", function() {
 			$('.layer-1 .middle-left, .layer-1 .middle-right').show(true);
 		}
 	})
-
+	let timeout, timeout2;
 	$('#fairness').input((a) => {
+		a.target.step = 0.4;
 		comRate = a.target.value;
 		let key = {"1.2": "Strict", "1.6": "Even", "2": "Standard", "2.4": "Loose"};
 		console.log(Math.floor(a.target.value * 10)/10, key)
 		$('.test:nth-child(4) [kk]').text(key[Math.floor(a.target.value * 10)/10]);
-		$('.test:nth-child(4) [kk]').css("right", `${a.target.value / 3 * 200 - 80}px`)
-		
-	}).focus(function(a){
-		a.target.step = "0.4";
-		$('.test:nth-child(4) [kk]').fadeIn();
-	}).blur(function(a){
-		a.target.step = "any"
-		$('.test:nth-child(4) [kk]').fadeOut();
+		$('.test:nth-child(4) [kk]').css("right", `${a.target.value / 3 * 200 - 80}px`).fadeIn()
+		clearTimeout(timeout);
+		timeout = setTimeout(() => $('.test:nth-child(4) [kk]').fadeOut(), 2000)
 	})
 
 
 
 	$('#eveness').input((a) => {
-		randomRate = a.target.value;
-		let key = {"0": "Strict", "1.2": "Stable", "2.4": "Random"};
-		$('.test:nth-child(3) [kk]').text(key[Math.floor(a.target.value * 10)/10])
-		$('.test:nth-child(3) [kk]').css("right", `${a.target.value / 3 * 100}px`)
-	}).focus(function(a){
 		a.target.step = "1.2";
-		$('.test:nth-child(3) [kk]').fadeIn();
-	}).blur(function(a){
-		a.target.step = "any";
-		$('.test:nth-child(3) [kk]').fadeOut();
+		randomRate = a.target.value;
+		let key = {"0": "Strict", "1.2": "Stable", "2.4": "Minimum"};
+		$('.test:nth-child(3) [kk]').text(key[Math.floor(a.target.value * 10)/10])
+		$('.test:nth-child(3) [kk]').css("right", `${a.target.value / 3 * 100}px`).fadeIn()
+		clearTimeout(timeout2);
+		timeout2 = setTimeout(() => $('.test:nth-child(3) [kk]').fadeOut(), 2000)
 	})
 
 		

@@ -30,7 +30,7 @@
 }
 
 .options{
-    margin-left: 5vw;
+    transform: translate(9.8%, 5vh) scale(1.1);
 
 }
 
@@ -617,7 +617,7 @@ button{
     color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.87);
     font-family: var(--pure-material-font, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
     font-size: 16px;
-	z-index: 60
+	z-index: 60;
 }
 
 /* Input */
@@ -873,12 +873,13 @@ button{
     font-weight: 400;
     position: absolute;
     right: 80px;
-    transform: translate(50%, -30px)!important;
-    font-size: 12px;
-    background: #3F51B5;
+    transform: translate(50%, -15px)!important;
+    font-size: 10px;
+    background: #6b696e;
     color: white;
+    opacity: 0;
     border-radius: 4px;
-    padding: 4px 8px;
+    padding: 0.3em 0.6em;
     transition: all cubic-bezier(0.4, 0, 0.2, 1) 0.2s, opacity cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
     box-shadow: 0 0.5px 1.5px rgba(0,0,0,0.12), 0 0.5px 1px rgba(0,0,0,0.24)
 }
