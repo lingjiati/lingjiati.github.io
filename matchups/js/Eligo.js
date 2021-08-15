@@ -90,7 +90,7 @@
 		aniqueue = [0];
 	Item.extend(Eligo.fn);
 	Item.selector = selector;
-	"click blur focus mouseover mouseout dblclick scroll load copy cut paste wheel select keyup keydown change".split(" ").forEach(function (type, index) {
+	"click blur focus mouseover mouseout input dblclick scroll load mouseup copy cut paste wheel select keyup keydown change".split(" ").forEach(function (type, index) {
 		Item[type] = function (handler) {
 			if (handler) {
 				this.each(function () {
@@ -99,6 +99,7 @@
 			} else {
 				this.trigger(type)
 			}
+			return this;
 		}
 	});
 	Item.item = function (num) {
@@ -328,7 +329,10 @@
 		return Eligo(this[num])
 	}
 	Item.text = function (str) {
-		if (!str) return this.item().innerText;
+		if (typeof str != "string") {
+			console.log(str)
+			return this.item().innerText;
+		}
 		this.each(function () {
 			this.innerText = str;
 		});

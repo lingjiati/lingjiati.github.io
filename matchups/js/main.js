@@ -48,6 +48,10 @@ function expandClose2(k) {
 	}
 }
 
+function update(){
+	document.querySelector('#eveness').value = randomRate = 4.2 - 0.3 * Array.from(document.querySelectorAll('.player')).filter((a) => a.innerText!=='' && a.innerText!== '\n').length
+}
+
 function swipedetect(el, callback) {
 
 	var touchsurface = el,
@@ -136,14 +140,15 @@ var closed = false,
 	random = false,
 	mode = '2v2',
     timeOut, countOver = false,
-	randomRate = 2.3,
+	randomRate = 2.1,
 	comRate = 2,
 	referee,
 	gestures;
 
+
+
 //DOM Setup
 window.addEventListener("load", function() {
-    
     
 	timeOut = setTimeout(function(){
         countOver = true;
@@ -177,9 +182,37 @@ window.addEventListener("load", function() {
 		}
 	})
 
-	$('input[type="range"]').change(() => {
-		comRate = $('input[type="range"]').item().value;
+	$('#fairness').input((a) => {
+		comRate = a.target.value;
+		let key = {"1.2": "Strict", "1.6": "Even", "2": "Standard", "2.4": "Loose"};
+		console.log(Math.floor(a.target.value * 10)/10, key)
+		$('.test:nth-child(4) [kk]').text(key[Math.floor(a.target.value * 10)/10]);
+		$('.test:nth-child(4) [kk]').css("right", `${a.target.value / 3 * 200 - 80}px`)
+		
+	}).focus(function(a){
+		a.target.step = "0.4";
+		$('.test:nth-child(4) [kk]').fadeIn();
+	}).blur(function(a){
+		a.target.step = "any"
+		$('.test:nth-child(4) [kk]').fadeOut();
 	})
+
+
+
+	$('#eveness').input((a) => {
+		randomRate = a.target.value;
+		let key = {"0": "Strict", "1.2": "Stable", "2.4": "Random"};
+		$('.test:nth-child(3) [kk]').text(key[Math.floor(a.target.value * 10)/10])
+		$('.test:nth-child(3) [kk]').css("right", `${a.target.value / 3 * 100}px`)
+	}).focus(function(a){
+		a.target.step = "1.2";
+		$('.test:nth-child(3) [kk]').fadeIn();
+	}).blur(function(a){
+		a.target.step = "any";
+		$('.test:nth-child(3) [kk]').fadeOut();
+	})
+
+		
 
 	//Add Score
 	$(".scoreKeeper .card").click(function() {
@@ -239,8 +272,7 @@ window.addEventListener("load", function() {
 	function _referee(){
 		createSnackbar(`Referee: ${referee}`)
 	}
-
-	swipedetect(document.body, function(direction) {
+	if(gestures) swipedetect(document.body, function(direction) {
 		if (direction == "right") {
 			if (index === 1) analytics();
 			else if (index === 2) settings();
@@ -443,6 +475,7 @@ function main() {
                 waitingList.push(z[1].innerText)
             }
             
+			
             
 			if (j) {
 				var n = ('.middle-left .' + j + ' .team-3');
@@ -470,7 +503,7 @@ function main() {
 			} else if (Number(w[1].innerText) < Number(w[0].innerText)) {
 				j = z[0].innerText
 			}
-
+			j = `${z[0].innerText}/${z[1].innerText}`
 			if (j) {
 				j = j.split("/");
 				j.forEach(function(k) {
@@ -616,7 +649,7 @@ function init() {
 function newMatch() {
 	round++;
 	console.log(getDev(graph2, (round - 1)), graph2)
-	if (round == 1 || getDev(graph2, round - 1) < (randomRate / 4 * tiers)) {
+	if (round == 1 || (getDev(graph2, round - 1) < randomRate)) {
 		//Random Match
 		let r = randomProperty(graph);
 		graph2 = pushByPlayer(graph, graph2, r);

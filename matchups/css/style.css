@@ -228,10 +228,6 @@ button{
 }
 
 
-.card{
-
-}
-
 .left, .middle-left {
 	left: 5vw;
 	/*background-color: #b2ebf2;*/
@@ -617,7 +613,7 @@ button{
     --pure-material-safari-helper3: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.16);
     --pure-material-safari-helper4: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.16);
     display: inline-block;
-    width: 90px;
+    width: 80px;
     color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.87);
     font-family: var(--pure-material-font, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
     font-size: 16px;
@@ -686,6 +682,7 @@ button{
     transition: box-shadow 0.2s, height 0.2s, width 0.2s, transform 0.2s;
     transform-origin: center;
 }
+
 
 /* Webkit | Hover, Focus */
 .pure-material-slider:hover > input::-webkit-slider-thumb {
@@ -869,11 +866,25 @@ button{
 }
 
 .test span:first-child{
-	margin-right: 5px
+	margin-right: 2px;
 }
 
-.test span:last-child{
-	margin-left: 5px;
+[kk]{
+    font-weight: 400;
+    position: absolute;
+    right: 80px;
+    transform: translate(50%, -30px)!important;
+    font-size: 12px;
+    background: #3F51B5;
+    color: white;
+    border-radius: 4px;
+    padding: 4px 8px;
+    transition: all cubic-bezier(0.4, 0, 0.2, 1) 0.2s, opacity cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+    box-shadow: 0 0.5px 1.5px rgba(0,0,0,0.12), 0 0.5px 1px rgba(0,0,0,0.24)
+}
+
+[helper], [helper-1] {
+    opacity: 0;
 }
 
 .radio:active .radio__label::after{
