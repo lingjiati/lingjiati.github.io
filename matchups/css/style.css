@@ -570,6 +570,10 @@ button{
     -webkit-user-select: none;
 }
 
+.wrapper{
+    -webkit-user-select: text;
+}
+
 .splash, i{
     opacity: 0;
     transition: 0.5s;
