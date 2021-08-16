@@ -882,7 +882,7 @@ button{
     opacity: 0;
     border-radius: 4px;
     padding: 0.3em 0.6em;
-    transition: all cubic-bezier(0.4, 0, 0.2, 1) 0.2s, opacity cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+    transition: all cubic-bezier(0.4, 0, 0.2, 1) 0.1s, opacity cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
     box-shadow: 0 0.5px 1.5px rgba(0,0,0,0.12), 0 0.5px 1px rgba(0,0,0,0.24)
 }
 
