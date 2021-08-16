@@ -504,8 +504,6 @@ button{
 	 display: inline-block;
 	 position: relative;
 	 margin: 0 - 10px 0;
-	 font-size: 14.54px;
-	 line-height: 21.8px;
 }
  .radio__input {
 	 position: absolute;
@@ -520,11 +518,12 @@ button{
 	 display: block;
 	 padding: 0 0 0 24px;
 	 cursor: pointer;
+     font-size: 14.54px;
 }
  .radio__label:before {
 	 content: '';
 	 position: absolute;
-	 top: 4px;
+	 top: 2.54px;
 	 left: 0;
 	 width: 16px;
 	 height: 16px;
@@ -537,7 +536,7 @@ button{
  .radio__label:after {
 	 content: '';
 	 position: absolute;
-	 top: 8px;
+	 top: 6.54px;
 	 left: 4px;
 	 width: 8px;
 	 height: 8px;
@@ -560,7 +559,8 @@ button{
 
 *{
     -webkit-tap-highlight-color: transparent;
-	user-select: none;
+	user-select: none!important;
+    -webket-user-select: none;
 }
 
 .splash, i{
@@ -867,8 +867,8 @@ button{
 
 .test span:first-child{
 	margin-right: 2px;
-    font-size: 14.5px;
-    margin-top: 0.75px;
+    margin-top: 0.96px;
+    font-size: 14.54px
 }
 
 [kk]{
