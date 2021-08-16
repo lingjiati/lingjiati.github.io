@@ -497,7 +497,7 @@ function main() {
 			} else if (Number(w[1].innerText) < Number(w[0].innerText)) {
 				j = z[0].innerText
 			}
-			j = `${z[0].innerText}/${z[1].innerText}`
+			/*j = `${z[0].innerText}/${z[1].innerText}`*/
 			if (j) {
 				j = j.split("/");
 				j.forEach(function(k) {

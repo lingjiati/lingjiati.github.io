@@ -329,7 +329,7 @@
 		return Eligo(this[num])
 	}
 	Item.text = function (str) {
-		if (typeof str != "string") {
+		if (arguments.length == 0) {
 			console.log(str)
 			return this.item().innerText;
 		}

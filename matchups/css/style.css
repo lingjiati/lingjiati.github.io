@@ -239,7 +239,7 @@ button{
 }
 
 .right .ripple, .left .ripple{
-	background-color: rgba(63,81,181,0.3);
+	background-color: rgba(63,81,181,0.2);
 }
 
 .center{
@@ -247,7 +247,7 @@ button{
   top: 50%;
   transform: translate(-50%, -50%);
 	left: 50%;
-	font-family: 'Roboto Mono';
+
 }
 
 .score, .lineup{
