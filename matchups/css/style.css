@@ -560,7 +560,7 @@ button{
 *{
     -webkit-tap-highlight-color: transparent;
 	user-select: none!important;
-    -webket-user-select: none;
+    -webkit-user-select: none;
 }
 
 .splash, i{
