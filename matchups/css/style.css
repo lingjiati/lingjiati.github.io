@@ -504,8 +504,8 @@ button{
 	 display: inline-block;
 	 position: relative;
 	 margin: 0 - 10px 0;
-	 font-size: 16px;
-	 line-height: 24px;
+	 font-size: 14.54px;
+	 line-height: 21.8px;
 }
  .radio__input {
 	 position: absolute;
@@ -867,6 +867,8 @@ button{
 
 .test span:first-child{
 	margin-right: 2px;
+    font-size: 14.5px;
+    margin-top: 0.75px;
 }
 
 [kk]{

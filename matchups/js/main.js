@@ -693,9 +693,8 @@ function addMatch() {
 		playersList.push(o);
 		p[q[l]].splice(r, 1)
 	}
-
-	document.querySelectorAll('.lineup')[0].innerHTML = playersList[0] + "/" + playersList[1];
-	document.querySelectorAll('.lineup')[1].innerHTML = playersList[2] + "/" + playersList[3];
+	document.querySelectorAll('.lineup')[0].innerHTML = playersList[0].replaceAll(' ', '') + "/" + playersList[1].replaceAll(' ', '');
+	document.querySelectorAll('.lineup')[1].innerHTML = playersList[2].replaceAll(' ', '') + "/" + playersList[3].replaceAll(' ', '');
 
 }
 
