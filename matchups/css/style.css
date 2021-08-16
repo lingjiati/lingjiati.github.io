@@ -105,7 +105,6 @@ h3{
 .wrapper{
     height: calc(100% - 49px);
     overflow-y: scroll;
-    -webkit-user-select: all;
 }
 
 .start{
@@ -115,6 +114,10 @@ h3{
 
 .player:last-child{
     margin-bottom: 10.75px;
+    
+}
+
+.player{
     -webkit-user-select: all;
 }
 .toolbar-2{
