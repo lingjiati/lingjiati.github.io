@@ -1,4 +1,4 @@
-var cacheName = 'matchups_icontest2'; //1.86
+var cacheName = 'matchups_icontest3'; //1.86
 var filesToCache = [
   './',
   './index.html',
