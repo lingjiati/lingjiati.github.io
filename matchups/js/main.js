@@ -7,6 +7,7 @@
     Gestures detection from http://www.javascriptkit.com/javatutors/touchevents2.shtml
 
 */
+
 function expandClose(a) {
 	if (a == true || closed == true) {
 		$(".toolbar").show(true).fadeIn();
@@ -24,33 +25,33 @@ function expandClose(a) {
 	}
 };
 
-document.fonts.ready.then(function(){
-    $('.splash, i').fadeIn(0.5)
+document.fonts.ready.then(function() {
+	$('.splash, i').fadeIn(0.5)
 })
 
-function clear(){
+function clear() {
 
-		queue[queue.length] = [document.querySelectorAll(".score")[0].innerText, document.querySelectorAll(".score")[1].innerText];
-		$(".score").each(function() {
-			this.innerText = 0;
-		});
+	queue[queue.length] = [document.querySelectorAll(".score")[0].innerText, document.querySelectorAll(".score")[1].innerText];
+	$(".score").each(function() {
+		this.innerText = 0;
+	});
 
-	
-    }
+
+}
 
 function expandClose2(k) {
 	if (k == true) $(".toolbar-2").show(true).fadeIn()
 	else {
 		$(".toolbar-2").css("opacity", "0");
-        setTimeout(function(){
-            $(".toolbar-2").hide()
-        }, 500)
+		setTimeout(function() {
+			$(".toolbar-2").hide()
+		}, 500)
 	}
 }
 
-function update(){
+function update() {
 	document.querySelector('#eveness').step = 'any';
-	document.querySelector('#eveness').value = randomRate = 4.2 - 0.3 * Array.from(document.querySelectorAll('.player')).filter((a) => a.innerText!=='' && a.innerText!== '\n').length
+	document.querySelector('#eveness').value = randomRate = 4.2 - 0.3 * Array.from(document.querySelectorAll('.player')).filter((a) => a.innerText !== '' && a.innerText !== '\n').length
 }
 
 function swipedetect(el, callback) {
@@ -140,7 +141,7 @@ function swipedetect(el, callback) {
 var closed = false,
 	random = false,
 	mode = '2v2',
-    timeOut, countOver = false,
+	timeOut, countOver = false,
 	randomRate = 2.1,
 	comRate = 2,
 	referee,
@@ -150,11 +151,11 @@ var closed = false,
 
 //DOM Setup
 window.addEventListener("load", function() {
-    
-	timeOut = setTimeout(function(){
-        countOver = true;
-        resize()
-    }, 3000);
+
+	timeOut = setTimeout(function() {
+		countOver = true;
+		resize()
+	}, 3000);
 
 	if (document.documentElement.clientHeight > 1000 || document.documentElement.clientWidth > 1000) {
 		$('.layer-1, .scoreKeeper').css('top', '6vh').css("height", "92%");
@@ -186,9 +187,14 @@ window.addEventListener("load", function() {
 	$('#fairness').input((a) => {
 		a.target.step = 0.4;
 		comRate = a.target.value;
-		let key = {"1.2": "Strict", "1.6": "Even", "2": "Standard", "2.4": "Loose"};
-		console.log(Math.floor(a.target.value * 10)/10, key)
-		$('.test:nth-child(4) [kk]').text(key[Math.floor(a.target.value * 10)/10]);
+		let key = {
+			"1.2": "Strict",
+			"1.6": "Even",
+			"2": "Standard",
+			"2.4": "Loose"
+		};
+		console.log(Math.floor(a.target.value * 10) / 10, key)
+		$('.test:nth-child(4) [kk]').text(key[Math.floor(a.target.value * 10) / 10]);
 		$('.test:nth-child(4) [kk]').css("right", `${a.target.value / 3 * 200 - 80}px`).fadeIn()
 		clearTimeout(timeout);
 		timeout = setTimeout(() => $('.test:nth-child(4) [kk]').fadeOut(), 2000)
@@ -199,14 +205,18 @@ window.addEventListener("load", function() {
 	$('#eveness').input((a) => {
 		a.target.step = "1.2";
 		randomRate = a.target.value;
-		let key = {"0": "Strict", "1.2": "Stable", "2.4": "Minimum"};
-		$('.test:nth-child(3) [kk]').text(key[Math.floor(a.target.value * 10)/10])
+		let key = {
+			"0": "Strict",
+			"1.2": "Stable",
+			"2.4": "Minimum"
+		};
+		$('.test:nth-child(3) [kk]').text(key[Math.floor(a.target.value * 10) / 10])
 		$('.test:nth-child(3) [kk]').css("right", `${a.target.value / 3 * 100}px`).fadeIn()
 		clearTimeout(timeout2);
 		timeout2 = setTimeout(() => $('.test:nth-child(3) [kk]').fadeOut(), 2000)
 	})
 
-		
+
 
 	//Add Score
 	$(".scoreKeeper .card").click(function() {
@@ -222,7 +232,6 @@ window.addEventListener("load", function() {
 		a = $(".layer-2"),
 		c = $(".scoreKeeper"),
 		index = 3;
-
 
 
 
@@ -263,10 +272,10 @@ window.addEventListener("load", function() {
 		}
 	}
 
-	function _referee(){
+	function _referee() {
 		createSnackbar(`Referee: ${referee}`)
 	}
-	if(gestures) swipedetect(document.body, function(direction) {
+	if (gestures) swipedetect(document.body, function(direction) {
 		if (direction == "right") {
 			if (index === 1) analytics();
 			else if (index === 2) settings();
@@ -274,11 +283,11 @@ window.addEventListener("load", function() {
 		} else if (index === 1) {
 			if (direction == "left") undo();
 			else if (direction == "up") main();
-			else if(direction == "down") _referee()
+			else if (direction == "down") _referee()
 		}
 	})
-    
-    
+
+
 
 	//Buttons
 	$('.nav .click:nth-child(1)').click(home)
@@ -291,12 +300,12 @@ window.addEventListener("load", function() {
 
 	$('i').click(function() {
 		$('.help, .splash').toggleShow();
-        clearTimeout(timeOut);
-        countOver = true;
-        if(document.documentElement.clientHeight < document.documentElement.clientWidth){
-            $('i').die().click(resize)
-        } 
-        
+		clearTimeout(timeOut);
+		countOver = true;
+		if (document.documentElement.clientHeight < document.documentElement.clientWidth) {
+			$('i').die().click(resize)
+		}
+
 	})
 
 	$('.ac .click:nth-child(2)').click(_referee);
@@ -321,8 +330,8 @@ window.addEventListener('resize', resize)
 //Sort Table
 
 function resize() {
-    if(countOver == false) return;
-    count
+	if (countOver == false) return;
+	count
 	if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
 		$('.card, .options').css("opacity", "0");
 		$('.toolbar').hide();
@@ -444,75 +453,74 @@ var teams = {
 	waitingList = [],
 	onTop = null,
 	round1 = 0,
-    lastGame = null,
+	lastGame = null,
 	prev;
 
 
 //Main Function
 function main() {
-    if(lastGame == '1v1'){
-        var z = document.querySelectorAll('.lineup'),
-				w = document.querySelectorAll('.score'),
-				j = false,
-                x = $(".layer-1 .middle-right .column"),
-				y = x.item().cloneNode(true);
-            y.querySelector('.points').innerHTML = x.length;
-			if (Number(w[1].innerText) > Number(w[0].innerText)) {
-				j = onTop = z[1].innerText;
-                waitingList.push(z[0].innerText)
-			} else if (Number(w[1].innerText) < Number(w[0].innerText)) {
-				j = onTop = z[0].innerText;
-                waitingList.push(z[1].innerText)
-			} else{
-                onTop = undefined;
-                waitingList.push(z[0].innerText);
-                waitingList.push(z[1].innerText)
-            }
-            
-			
-            
-			if (j) {
-				var n = ('.middle-left .' + j + ' .team-3');
-				document.querySelector(n).innerText = (Number(document.querySelector(n).innerText || '0') + 1);
-                
-			}
-            for (var d in [0, 1]) {
-				y.querySelectorAll('.team-3 div')[d].innerHTML = w[d].innerText.length == 1 ? '0' + w[d].innerText : w[d].innerText;
-				y.querySelectorAll('.team-1 div')[d].innerHTML = z[d].innerText;
-                
-			}
-            $(".layer-1 .middle-right .container").append(y);
-            clear();
-    }
-    else if(lastGame == '2v2'){
-        var x = $(".layer-1 .right .column"),
-				y = x.item().cloneNode(true),
-				z = document.querySelectorAll('.lineup'),
-				w = document.querySelectorAll('.score'),
-				j = false;
-			y.querySelector('.points').innerHTML = x.length;
+	if (lastGame == '1v1') {
+		var z = document.querySelectorAll('.lineup'),
+			w = document.querySelectorAll('.score'),
+			j = false,
+			x = $(".layer-1 .middle-right .column"),
+			y = x.item().cloneNode(true);
+		y.querySelector('.points').innerHTML = x.length;
+		if (Number(w[1].innerText) > Number(w[0].innerText)) {
+			j = onTop = z[1].innerText;
+			waitingList.push(z[0].innerText)
+		} else if (Number(w[1].innerText) < Number(w[0].innerText)) {
+			j = onTop = z[0].innerText;
+			waitingList.push(z[1].innerText)
+		} else {
+			onTop = undefined;
+			waitingList.push(z[0].innerText);
+			waitingList.push(z[1].innerText)
+		}
 
-			if (Number(w[1].innerText) > Number(w[0].innerText)) {
-				j = z[1].innerText
-			} else if (Number(w[1].innerText) < Number(w[0].innerText)) {
-				j = z[0].innerText
-			}
-			/*j = `${z[0].innerText}/${z[1].innerText}`*/
-			if (j) {
-				j = j.split("/");
-				j.forEach(function(k) {
-					var n = ('.left .' + k + ' .team-3');
-					document.querySelector(n).innerText = (Number(document.querySelector(n).innerText || '0') + 1)
-				})
-			}
 
-			for (var d in [0, 1]) {
-				y.querySelectorAll('.team-3 div')[d].innerHTML = w[d].innerText.length == 1 ? '0' + w[d].innerText : w[d].innerText;
-				y.querySelectorAll('.team-1 div')[d].innerHTML = z[d].innerText;
-				w[d].innerText = 0;
-			}
-			$(".layer-1 .right .container").append(y);
-    }
+
+		if (j) {
+			var n = ('.middle-left .' + j + ' .team-3');
+			document.querySelector(n).innerText = (Number(document.querySelector(n).innerText || '0') + 1);
+
+		}
+		for (var d in [0, 1]) {
+			y.querySelectorAll('.team-3 div')[d].innerHTML = w[d].innerText.length == 1 ? '0' + w[d].innerText : w[d].innerText;
+			y.querySelectorAll('.team-1 div')[d].innerHTML = z[d].innerText;
+
+		}
+		$(".layer-1 .middle-right .container").append(y);
+		clear();
+	} else if (lastGame == '2v2') {
+		var x = $(".layer-1 .right .column"),
+			y = x.item().cloneNode(true),
+			z = document.querySelectorAll('.lineup'),
+			w = document.querySelectorAll('.score'),
+			j = false;
+		y.querySelector('.points').innerHTML = x.length;
+
+		if (Number(w[1].innerText) > Number(w[0].innerText)) {
+			j = z[1].innerText
+		} else if (Number(w[1].innerText) < Number(w[0].innerText)) {
+			j = z[0].innerText
+		}
+		/*j = `${z[0].innerText}/${z[1].innerText}`*/
+		if (j) {
+			j = j.split("/");
+			j.forEach(function(k) {
+				var n = ('.left .' + k + ' .team-3');
+				document.querySelector(n).innerText = (Number(document.querySelector(n).innerText || '0') + 1)
+			})
+		}
+
+		for (var d in [0, 1]) {
+			y.querySelectorAll('.team-3 div')[d].innerHTML = w[d].innerText.length == 1 ? '0' + w[d].innerText : w[d].innerText;
+			y.querySelectorAll('.team-1 div')[d].innerHTML = z[d].innerText;
+			w[d].innerText = 0;
+		}
+		$(".layer-1 .right .container").append(y);
+	}
 	if (mode === '2v2') {
 		queue = [
 			[0, 0]
@@ -539,12 +547,17 @@ function main() {
 						r.querySelector('.team-1').innerHTML = g[h].innerText;
 					}
 				}
-				
+
 			}
 			if (exist) tiersTemp += 1;
 		})
-		if(String(i) !== String(prev)){
-			graph2 = {A: 0, B: 0, C: 0, D: 0};
+		if (String(i) !== String(prev)) {
+			graph2 = {
+				A: 0,
+				B: 0,
+				C: 0,
+				D: 0
+			};
 			round = 0;
 			p = false;
 		}
@@ -552,7 +565,7 @@ function main() {
 
 		if (tiersTemp === 0) return;
 		tiers = tiersTemp;
-		
+
 		players = {
 			A: i[0].length,
 			B: i[1].length,
@@ -573,7 +586,7 @@ function main() {
 
 		//Generate Match
 		addMatch();
-        lastGame = '2v2'
+		lastGame = '2v2'
 	} else {
 
 		$('.player').each(function() {
@@ -593,13 +606,13 @@ function main() {
 		onTop = onTop || waitingList.shift();
 		$('.lineup')[0].innerText = onTop;
 		$('.lineup')[1].innerText = waitingList.shift();
-        lastGame = '1v1'
+		lastGame = '1v1'
 	}
-	
+
 	var k = document.querySelectorAll('.lineup')
 	k = Array.prototype.map.call(k, a => a.innerText).join('/').split('/')
 	var l = document.querySelectorAll((mode == '2v2' ? '.left' : '.middle-left') + ' .team-1');
-	l = Array.prototype.filter.call(l, function(d){
+	l = Array.prototype.filter.call(l, function(d) {
 		return !k.includes(d.innerText) && d.innerText != '' && d.innerText != '\n'
 	});
 	l.shift();
@@ -608,6 +621,8 @@ function main() {
 
 //Create Matchup Data
 function init() {
+
+	graph = [], matchesCompetitive = [], matchesPractical = [];
 	//Competitive Matchups
 	for (var i in teams) {
 		for (var j in teams) {
@@ -669,7 +684,7 @@ function newMatch() {
 		graph2 = pushByPlayer(graph, graph2, currentMatch);
 		return currentMatch;
 	}
-	
+
 }
 
 function addMatch() {
@@ -701,57 +716,50 @@ function addMatch() {
 var createSnackbar = (function() {
 	// Any snackbar that is already shown
 	var previous = null;
-	
-  /*
-  <div class="paper-snackbar">
-	<button class="action">Dismiss</button>
-	This is a longer message that won't fit on one line. It is, inevitably, quite a boring thing. Hopefully it is still useful.
-  </div>
-  */
-	
+
 	return function(message, actionText, action) {
-	  if (previous) {
-		previous.dismiss();
-	  }
-	  var snackbar = document.createElement('div');
-	  snackbar.className = 'paper-snackbar card-3';
-	  snackbar.dismiss = function() {
-		this.style.transform = 'translateY(100%)'
-	  };
-	  var text = document.createTextNode(message);
-	  snackbar.appendChild(text);
-	  if (actionText) {
-		if (!action) {
-		  action = snackbar.dismiss.bind(snackbar);
+		if (previous) {
+			previous.dismiss();
 		}
-		var actionButton = document.createElement('button');
-		actionButton.className = 'action';
-		actionButton.innerHTML = actionText;
-		actionButton.addEventListener('click', action);
-		snackbar.appendChild(actionButton);
-	  }
-	  setTimeout(function() {
-		if (previous === this) {
-		  previous.dismiss();
+		var snackbar = document.createElement('div');
+		snackbar.className = 'paper-snackbar card-3';
+		snackbar.dismiss = function() {
+			this.style.transform = 'translateY(100%)'
+		};
+		var text = document.createTextNode(message);
+		snackbar.appendChild(text);
+		if (actionText) {
+			if (!action) {
+				action = snackbar.dismiss.bind(snackbar);
+			}
+			var actionButton = document.createElement('button');
+			actionButton.className = 'action';
+			actionButton.innerHTML = actionText;
+			actionButton.addEventListener('click', action);
+			snackbar.appendChild(actionButton);
 		}
-	  }.bind(snackbar), 4000);
-	  
-	  snackbar.addEventListener('transitionend', function(event, elapsed) {
-		if (event.propertyName === 'transform' && this.style.transform == 'translateY(100%)') {
-		  this.parentElement.removeChild(this);
-		  if (previous === this) {
-			previous = null;
-		  }
-		}
-	  }.bind(snackbar));
-  
-	  
-	  
-	  previous = snackbar;
-	  document.body.appendChild(snackbar);
-	  // In order for the animations to trigger, I have to force the original style to be computed, and then change it.
-	  getComputedStyle(snackbar).bottom;
-	  snackbar.style.bottom = '0px';
-	  snackbar.style.opacity = 1;
+		setTimeout(function() {
+			if (previous === this) {
+				previous.dismiss();
+			}
+		}.bind(snackbar), 4000);
+
+		snackbar.addEventListener('transitionend', function(event, elapsed) {
+			if (event.propertyName === 'transform' && this.style.transform == 'translateY(100%)') {
+				this.parentElement.removeChild(this);
+				if (previous === this) {
+					previous = null;
+				}
+			}
+		}.bind(snackbar));
+
+
+
+		previous = snackbar;
+		document.body.appendChild(snackbar);
+		// In order for the animations to trigger, I have to force the original style to be computed, and then change it.
+		getComputedStyle(snackbar).bottom;
+		snackbar.style.bottom = '0px';
+		snackbar.style.opacity = 1;
 	};
-  })();
+})();
