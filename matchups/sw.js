@@ -1,4 +1,4 @@
-var cacheName = 'matchups_icontest3'; //1.86
+var cacheName = 'matchups_v1.9'; //1.86
 var filesToCache = [
   './',
   './index.html',
@@ -7,6 +7,7 @@ var filesToCache = [
   './js/Eligo.js',
   './css/w3.css',
   './js/main.js',
+  './js/Sortable.js',
   './fonts/RobotoMono.woff',
   './fonts/RobotoMonoBold.woff',
   './fonts/MaterialIcons.woff'  

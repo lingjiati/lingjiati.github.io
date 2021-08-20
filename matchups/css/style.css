@@ -148,6 +148,7 @@ body{
     	position: fixed;
 }
 
+
 .sortable-drag{
     opacity: 1!important;
     color: black!important;
@@ -159,6 +160,7 @@ body{
     background-color:rgba(63, 81, 181, .05)!important;
     color: transparent;
     opacity: 1;
+    z-index: -1
 }
 
 
@@ -197,7 +199,7 @@ body{
     background: white;
 }
 
-.player:first-child, .sortable-ghost:nth-child(2){
+.player:first-child, .sortable-drag ~ .sortable-ghost:last-child{
     margin-top: 6.75px;
 }
 
@@ -310,7 +312,7 @@ button{
 	background: white;
 	outline: none;
 	top: 10vh;
-    overflow: visible!important;
+    /*overflow: visible!important;*/
 }
 
 .tier:first-child{
@@ -596,7 +598,7 @@ button{
 
 .wrapper{
     -webkit-user-select: text;
-    overflow: visible!important;
+    /*overflow: visible!important;*/
 }
 
 .splash, i{
