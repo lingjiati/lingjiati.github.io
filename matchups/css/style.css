@@ -157,7 +157,7 @@ body{
 }
 
 .sortable-ghost{
-    background-color:rgba(63, 81, 181, .05)!important;
+    background-color:#eee!important;
     color: transparent;
     opacity: 1;
     z-index: -1
@@ -312,7 +312,7 @@ button{
 	background: white;
 	outline: none;
 	top: 10vh;
-    /*overflow: visible!important;*/
+    overflow: visible!important;
 }
 
 .tier:first-child{
@@ -598,7 +598,7 @@ button{
 
 .wrapper{
     -webkit-user-select: text;
-    /*overflow: visible!important;*/
+    overflow: visible!important;
 }
 
 .splash, i{

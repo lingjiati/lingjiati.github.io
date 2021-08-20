@@ -275,7 +275,10 @@ window.addEventListener("load", function() {
 			animation: 150,
 			onStart: function(a){
 				a.from.parentNode.style.zIndex = 6;
-				console.log(a.from)
+			},
+			onMove: function(a){
+				
+
 			},
 			onEnd: function(a){
 				a.from.parentNode.style.zIndex = 5;
