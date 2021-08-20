@@ -162,6 +162,9 @@ body{
     opacity: 1;
 }
 
+.sortable-drag ~ .sortable-ghost:last-child{
+    opacity: 0.5
+}
 
 
 .wrapper{
