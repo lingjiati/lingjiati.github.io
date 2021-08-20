@@ -197,7 +197,7 @@ body{
     background: white;
 }
 
-.player:first-child{
+.player:first-child, .sortable-ghost:nth-child(2){
     margin-top: 6.75px;
 }
 
