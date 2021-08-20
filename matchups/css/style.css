@@ -151,6 +151,15 @@ body{
     	position: fixed;
 }
 
+.sortable-drag{
+    opacity: 0!important;
+}
+
+
+.wrapper{
+    overflow-x: hidden;
+}
+
 .toucharea{
 	height: 100%;
 	width: 100%;

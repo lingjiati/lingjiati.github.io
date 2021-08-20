@@ -228,6 +228,37 @@ window.addEventListener("load", function() {
 
 	})
 
+	$('.title').each(function(){
+		this.onclick = function(a){
+			if(a.target.parentNode.querySelectorAll('.player').length === 0){
+				var tag = document.createElement("div");
+				tag.classList.add('player');
+				a.target.parentNode.querySelector('.wrapper').appendChild(tag);
+				tag.contentEditable = 'true';
+				tag.focus();
+			}
+			else{
+				a.target.parentNode.querySelectorAll('.player').forEach(function(b){
+					b.contentEditable = "true";
+				});
+				a.target.parentNode.querySelector('.wrapper').focus()
+			}
+			
+			
+		}
+
+		new Sortable(this.parentNode.querySelector('.wrapper'), {
+			group: 'shared', // set both lists to same group
+			animation: 150
+		})
+	})
+
+	$('.wrapper').blur(function(a){
+		a.target.querySelectorAll('.player').forEach(function(b){
+			b.contentEditable = "false";
+		})
+	})
+
 	let b = $(".layer-1"),
 		a = $(".layer-2"),
 		c = $(".scoreKeeper"),
@@ -551,16 +582,7 @@ function main() {
 			}
 			if (exist) tiersTemp += 1;
 		})
-		if (String(i) !== String(prev)) {
-			graph2 = {
-				A: 0,
-				B: 0,
-				C: 0,
-				D: 0
-			};
-			round = 0;
-			p = false;
-		}
+
 		prev = [...i]
 
 		if (tiersTemp === 0) return;
@@ -616,6 +638,7 @@ function main() {
 		return !k.includes(d.innerText) && d.innerText != '' && d.innerText != '\n'
 	});
 	l.shift();
+	if(l.length == 0) return
 	referee = l[randomProperty(l)].innerText
 }
 
