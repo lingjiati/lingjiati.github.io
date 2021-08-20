@@ -597,7 +597,6 @@ button{
 
 .wrapper{
     -webkit-user-select: text;
-    overflow: visible!important;
 }
 
 .splash, i{
