@@ -112,10 +112,6 @@ h3{
     font-size: 36px
 }
 
-.player:last-child{
-    margin-bottom: 10.75px;
-    
-}
 
 
 .toolbar-2{
@@ -151,6 +147,23 @@ body{
     	position: fixed;
 }
 
+.sortable-drag{
+    opacity: 1!important;
+    color: black!important;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.sortable-ghost{
+    background-color:rgba(63, 81, 181, .1)!important;
+    color: transparent;
+    opacity: 1;
+}
+
+.sortable-ghost:first-child{
+    margin-top: 0px!important;
+}
+
 
 .wrapper{
     overflow-x: hidden;
@@ -177,10 +190,17 @@ body{
     padding-bottom: 13.5px;
 	font-size: 16px;
     border-bottom: 1px solid #ddd;
+    
 }
 
 .player{
-    padding-top: 13.5px;
+    padding-top: 6.75px;
+    padding-bottom: 6.75px;
+    background: white;
+}
+
+.player:first-child{
+    margin-top: 6.75px;
 }
 
 .toolbar{

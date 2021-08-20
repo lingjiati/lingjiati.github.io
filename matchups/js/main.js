@@ -250,7 +250,14 @@ window.addEventListener("load", function() {
 
 		new Sortable(this.parentNode.querySelector('.wrapper'), {
 			group: 'shared', // set both lists to same group
-			animation: 150
+			animation: 150,
+			onStart: function(a){
+				a.from.parentNode.style.zIndex = 100000;
+				console.log(a.from)
+			},
+			onEnd: function(a){
+				a.from.parentNode.style.zIndex = 5;
+			}
 		})
 	})
 
