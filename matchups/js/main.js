@@ -230,20 +230,23 @@ window.addEventListener("load", function() {
 
 	$('.title').each(function(){
 		this.onclick = function(a){
+			let wrapper = a.target.parentNode.querySelector('.wrapper')
 			if(a.target.parentNode.querySelectorAll('.player').length === 0){
 				var tag = document.createElement("div");
 				tag.classList.add('player');
-				a.target.parentNode.querySelector('.wrapper').appendChild(tag);
-				a.target.parentNode.querySelector('.wrapper').contentEditable="true"
+				wrapper.appendChild(tag);
+				wrapper.contentEditable="true"
 				tag.contentEditable = 'true';
-				a.target.parentNode.querySelector('.wrapper').focus()
 			}
 			else{
 				a.target.parentNode.querySelectorAll('.player').forEach(function(b){
 					b.contentEditable = "true";
 				});
-				a.target.parentNode.querySelector('.wrapper').focus()
+				
 			}
+
+			wrapper.focus();
+			wrapper.selectionStart = wrapper.selectionEnd = wrapper.innerText.length;
 			
 			
 		}

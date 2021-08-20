@@ -26,7 +26,8 @@
 }
 
 .tier div{
-	outline: none!important
+	outline: none!important;
+    
 }
 
 .options{
@@ -150,19 +151,16 @@ body{
 .sortable-drag{
     opacity: 1!important;
     color: black!important;
-    border-radius: 8px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    border-radius: 4px;
+    box-shadow: 0 1.5px 3px rgba(0,0,0,0.14), 0 1.5px 3px rgba(0,0,0,0.23);
 }
 
 .sortable-ghost{
-    background-color:rgba(63, 81, 181, .1)!important;
+    background-color:rgba(63, 81, 181, .05)!important;
     color: transparent;
     opacity: 1;
 }
 
-.sortable-ghost:first-child{
-    margin-top: 0px!important;
-}
 
 
 .wrapper{
@@ -312,6 +310,7 @@ button{
 	background: white;
 	outline: none;
 	top: 10vh;
+    overflow: visible!important;
 }
 
 .tier:first-child{
@@ -597,6 +596,7 @@ button{
 
 .wrapper{
     -webkit-user-select: text;
+    overflow: visible!important;
 }
 
 .splash, i{
