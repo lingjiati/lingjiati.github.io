@@ -234,8 +234,9 @@ window.addEventListener("load", function() {
 				var tag = document.createElement("div");
 				tag.classList.add('player');
 				a.target.parentNode.querySelector('.wrapper').appendChild(tag);
+				a.target.parentNode.querySelector('.wrapper').contentEditable="true"
 				tag.contentEditable = 'true';
-				tag.focus();
+				a.target.parentNode.querySelector('.wrapper').focus()
 			}
 			else{
 				a.target.parentNode.querySelectorAll('.player').forEach(function(b){
