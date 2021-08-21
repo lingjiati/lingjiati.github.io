@@ -15,13 +15,11 @@ function expandClose(a) {
 
 		closed = false;
 	} else {
-		setTimeout(function() {
-			$(".toolbar").hide()
-		}, 500)
-		$(".toolbar").fadeOut();
+		$(".toolbar").css("visibility", 'hidden')
 		$(".scoreKeeper").css("margin-top", "0");
 		$(".layer-1, .layer-2").css("margin-top", "0")
 		closed = true;
+		console.log('hi')
 	}
 };
 
@@ -180,7 +178,7 @@ window.addEventListener("load", function() {
 		$('.layer-1, .scoreKeeper').css('top', '6vh').css("height", "92%");
 		$('.layer-2').css('top', '6vh')
 		$('.layer-2 > div').css("height", "82%");
-		$('.options').css('margin-top', '-2vh');
+		$('.options').css('margin-top', '-2.8vh');
 		$('.tier').css('top', '9.2vh');
 		$('.help-mobile').remove();
 		gestures = false;
@@ -275,6 +273,9 @@ window.addEventListener("load", function() {
 			animation: 150,
 			onStart: function(a){
 				a.from.parentNode.style.zIndex = 6;
+				$('.player').each(function(a){
+					if(this.innerText === '' || this.innerText==='\n') $(this).remove()
+				})
 			},
 			onMove: function(a){
 				
@@ -395,7 +396,6 @@ window.addEventListener('resize', resize)
 
 function resize() {
 	if (countOver == false) return;
-	count
 	if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
 		$('.card, .options').css("opacity", "0");
 		$('.toolbar').hide();
