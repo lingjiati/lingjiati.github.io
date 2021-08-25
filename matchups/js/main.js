@@ -615,7 +615,7 @@ function main() {
 			}
 			if (exist) tiersTemp += 1;
 		})
-                if(String(i) !== String(prev) p = false
+                if(String(i) !== String(prev)) p = false
 		prev = [...i]
 
 		if (tiersTemp === 0) return;
