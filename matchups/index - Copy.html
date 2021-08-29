@@ -120,13 +120,13 @@
 			<i class="click unselectable">help</i>
 		</div>
 		<div class="scoreKeeper fullScreenLayer">
-			<div class="card card-2 ripple left clickable">
+			<div class="card card-2 left clickable">
 				<div class="unselectable center">
 					<div class="score">0</div>
 					<div class="lineup">-</div>
 				</div>
 			</div>
-			<div class="card card-2 ripple right clickable">
+			<div class="card card-2 right clickable">
 				<div class="unselectable center">
 					<div class="score">0</div>
 					<div class="lineup">-</div>
@@ -232,11 +232,61 @@
 			</div>
 			<div class="block"></div>
 		</div>
-		<div>
-		</div>
+			<!-- Content wrapper -->
+			<template id="revert">
+				<div class="wrapperOutside">
+					<div class="wrapperInside">
+						<!-- Dialog -->
+						<div class="dialogContainer">
+							<!-- Dialog title and body -->
+							<div class="dialogContent">
+								<div class="dialogContentTitle">Confirm</div>
+								<div class="dialogContentBody">Are you sure you want to revert to the previous matchup?</div>
+								</div>
+									<!-- Dialog action bar -->
+									<div class="dialogActionBar">
+								<!-- Buttons -->
+								<a class="buttonTouchTarget" id="buttonOneTouchTarget">
+								<div class="buttonFlat " id="buttonOne" fit>YES</div>
+								</a><!-- This comment removes 4px gap between buttons
+								--><a class="buttonTouchTarget" id="buttonTwoTouchTarget">
+								<div class="buttonFlat" id="buttonTwo">CANCEL</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</template>
+			<template id="reroll">
+				<div class="wrapperOutside">
+					<div class="wrapperInside">
+						<!-- Dialog -->
+						<div class="dialogContainer">
+							<!-- Dialog title and body -->
+							<div class="dialogContent">
+								<div class="dialogContentTitle">Confirm</div>
+								<div class="dialogContentBody">Are you sure you want reroll?</div>
+								</div>
+									<!-- Dialog action bar -->
+									<div class="dialogActionBar">
+								<!-- Buttons -->
+								<a class="buttonTouchTarget" id="buttonOneTouchTarget">
+								<div class="buttonFlat " id="buttonOne" fit>YES</div>
+								</a><!-- This comment removes 4px gap between buttons
+								--><a class="buttonTouchTarget" id="buttonTwoTouchTarget">
+								<div class="buttonFlat" id="buttonTwo">CANCEL</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</template>
+	<!-- Javascript -->
 		<script src="js/Sortable.js"></script>
 		<script src="js/register.js"></script>
 		<script src="js/Eligo.js"></script>
+		
+		</script>
 		<script src="js/main.js"></script>
 	</body>
 	<html>
