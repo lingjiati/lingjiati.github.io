@@ -539,16 +539,24 @@ var dialog = (function(){
 
 	var self = {}, 
 	revert = document.querySelector('#revert'),
-	reroll = document.querySelector('#reroll');
+	reroll = document.querySelector('#reroll'),
+	locked = false;
+
+	function ripple(){
+		if(locked) return;
+		locked = true;
+		setTimeout(() => locked = false, 5000);
+		createRipple();
+	}
 
 	function assign(type){
 		var buttons = document.querySelectorAll('.buttonFlat:not(template .buttonFlat)');
 		console.log(buttons)
 
 		Array.prototype.forEach.call(buttons, function(b) {
-			b.addEventListener('mousedown', createRipple);
-			b.addEventListener('touchstart', createRipple);
-			b.addEventListener('touchend', () => $('.wrapperOutside:not(template .wrapperOutside)').remove());
+			b.addEventListener('mousedown', ripple);
+			b.addEventListener('touchstart', ripple);
+			b.addEventListener('click', () => setTimeout(() => $('.wrapperOutside:not(template .wrapperOutside)').remove(), 20));
 		});
 
 		buttons[0].addEventListener('click', type == "reroll" ? () => main(true) : () => backup.revert())
