@@ -269,21 +269,6 @@ button{
 
 .right .ripple, .left .ripple{
 	background-color: rgba(63,81,181,0.2);
-    
-}
-
-.buttonFlat{
-    position: relative;
-    overflow: hidden;
-    clip: rect(0, auto, auto, 0);
-    border-radius: 2px
-}
-
-.buttonTouchTarget .ripple{
-    
-    z-index: 20000;
-    background-color: rgba(63,81,181,0.4);
-    animation: ripple 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .center{
@@ -424,7 +409,7 @@ button{
   src: url(/matchups/fonts/MaterialIcons.woff) format('woff');
 }
 
-.ripple{
+.card .ripple{
   border-radius: 50%;
 
   position: absolute;

@@ -325,11 +325,8 @@
 	Item.last = function () {
 		return Eligo(this[this.length - 1]);
 	}
-	Item.nthLast = function (num) {
-		return Eligo(this[this.length - num]);
-	}
 	Item.nth = function (num) {
-		return Eligo(this[num -1])
+		return Eligo(this[num])
 	}
 	Item.text = function (str) {
 		if (arguments.length == 0) {
@@ -527,10 +524,7 @@ function createRipple(e)
   if(this.getElementsByClassName('ripple').length > 0)
     {
       this.removeChild(this.getElementsByClassName('ripple')[0]);
-  
-	}
-
-console.log('hi')
+    }
   
   var circle = document.createElement('div');
   this.appendChild(circle);
