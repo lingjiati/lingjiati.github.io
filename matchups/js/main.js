@@ -542,11 +542,12 @@ var dialog = (function(){
 	reroll = document.querySelector('#reroll'),
 	locked = false;
 
-	function ripple(){
+	function ripple(e){
+		return
 		if(locked) return;
 		locked = true;
 		setTimeout(() => locked = false, 5000);
-		createRipple();
+		createRipple(e);
 	}
 
 	function assign(type){
@@ -679,7 +680,7 @@ function main(fromDialog) {
 		} else if (Number(w[1].innerText) < Number(w[0].innerText)) {
 			j = z[0].innerText
 		}
-		j = `${z[0].innerText}/${z[1].innerText}`
+		/*j = `${z[0].innerText}/${z[1].innerText}`*/
 		if (j) {
 			j = j.split("/");
 			j.forEach(function(k) {

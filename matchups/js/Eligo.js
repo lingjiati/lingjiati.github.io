@@ -524,24 +524,24 @@
 
 function createRipple(e)
 {
-  if(this.getElementsByClassName('ripple').length > 0)
+  if(e.target.getElementsByClassName('ripple').length > 0)
     {
-      this.removeChild(this.getElementsByClassName('ripple')[0]);
+		e.target.removeChild(e.target.getElementsByClassName('ripple')[0]);
   
 	}
 
 console.log('hi')
   
   var circle = document.createElement('div');
-  this.appendChild(circle);
+  e.target.appendChild(circle);
   
-  var d = Math.max(this.clientWidth, this.clientHeight);
+  var d = Math.max(e.target.clientWidth, e.target.clientHeight);
   circle.style.width = circle.style.height = d + 'px';
   
   
   
   circle.classList.add('ripple');
-	circle.style.left = e.clientX - this.offsetLeft - d / 2 + 'px';
-  circle.style.top = e.clientY - this.offsetTop - d / 2 + 'px';
-    e.preventDefault;
+	circle.style.left = e.clientX - e.target.offsetLeft - d / 2 + 'px';
+  circle.style.top = e.clientY - e.target.offsetTop - d / 2 + 'px';
+    e.preventDefault();
 }
