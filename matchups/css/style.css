@@ -1028,11 +1028,10 @@ button{
 
 @media (max-width: 875px) {
     @supports (-webkit-touch-callout: none){
-        
+        .layer-1, .layer-2, .scoreKeeper{
+            width: calc(100% - env(safe-area-inset-left) * 2);
+            margin-left: env(safe-area-inset-left);
+        }
     }
 }
 
-.layer-1, .layer-2, .scoreKeeper{
-    width: 92%;
-    margin-left: 4%;
-}
