@@ -269,6 +269,28 @@ button{
 
 .right .ripple, .left .ripple{
 	background-color: rgba(63,81,181,0.2);
+    
+}
+
+.buttonFlat{
+    position: relative;
+    overflow: hidden;
+    clip: rect(0, auto, auto, 0);
+    border-radius: 4px;
+    background: transparent;
+    transition: background 0.2s;
+}
+
+.buttonFlat:active{
+    background-color:rgba(63, 81, 181, 0.1);
+    
+}
+
+.buttonTouchTarget .ripple{
+    
+    z-index: 20000;
+    background-color: rgba(63,81,181,0.4);
+    animation: ripple 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .center{
@@ -285,12 +307,16 @@ button{
 }
 
 .score{
-	font-size: calc(15vh + 50px);
+    --multiplier: 18;
+	font-size: calc(150px + var(--multiplier) * 1vh - var(--multiplier) * 3.75px);
 }
 
 .lineup{
+    --multiplier: 6;
+    --multiplier2: 18;
 	font-size: 16px;
-	margin-top: 8vh;
+	margin-top: calc(5px + var(--multiplier2) * 1vh - var(--multiplier2) * 3.75px);
+    margin-bottom: calc(25px + var(--multiplier) * 1vh - var(--multiplier) * 3.75px);
 }
 
 .fullScreenLayer {
@@ -409,7 +435,7 @@ button{
   src: url(/matchups/fonts/MaterialIcons.woff) format('woff');
 }
 
-.card .ripple{
+.ripple{
   border-radius: 50%;
 
   position: absolute;
@@ -909,6 +935,8 @@ button{
     font-size: 14.54px
 }
 
+
+
 [kk]{
     font-weight: 400;
     position: absolute;
@@ -991,4 +1019,11 @@ button{
     margin: 0px 0px 0px 24px;
     padding: 0px;
     min-width: min-content;
+}
+
+@supports(padding:max(0px)) {
+    body, header, footer {
+        padding-left: min(0vmin, env(safe-area-inset-left));
+        padding-right: min(0vmin, env(safe-area-inset-right));
+    }
 }

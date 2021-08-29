@@ -484,13 +484,21 @@ horizontally on the screen.
     to {transform: scale(1, 1)}
 }
 
+@keyframes modal {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
 .wrapperOutside {
    display: table;
    width: 100vw;
    height: 100vh;
    background:rgba(0, 0, 0, 0.3);
    position: relative;
-   z-index: 20000
+   z-index: 20000;
+   animation-name: modal;
+  animation-duration: 0.2s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
 }
 
 .wrapperInside {

@@ -371,7 +371,7 @@ window.addEventListener("load", function() {
 
 	$('.nav .click:nth-child(3)').click(settings)
 
-	$('.ac .click:nth-child(3)').click(main);
+	$('.ac .click:nth-child(3)').click(() => main());
 
 	$('i').click(function() {
 		$('.help, .splash').toggleShow();
@@ -518,10 +518,12 @@ var backup = (function(){
 		document.querySelectorAll('.lineup')[1].innerHTML = $('.right .column .team-1 div').nthLast(1).text();
 		document.querySelectorAll('.score')[0].innerHTML = $('.right .column .team-3 div').nthLast(2).text().replace(/^0/, '');
 		document.querySelectorAll('.score')[1].innerHTML = $('.right .column .team-3 div').nthLast(1).text().replace(/^0/, '');
-		$('.right .column:not(:first-child)').last().item().remove();
+		$('.right .container .column').last().item().remove();
+		round -= 1;
 	}
 
 	self.reset = function(){
+		console.log('me is called')
 		if(prevScore) $('.left .column .team-3').filter((a, b) => b != 0).forEach((a, b) => a.innerText = prevScore[b])
 		p = JSON.parse(prevP)
 		graph2 = JSON.parse(prevGraph2)
