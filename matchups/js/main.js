@@ -1,9 +1,11 @@
 /*
+
 	Matchups - an intelligent Badminton companion
 	Written By Tim Ling
 	7/11/2021
     
     Gestures detection from http://www.javascriptkit.com/javatutors/touchevents2.shtml
+
 */
 
 function expandClose(a) {
@@ -259,7 +261,7 @@ window.addEventListener("load", function() {
 				});
 				
 			}
-
+			
 			wrapper.focus();
 			setEndOfContenteditable(wrapper)
 			
@@ -323,11 +325,21 @@ window.addEventListener("load", function() {
 			if (a.scrollHeight > a.clientHeight) k += ('.' + a.classList[1] + ' .column:last-child {border-bottom: none; margin-bottom: 4px}')
 		});
 		$('style').text(k);
-		sortTable();
+		
 		index = 2;
 	}
 
 	function undo() {
+
+		
+
+		if(document.querySelectorAll(".score")[0].innerText == '0' && document.querySelectorAll(".score")[1].innerText == '0'){
+
+			if (round == 1) return;
+			dialog.revert()
+			return;
+		}
+
 		let v = queue.pop();
 		if (v) {
 			document.querySelectorAll(".score")[0].innerText = v[0];
@@ -482,6 +494,79 @@ function pushByPlayer(obj, obj2, a) {
 	return b
 }
 
+var backup = (function(){
+
+	var prevQueue, prevGraph2, prevP, prevScore, self = {};
+
+	self.backup = function(){
+		prevQueue = JSON.stringify(queue);
+		prevGraph2 = JSON.stringify(graph2);
+		prevP = JSON.stringify(p)
+		
+	}
+
+	self.backupScore = function(){
+		prevScore = $('.left .column .team-3').filter((a, b) => b != 0).map(a => a.innerText);
+	}
+
+	self.revert = function(){
+		p = JSON.parse(prevP)
+		graph2 = JSON.parse(prevGraph2)
+		queue = JSON.parse(prevQueue)
+		$('.left .column .team-3').filter((a, b) => b != 0).forEach((a, b) => a.innerText = prevScore[b])
+		document.querySelectorAll('.lineup')[0].innerHTML = $('.right .column .team-1 div').nthLast(2).text();
+		document.querySelectorAll('.lineup')[1].innerHTML = $('.right .column .team-1 div').nthLast(1).text();
+		document.querySelectorAll('.score')[0].innerHTML = $('.right .column .team-3 div').nthLast(2).text().replace(/^0/, '');
+		document.querySelectorAll('.score')[1].innerHTML = $('.right .column .team-3 div').nthLast(1).text().replace(/^0/, '');
+		$('.right .column:not(:first-child)').last().item().remove();
+	}
+
+	self.reset = function(){
+		if(prevScore) $('.left .column .team-3').filter((a, b) => b != 0).forEach((a, b) => a.innerText = prevScore[b])
+		p = JSON.parse(prevP)
+		graph2 = JSON.parse(prevGraph2)
+		queue = JSON.parse(prevP)
+		round -= 1;
+	}
+
+	return self;
+
+})()
+
+var dialog = (function(){
+
+	var self = {}, 
+	revert = document.querySelector('#revert'),
+	reroll = document.querySelector('#reroll');
+
+	function assign(type){
+		var buttons = document.querySelectorAll('.buttonFlat:not(template .buttonFlat)');
+		console.log(buttons)
+
+		Array.prototype.forEach.call(buttons, function(b) {
+			b.addEventListener('mousedown', createRipple);
+			b.addEventListener('touchstart', createRipple);
+			b.addEventListener('click', () => $('.wrapperOutside:not(template .wrapperOutside)').remove());
+		});
+
+		buttons[0].addEventListener('click', type == "reroll" ? () => main(true) : () => backup.revert())
+			
+		
+	}
+
+	self.reroll = function(){
+		document.body.appendChild(reroll.content.cloneNode(true))
+		assign("reroll")
+	}
+
+	self.revert = function(){
+		document.body.appendChild(revert.content.cloneNode(true))
+		assign("revert")
+	}
+
+	return self;
+
+})()
 //Global Variables
 var teams = {
 		AA: 16,
@@ -516,11 +601,12 @@ var teams = {
 	onTop = null,
 	round1 = 0,
 	lastGame = null,
-	prev;
+	prev,
+	called = false;
 
 
 //Main Function
-function main() {
+function main(fromDialog) {
 	if (lastGame == '1v1') {
 		var z = document.querySelectorAll('.lineup'),
 			w = document.querySelectorAll('.score'),
@@ -555,7 +641,23 @@ function main() {
 		$(".layer-1 .middle-right .container").append(y);
 		clear();
 	} else if (lastGame == '2v2') {
-		var x = $(".layer-1 .right .column"),
+		
+		backup.backupScore()
+
+		let pushScore = true;
+
+		if (fromDialog) {
+			backup.reset()
+			pushScore = false;
+		}
+
+		else if (document.querySelectorAll(".score")[0].innerText == '0' && document.querySelectorAll(".score")[1].innerText == '0' && round != 0){
+			dialog.reroll();
+			return
+		}
+
+		if(pushScore){
+			var x = $(".layer-1 .right .column"),
 			y = x.item().cloneNode(true),
 			z = document.querySelectorAll('.lineup'),
 			w = document.querySelectorAll('.score'),
@@ -567,7 +669,7 @@ function main() {
 		} else if (Number(w[1].innerText) < Number(w[0].innerText)) {
 			j = z[0].innerText
 		}
-		/*j = `${z[0].innerText}/${z[1].innerText}`*/
+		j = `${z[0].innerText}/${z[1].innerText}`
 		if (j) {
 			j = j.split("/");
 			j.forEach(function(k) {
@@ -582,11 +684,16 @@ function main() {
 			w[d].innerText = 0;
 		}
 		$(".layer-1 .right .container").append(y);
+		sortTable();
+		}
+
+		
 	}
+
 	if (mode === '2v2') {
-		queue = [
-			[0, 0]
-		];
+
+		
+
 		var i = [],
 			exist = false;
 		total = 0;
@@ -613,12 +720,7 @@ function main() {
 			}
 			if (exist) tiersTemp += 1;
 		})
-                if(String(i) !== String(prev)) p = false
-		prev = [...i]
-
-		if (tiersTemp === 0) return;
-		tiers = tiersTemp;
-
+    	
 		players = {
 			A: i[0].length,
 			B: i[1].length,
@@ -632,7 +734,20 @@ function main() {
 			D: [...i[3]]
 		};
 
+		if(String(i) !== String(prev)) {
 
+			console.log('someone changed me!')
+			// Clear non-existing players
+			for(let k in p){
+				p[k] = p[k].filter((b) => playersName[k].includes(b))
+			}
+		}
+
+		prev = [...i]
+
+		if (tiersTemp === 0) return;
+		tiers = tiersTemp;
+		
 
 		//Create Matchup Data
 		init();
@@ -742,11 +857,41 @@ function newMatch() {
 }
 
 function addMatch() {
+
 	if (!p) p = new Object(playersName);
+
+	backup.backup();
+
+	queue = [
+		[0, 0]
+	];
+	
+	console.log(JSON.stringify(p))
+
 	var q = newMatch(),
 		playersList = [],
 		r, repeated = false,
-		o, k;
+		o, k = Math.floor(Math.random() * 8);
+
+	switch (k) {
+		case 0:
+			q = q[0] + q[1] + q[2] + q[3];
+		case 1:
+			q = q[1] + q[0] + q[2] + q[3];
+		case 2:
+			q = q[0] + q[1] + q[3] + q[2];
+		case 3:
+			q = q[1] + q[0] + q[3] + q[2];
+		case 4:
+			q = q[2] + q[3] + q[0] + q[1];
+		case 5:
+			q = q[2] + q[3] + q[1] + q[0];
+		case 6:
+			q = q[3] + q[2] + q[0] + q[1];
+		case 7:
+			q = q[3] + q[2] + q[1] + q[0];
+	}
+
 	//Pick Players
 	for (var l in q) {
 		if (p[q[l]].length == 0) p[q[l]] = playersName[q[l]];
