@@ -548,7 +548,7 @@ var dialog = (function(){
 		Array.prototype.forEach.call(buttons, function(b) {
 			b.addEventListener('mousedown', createRipple);
 			b.addEventListener('touchstart', createRipple);
-			b.addEventListener('click', () => $('.wrapperOutside:not(template .wrapperOutside)').remove());
+			b.addEventListener('touchend', () => $('.wrapperOutside:not(template .wrapperOutside)').remove());
 		});
 
 		buttons[0].addEventListener('click', type == "reroll" ? () => main(true) : () => backup.revert())

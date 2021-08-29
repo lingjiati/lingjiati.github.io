@@ -251,19 +251,19 @@ button{
 	position: absolute;
 	top: 10%;
 	bottom: 10%;
-	width: calc(42.5vw);
+	width: 42.5%;
 
 	background: white;
 }
 
 
 .left, .middle-left {
-	left: 5vw;
+	left: 5%;
 	/*background-color: #b2ebf2;*/
 }
 
 .right, .middle-right{
-	right: 5vw;
+	right: 5%;
 	/*background-color: #f8bbd0;*/
 }
 
@@ -321,10 +321,6 @@ button{
 
 .fullScreenLayer {
 	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
 	font-size: 16px;
 	display: none;
 	background: #eee;
@@ -334,8 +330,8 @@ button{
 	width: 18.75%;
 	height: 80%;
 	float: left;
-	margin-left: 2.5vw;
-	margin-right: 2.5vw;
+	margin-left: 2.5%;
+	margin-right: 2.5%;
 	background: white;
 	outline: none;
 	top: 10vh;
@@ -343,11 +339,11 @@ button{
 }
 
 .tier:first-child{
-	margin-left: 5vw
+	margin-left: 5%
 }
 
 .tier:last-child{
-	margin-right: 5vw;
+	margin-right: 5%;
 }
 
 
@@ -375,6 +371,8 @@ button{
     position: absolute;
 	transition: 0.5s;
 }
+
+
 
 
 
@@ -480,7 +478,7 @@ button{
 
 .card > .column{
 	background: white;
-	width: 42.5vw;
+	width: 100%;
 	position: absolute;
 	padding-top: 24px;
 	background: white;
@@ -1021,9 +1019,18 @@ button{
     min-width: min-content;
 }
 
-@supports(padding:max(0px)) {
+@supports (padding:max(0px)) and (-webkit-touch-callout: none) {
     body, header, footer {
         padding-left: min(0vmin, env(safe-area-inset-left));
         padding-right: min(0vmin, env(safe-area-inset-right));
+    }
+}
+
+@media (max-width: 875px) {
+    @supports (-webkit-touch-callout: none){
+        .layer-1, .layer-2, .scoreKeeper{
+            width: 94%;
+            margin-left: 3%;
+        }
     }
 }
