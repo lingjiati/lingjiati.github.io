@@ -120,7 +120,8 @@ h3{
     position: absolute;
     z-index: 100;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
+    height: calc(100vh - constant(safe-area-inset-top));
     background: #eee;
 	transition: opacity 0.5s;
     z-index: 50
@@ -298,6 +299,8 @@ button{
   top: 50%;
   transform: translate(-50%, -50%);
 	left: 50%;
+    background: transparent;
+    pointer-events: none;
 
 }
 
@@ -325,6 +328,8 @@ button{
 	display: none;
 	background: #eee;
 }
+
+
 
 .tier{
 	width: 18.75%;
