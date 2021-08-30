@@ -434,10 +434,10 @@ button{
 }
 
 .ripple{
-  border-radius: 0%;
+  border-radius: 50%;
 
   position: absolute;
-  transform: scaleY(0);
+  transform: scale(0);
   animation: ripple 0.6s linear;
 }
 
@@ -445,7 +445,7 @@ button{
 
 @keyframes ripple{
   to{
-    transform: scaleY(2.5);
+    transform: scale(2.5);
     opacity: 0;
   }
 }
