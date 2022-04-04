@@ -1,0 +1,29 @@
+{
+    "soundEffects":[
+       {
+          "fileName": "Zap.mp3",
+          "description": "When Chris enters"
+       },
+       {
+          "fileName": "Clock Tick.wav",
+          "description": "When the professor enters"
+       }
+    ],
+    "soundTracks":[
+       {
+          "fileName":"Cinematic Trailer.mp3",
+          "description": "Scene 1",
+          "transition": "cut"
+       },
+       {
+          "fileName": "Never Gonna Give You Up.mp3",
+          "description": "Scene 2",
+          "transition": "crossFade"
+       },
+       {
+          "fileName": "Future Bass.mp3",
+          "description": "When Elsie attacks Chris",
+          "transition": "fade"
+       }
+    ]
+ }

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>H101 Audio System</title>
+    <style>
+        @font-face {
+            font-family: 'Space Grotesk';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url(./src/spaceGrotesk.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        @font-face {
+            font-family: 'Space Grotesk';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url(./src/spaceGrotesk.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        body {
+            font-family: 'Space Grotesk';
+        }
+
+        .soundEffects,
+        .soundTracks {
+            display: flex;
+            justify-content: center;
+            gap: 20px
+        }
+
+        .title {
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        .description {
+            font-size: 16px;
+        }
+
+        .next {
+
+            cursor: pointer;
+        }
+
+        .current,
+        .next {
+            display: flex;
+            width: 400px;
+            height: 200px;
+            border-radius: 8px;
+            gap: 8px;
+            flex-direction: column;
+            justify-content: center;
+            border: 1px solid #ddd;
+
+        }
+
+        .title,
+        .description {
+            width: 100%;
+            text-align: center;
+        }
+
+        .main {
+            display: none;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+            height: 100vh;
+        }
+
+        body {
+            margin: 0;
+
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        [data-playing="true"]{
+            border: 2px solid #222
+        }
+
+        .indicator {
+            width: 100vw;
+            position: absolute;
+            bottom: 0;
+            text-align: center;
+            padding: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        var tracks = [],
+            effects = [],
+            tracksLength, effectsLength;
+        var trackIndex = -1,
+            effectIndex = -1;
+        var loaded = 0;
+
+        var methods = {
+            cutIn: function(isTrack, index) {
+                var list = isTrack ? tracks : effects;
+                if (!list[index]) return;
+                list[index].audio.play();
+                
+            },
+            cutOff: function(isTrack, index) {
+                var list = isTrack ? tracks : effects;
+                if (!list[index]) return;
+                list[index].audio.pause();
+            },
+            fadeOff: function(isTrack, index) {
+                var list = isTrack ? tracks : effects;
+                if (!list[index]) return;
+                console.log("hi")
+                var interval = setInterval(() => {
+                    if(list[index].audio.volume <= 0) {
+                        list[index].audio.pause();
+                        return clearInterval(interval);
+                    }
+
+                    list[index].audio.volume = Math.round(list[index].audio.volume * 100) / 100 - 0.01;
+                }, 10);
+            },
+            fadeIn: function(isTrack, index) {
+                var list = isTrack ? tracks : effects;
+                if (!list[index]) return;
+                list[index].audio.volume = 0;
+                list[index].audio.play();
+                var interval = setInterval(() => {
+                    if(list[index].audio.volume >= 1) return clearInterval(interval);
+                    list[index].audio.volume = Math.round(list[index].audio.volume * 100) / 100 + 0.01;
+                }, 10);
+            },
+        }
+
+        function update(isTrack) {
+            var parentElement, list, index, max;
+            if (isTrack) {
+                parentElement = document.querySelector(".soundTracks");
+                index = trackIndex;
+                list = tracks;
+                max = tracksLength;
+            } else {
+                parentElement = document.querySelector(".soundEffects");
+                index = effectIndex;
+                list = effects;
+                max = effectsLength;
+            }
+            if (index > -1) {
+                parentElement.querySelector(".current .description").innerText = list[index].description;
+                parentElement.querySelector(".current .title").innerText = list[index].fileName.split('.')[0];
+                parentElement.querySelector(".current").dataset.playing = "true";
+                parentElement.querySelector(".current").style.cursor = "pointer";
+                if(list[index].transition == "cut"){
+                    methods.cutOff(isTrack, index - 1);
+                    methods.cutIn(isTrack, index)
+                }
+                else if(list[index].transition == "crossFade"){
+                    methods.fadeOff(isTrack, index - 1);
+                    methods.fadeIn(isTrack, index);
+                }
+                else{
+                    methods.fadeOff(isTrack, index - 1);
+                    setTimeout(() => methods.fadeIn(isTrack, index), 1000);
+                }
+                
+            }
+            if (index != max - 1) {
+                parentElement.querySelector(".next .description").innerText = list[index + 1].description;
+                parentElement.querySelector(".next .title").innerText = list[index + 1].fileName.split('.')[0];
+            } else {
+                parentElement.querySelector(".next .description").innerText = parentElement.querySelector(".next .title").innerText = ""
+            }
+
+        }
+        fetch("settings.json")
+            .then(response => response.json())
+            .then(function (data) {
+
+                tracksLength = data.soundTracks.length,
+                    effectsLength = data.soundEffects.length;
+                for (let i = 0; i < tracksLength; i++) {
+                    tracks[i] = {
+                        description: data.soundTracks[i].description,
+                        audio: new Audio("./soundTracks/" + data.soundTracks[i].fileName),
+                        fileName: data.soundTracks[i].fileName,
+                        transition: data.soundTracks[i].transition || "cut"
+                    }
+                    tracks[i].audio.oncanplaythrough = function () {
+                        loaded++;
+                        if (loaded == tracksLength + effectsLength) {
+                            document.querySelector(".indicator").innerText = "Status: fully loaded."
+                            document.querySelector(".main").style.display = "flex";
+                        }
+                    }
+                }
+                for (let i = 0; i < effectsLength; i++) {
+                    effects[i] = {
+                        description: data.soundEffects[i].description,
+                        audio: new Audio("./soundEffects/" + data.soundEffects[i].fileName),
+                        fileName: data.soundEffects[i].fileName,
+                        transition: "cut"
+                    }
+                    effects[i].audio.oncanplaythrough = function () {
+                        loaded++;
+                        if (loaded == tracksLength + effectsLength) {
+                            document.querySelector(".indicator").innerText = "Status: fully loaded."
+                            document.querySelector(".main").style.display = "flex";
+                        }
+                    }
+
+                }
+
+                update(true);
+                update(false);
+
+                document.querySelector(".soundTracks .next").onclick = function () {
+                    if (trackIndex == tracksLength - 1) return;
+                    trackIndex++;
+                    update(true);
+                }
+
+                document.querySelector(".soundEffects .next").onclick = function () {
+                    if (effectIndex == effectsLength - 1) return;
+                    effectIndex++;
+                    update(false);
+                }
+
+                document.querySelector(".soundEffects .current").onclick = function () {
+                    if(this.dataset.playing == "true"){
+                        this.dataset.playing = "false";
+                        effects[effectIndex].audio.pause();
+                    }
+                    else{
+                        this.dataset.playing = "true";
+                        effects[effectIndex].audio.play();
+                    }
+                }
+
+                document.querySelector(".soundTracks .current").onclick = function () {
+                    if(this.dataset.playing == "true"){
+                        this.dataset.playing = "false";
+                        methods.fadeOff(true, trackIndex);
+                    }
+                    else{
+                        this.dataset.playing = "true";
+                        methods.fadeIn(true, trackIndex);
+                    }
+                }
+
+
+            });
+    </script>
+    <div class="indicator">Status: loading.</div>
+    <div class="main">
+        <div class="soundTracks">
+            <div class="current" data-playing="false">
+                <div class="title"></div>
+                <div class="description">
+
+                </div>
+            </div>
+            <div class="next" onclick="tracks[1].audio.play()">
+                <div class="title">PlaceHolder</div>
+                <div class="description">PlaceHolder</div>
+            </div>
+
+        </div>
+        <div class="soundEffects">
+            <div class="current" data-playing="false">
+                <div class="title"></div>
+                <div class="description"></div>
+            </div>
+            <div class="next">
+                <div class="title">PlaceHolder</div>
+                <div class="description">PlaceHolder</div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
