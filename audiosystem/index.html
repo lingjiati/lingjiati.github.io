@@ -264,7 +264,7 @@
                         fileName: data.soundTracks[i].fileName,
                         transition: data.soundTracks[i].transition || "cut"
                     }
-                    if(tracks[i].audio.preload) tracks[i].audio.preload = true;
+                    if(tracks[i].audio) tracks[i].audio.preload = true;
                     tracks[i].audio.oncanplaythrough = function () {
                         loaded++;
                         document.querySelector(".indicator").innerText = "Status: " + loaded + "loaded."
@@ -275,12 +275,15 @@
                     }
                 }
                 for (let i = 0; i < effectsLength; i++) {
-                    if(effects[i].audio) effects[i].audio.preload = true;
+                    
                     effects[i] = {
                         description: data.soundEffects[i].description,
                         audio: new Audio("./soundEffects/" + data.soundEffects[i].fileName),
                         fileName: data.soundEffects[i].fileName,
                         transition: "cut"
+                    }
+                    if(effects[i].audio) {
+                        effects[i].audio.preload = true;
                     }
                     effects[i].audio.oncanplaythrough = function () {
                         loaded++;
