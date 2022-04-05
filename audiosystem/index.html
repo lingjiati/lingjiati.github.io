@@ -266,8 +266,9 @@
                     }
                     tracks[i].audio.oncanplaythrough = function () {
                         loaded++;
+                        document.querySelector(".indicator").innerText = "Status: " + loaded + "loaded."
                         if (loaded == tracksLength + effectsLength) {
-                            document.querySelector(".indicator").innerText = "Status: fully loaded."
+                            
                             document.querySelector(".main").style.display = "flex";
                         }
                     }
@@ -281,6 +282,7 @@
                     }
                     effects[i].audio.oncanplaythrough = function () {
                         loaded++;
+                        document.querySelector(".indicator").innerText = "Status: " + loaded + "loaded."
                         if (loaded == tracksLength + effectsLength) {
                             document.querySelector(".indicator").innerText = "Status: fully loaded."
                             document.querySelector(".main").style.display = "flex";
