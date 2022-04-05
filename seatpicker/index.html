@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <style>
+            *{
+                box-sizing: border-box;
+                user-select: none;
+                -webkit-user-select: none;
+                
+            }
+            .seats{
+                height: 60vh;
+                width: 60vw;  
+                display: flex;
+                flex-wrap: wrap;
+                border: 1px #bbb solid;
+                border-radius: 8px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                gap: 8px 8px;
+                padding: 12px;
+                
+            }
+            .button{
+                padding: 8px 16px;
+                background: black;
+                color: white;
+                border-radius: 8px;
+                display: none;
+                text-transform: uppercase;
+                cursor: pointer;
+            }
+
+        @font-face {
+            font-family: 'Space Grotesk';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url(./src/spaceGrotesk.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        @font-face {
+            font-family: 'Space Grotesk';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url(./src/spaceGrotesk.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        body {
+            font-family: 'Space Grotesk';
+        }
+        .captions{
+            font-weight: 600
+        }
+            .seat{
+                height: calc(16.6% - 40px / 6);
+                width: calc(12.5% - 56px / 8);
+                border: 1px #bbb dashed;
+                border-radius: 8px;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                cursor: pointer;
+            }
+
+            .draw{
+                width: 15vw;
+                margin: 96px 10vw;
+                border: 1px solid #bbb;
+                border-radius: 8px;
+                height: calc(100vh - 192px);
+                overflow-Y: scroll;
+                padding: 8px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px 8px;
+                flex-wrap: wrap;
+                display: none;
+            }
+
+            body{
+                margin: 0;
+            }
+
+            [data-selected="true"]{
+                border: 1px #444 solid;
+                background: #ebebeb
+            }
+
+            [data-selected-new="true"]{
+                border: 1px #444 solid!important;
+            }
+
+
+
+            .topbar{
+                display: flex;
+                justify-content: space-between;
+                align-content: center;
+                padding: 24px 32px;
+                width: 100vw;
+                position: absolute;
+                top: 0px;
+                
+            }
+            .person{
+                width: calc(50% - 12px);
+                height: 60px;
+                border-radius: 4px;
+                background: #ebebeb;
+                border: 1px solid #bbb;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                cursor: pointer;
+                
+            }
+
+            
+        </style>
+    </head>
+    <body>
+        <script>
+            window.onload = function(){
+                var personTemplate = document.querySelector('.person'), draw = document.querySelector(".draw")
+                
+                var seats = document.querySelector('.seats'), seatTemplate = document.querySelector('.seat');
+                for(var i = 0; i < 47; i ++){
+                    var clone = seatTemplate.cloneNode(true);
+                    seats.appendChild(clone);
+                }
+                document.querySelectorAll('.seat').forEach(a => {
+                    a.onclick = function(){
+                        document.querySelector('.button').style.display = "block";
+                        this.dataset.selected = this.dataset.selected != "true";
+                        document.querySelector(".captions").innerText = document.querySelectorAll('[data-selected="true"]').length + " selected";
+                    }
+                })
+                
+                document.querySelector(".button").onclick = (evt) => {
+                    seat = document.querySelectorAll('.seat');
+                    evt.target.onclick = new Function();
+                    evt.target.style.display = "none";
+                    document.querySelector(".captions").innerText = "Assign seats";
+                    var selectedSeats = [], queue = [];
+
+                    Array.prototype.forEach.call(seat, function(a){
+                        a.onclick = new Function();
+                        a.style.border = "1px solid #bbb";
+                        if(a.dataset.selected == "true") selectedSeats.push(a);
+                    })
+                    for(var i = 0; i < selectedSeats.length; i ++){
+                        queue[i] = i;
+                        var clone = personTemplate.cloneNode(true);
+                        clone.innerText = i + 1;
+                        clone.onclick = function(evt){
+                            var chosen = queue.pop();
+                            selectedSeats[chosen].innerText = evt.target.innerText;
+                            evt.target.style.display = "none";
+                            if(queue.length == 0){
+                                draw.style.display = "none";
+                                seats.style.transform = "translate(-50%, -50%)"
+                                document.querySelector(".captions").innerText = "Select two seats to exchange"
+                                document.querySelector(".button").innerText = "Exchange"
+                                selectedSeats.forEach(a => {
+                                    
+                                    a.style.background = "#ebebeb"
+                                    a.dataset.selected = "false";
+                                })
+                                selectedSeats.forEach(a => {
+                                    a.onclick = function(){
+                                        this.dataset.selectedNew = this.dataset.selectedNew != "true";
+                                        
+                                        document.querySelector(".button").style.display = document.querySelectorAll('[data-selected-new="true"]').length == 2 ? "block" : "none"
+                                    }
+                                })
+                                document.querySelector(".button").onclick = function(){
+                                    var twoSeats = document.querySelectorAll('[data-selected-new="true"]');
+                                    var temp = twoSeats[0].innerText;
+                                    twoSeats[0].innerText = twoSeats[1].innerText;
+                                    twoSeats[1].innerText = temp;
+                                    twoSeats[0].dataset.selectedNew = twoSeats[1].dataset.selectedNew = false;
+                                }
+                            }
+
+                        }
+                        draw.appendChild(clone);
+                        
+                    }
+                    queue.sort(() => Math.random() - 0.5)
+                    draw.style.display = "flex";
+                    seats.style.transform = "translate(calc(-50% + 10vw), -50%)"
+                    
+                    
+                }
+                
+            }
+        </script>
+        <div style="display: none">
+            <div class="person"></div>
+        </div>
+        <div class="draw">
+            
+        </div>
+        <div class="seats">
+            <div class="seat"></div>
+        </div>
+        <div class="topbar">
+            <div class="captions"></div>
+            <div class="button">Next</div>
+        </div>
+    </body>
+</html>
