@@ -2,7 +2,8 @@
 <html>
 
 <head>
-    <title>H101 Audio System</title>
+    <link rel="icon" href="./src/favicon.ico">
+    <title>Audio System</title>
     <style>
         @font-face {
             font-family: 'Space Grotesk';
@@ -27,7 +28,8 @@
         }
 
         .soundEffects,
-        .soundTracks {
+        .soundTracks,
+        .label {
             display: flex;
             justify-content: center;
             gap: 20px
@@ -45,6 +47,11 @@
         .next {
 
             cursor: pointer;
+        }
+
+        .labelX{
+            width: 400px;
+            text-align: center;
         }
 
         .current,
@@ -67,17 +74,36 @@
         }
 
         .main {
-            display: none;
+            display: flex;
             justify-content: center;
             flex-direction: column;
             gap: 20px;
             height: 100vh;
+            transform: translate(-80px, -20.5px)
         }
 
         body {
             margin: 0;
 
         }
+
+        .labelY{
+            width: 140px
+        }
+
+        .soundEffects .labelY, .soundTracks .labelY{
+            display:flex;
+            height: 200px;
+            text-align: right; 
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .labelX, .labelY{
+            
+        }
+
+        
 
         * {
             box-sizing: border-box;
@@ -87,13 +113,48 @@
             border: 2px solid #222
         }
 
-        .indicator {
+        .topbar{
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            padding: 24px 32px;
+            position: fixed;
             width: 100vw;
-            position: absolute;
-            bottom: 0;
-            text-align: center;
-            padding: 16px;
+            align-items: center;
         }
+
+        .soundTracks .current{
+            transition: border 1s;
+        }
+        .indicator {
+           
+        }
+
+        .appname{
+            font-weight: 600;
+            text-transform: uppercase;
+        }/*
+
+        body{
+            background: black;
+            color: white;
+        }
+
+        
+
+        .current,
+        .next{
+            border: 1px solid #999
+        }
+
+        [data-playing="true"]{
+            border: 2px solid white
+        }
+
+        .topbar{
+            background: white;
+            color: black;
+        }*/
     </style>
 </head>
 
@@ -120,24 +181,32 @@
             },
             fadeOff: function(isTrack, index) {
                 var list = isTrack ? tracks : effects;
+                var callback;
                 if (!list[index]) return;
-                console.log("hi")
-                var interval = setInterval(() => {
+                clearInterval(list[index].interval);
+                list[index].interval = setInterval(() => {
                     if(list[index].audio.volume <= 0) {
                         list[index].audio.pause();
-                        return clearInterval(interval);
+                        if(typeof callback == "function") callback();
+                        return clearInterval(list[index].interval);
                     }
 
                     list[index].audio.volume = Math.round(list[index].audio.volume * 100) / 100 - 0.01;
                 }, 10);
+                return {
+                    callback: function(a){
+                        callback = a;
+                    }
+                }
             },
             fadeIn: function(isTrack, index) {
                 var list = isTrack ? tracks : effects;
                 if (!list[index]) return;
+                clearInterval(list[index].interval);
                 list[index].audio.volume = 0;
                 list[index].audio.play();
-                var interval = setInterval(() => {
-                    if(list[index].audio.volume >= 1) return clearInterval(interval);
+                list[index].interval = setInterval(() => {
+                    if(list[index].audio.volume >= 1) return clearInterval(list[index].interval);
                     list[index].audio.volume = Math.round(list[index].audio.volume * 100) / 100 + 0.01;
                 }, 10);
             },
@@ -170,8 +239,7 @@
                     methods.fadeIn(isTrack, index);
                 }
                 else{
-                    methods.fadeOff(isTrack, index - 1);
-                    setTimeout(() => methods.fadeIn(isTrack, index), 1000);
+                    methods.fadeOff(isTrack, index - 1).callback(() => methods.fadeIn(isTrack, index));
                 }
                 
             }
@@ -237,6 +305,7 @@
                 }
 
                 document.querySelector(".soundEffects .current").onclick = function () {
+                    if(effectIndex == -1) return;
                     if(this.dataset.playing == "true"){
                         this.dataset.playing = "false";
                         effects[effectIndex].audio.pause();
@@ -248,6 +317,7 @@
                 }
 
                 document.querySelector(".soundTracks .current").onclick = function () {
+                    if(trackIndex == -1) return;
                     if(this.dataset.playing == "true"){
                         this.dataset.playing = "false";
                         methods.fadeOff(true, trackIndex);
@@ -261,9 +331,19 @@
 
             });
     </script>
-    <div class="indicator">Status: loading.</div>
+    <div class="topbar">
+        <div class="appname">Simple Stage Audio System for H101</div>
+        <div class="indicator">Status: loading.</div>
+    </div>
+    
     <div class="main">
+        <div class="label">
+            <div class="labelY"></div>
+            <div class="labelX">Currently Playing</div>
+            <div class="labelX">Upcoming</div>
+        </div>
         <div class="soundTracks">
+            <div class="labelY">Soundtracks</div>
             <div class="current" data-playing="false">
                 <div class="title"></div>
                 <div class="description">
@@ -277,6 +357,7 @@
 
         </div>
         <div class="soundEffects">
+            <div class="labelY">Effects</div>
             <div class="current" data-playing="false">
                 <div class="title"></div>
                 <div class="description"></div>
