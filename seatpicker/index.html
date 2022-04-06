@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+	<title>Seat Picker</title>
 
         <style>
             *{
@@ -131,12 +132,15 @@
         <script>
             window.onload = function(){
                 var personTemplate = document.querySelector('.person'), draw = document.querySelector(".draw")
-                
+                var H101 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 34, 35, 36, 37, 38, 43, 44];
                 var seats = document.querySelector('.seats'), seatTemplate = document.querySelector('.seat');
-                for(var i = 0; i < 47; i ++){
+                for(var i = 0; i < 48; i ++){
                     var clone = seatTemplate.cloneNode(true);
                     seats.appendChild(clone);
+                    if(H101.indexOf(i) != -1) clone.dataset.selected = "true";
                 }
+document.querySelector(".captions").innerText = H101.length + " selected";
+		seatTemplate.parentNode.removeChild(seatTemplate)
                 document.querySelectorAll('.seat').forEach(a => {
                     a.onclick = function(){
                         document.querySelector('.button').style.display = "block";
@@ -146,27 +150,32 @@
                 })
                 
                 document.querySelector(".button").onclick = (evt) => {
+			var assigned = 0;
+		    var selectedSeats = [], queue = [];
                     seat = document.querySelectorAll('.seat');
                     evt.target.onclick = new Function();
                     evt.target.style.display = "none";
                     document.querySelector(".captions").innerText = "Assign seats";
-                    var selectedSeats = [], queue = [];
+                    
 
                     Array.prototype.forEach.call(seat, function(a){
-                        a.onclick = new Function();
+			
+                        a.onclick = function(evt){
+				var selected = queue.indexOf(Number(evt.target.dataset.i)) + 1,
+				selectedPerson = Array.prototype.filter.call(document.querySelectorAll(".person"), (b => b.innerText == String(selected)))[0];
+				console.log(selected, selectedPerson)
+				
+				a.innerText = selectedPerson.innerText;
+				selectedPerson.style.display = "none"
+				assigned ++;
+				evt.target.onclick = new Function()
+				if(assigned == queue.length) A();
+                        }
                         a.style.border = "1px solid #bbb";
                         if(a.dataset.selected == "true") selectedSeats.push(a);
                     })
-                    for(var i = 0; i < selectedSeats.length; i ++){
-                        queue[i] = i;
-                        var clone = personTemplate.cloneNode(true);
-                        clone.innerText = i + 1;
-                        clone.onclick = function(evt){
-                            var chosen = queue.pop();
-                            selectedSeats[chosen].innerText = evt.target.innerText;
-                            evt.target.style.display = "none";
-                            if(queue.length == 0){
-                                draw.style.display = "none";
+		    function A(){
+draw.style.display = "none";
                                 seats.style.transform = "translate(-50%, -50%)"
                                 document.querySelector(".captions").innerText = "Select two seats to exchange"
                                 document.querySelector(".button").innerText = "Exchange"
@@ -190,13 +199,32 @@
                                     twoSeats[0].dataset.selectedNew = twoSeats[1].dataset.selectedNew = false;
                                     document.querySelector(".button").style.display = "none"
                                 }
-                            }
+
+
+
+}
+                    for(var i = 0; i < selectedSeats.length; i ++){
+			selectedSeats[i].dataset.i = i;
+                        queue[i] = i;
+                        queue.sort(() => Math.random() - 0.5)
+                        var clone = personTemplate.cloneNode(true);
+			
+                        clone.innerText = i + 1;
+                        clone.onclick = function(evt){
+                            var chosen = queue[Number(evt.target.innerText) - 1]
+				console.log(chosen, queue)
+
+                            selectedSeats[chosen].innerText = evt.target.innerText;
+                            evt.target.style.display = "none";
+				assigned ++;
+				evt.target.onclick = new Function()
+				if(assigned == queue.length) A();
 
                         }
                         draw.appendChild(clone);
                         
                     }
-                    queue.sort(() => Math.random() - 0.5)
+                    
                     draw.style.display = "flex";
                     seats.style.transform = "translate(calc(-50% + 10vw), -50%)"
                     
@@ -207,12 +235,13 @@
         </script>
         <div style="display: none">
             <div class="person"></div>
+<div class="seat"></div>
         </div>
         <div class="draw">
             
         </div>
         <div class="seats">
-            <div class="seat"></div>
+            
         </div>
         <div class="topbar">
             <div class="captions"></div>
