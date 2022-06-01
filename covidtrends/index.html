@@ -197,8 +197,9 @@
                 daily[i][1] = daily[a[1]][1] + (a[0] - i + 2) / totalWeight * m0
             }
           })
-          let X = simpleMovingAverage(daily.map(a => a[0])), Y = simpleMovingAverage(daily.map(a => a[1]))
           let today = daily[0][0]
+          let X = simpleMovingAverage(daily.map(a => a[0])), Y = simpleMovingAverage(daily.map(a => a[1]))
+          
 
           daily = daily.map((a, b) => [X[b], Y[b]])
           console.table(daily)
