@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,500,0,0" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@600&display=swap" rel="stylesheet">
+    <style>
+      body{
+        font-family: 'Roboto Mono';
+        margin: 0;
+        background-color: #f4f4f4;
+      }
+      .stateContainer{
+        align-items: center; display: flex; flex-direction: column; background: white; border: 1px solid #ccc;padding: 20px 60px 60px; border-radius: 8px;
+      }
+      .container{
+        display: flex;
+        width: 100vw;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        justify-content: space-around;
+      }
+      #cases{
+        font-family: 'Roboto Mono', 'Noto Sans TC';
+        text-align: center;
+        font-size: 20px;
+        line-height: 1.75;
+      }
+      #state{
+        font-size: 200px;
+
+        color: #999
+      }
+      #stateText{
+        font-size: 24px;
+        font-weight: 600;
+        font-family: 'Noto Sans TC';
+      }
+      .indigo{
+        color: #e91e63
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      // ref: http://stackoverflow.com/a/1293163/2343
+      // This will parse a delimited string into an array of
+      // arrays. The default delimiter is the comma, but this
+      // can be overriden in the second argument.
+      function CSVToArray(strData, strDelimiter) {
+        // Check to see if the delimiter is defined. If not,
+        // then default to comma.
+        strDelimiter = strDelimiter || ",";
+
+        // Create a regular expression to parse the CSV values.
+        var objPattern = new RegExp(
+          // Delimiters.
+          "(\\" +
+            strDelimiter +
+            "|\\r?\\n|\\r|^)" +
+            // Quoted fields.
+            '(?:"([^"]*(?:""[^"]*)*)"|' +
+            // Standard fields.
+            '([^"\\' +
+            strDelimiter +
+            "\\r\\n]*))",
+          "gi"
+        );
+
+        // Create an array to hold our data. Give the array
+        // a default empty first row.
+        var arrData = [[]];
+
+        // Create an array to hold our individual pattern
+        // matching groups.
+        var arrMatches = null;
+
+        // Keep looping over the regular expression matches
+        // until we can no longer find a match.
+        while ((arrMatches = objPattern.exec(strData))) {
+          // Get the delimiter that was found.
+          var strMatchedDelimiter = arrMatches[1];
+
+          // Check to see if the given delimiter has a length
+          // (is not the start of string) and if it matches
+          // field delimiter. If id does not, then we know
+          // that this delimiter is a row delimiter.
+          if (
+            strMatchedDelimiter.length &&
+            strMatchedDelimiter !== strDelimiter
+          ) {
+            // Since we have reached a new row of data,
+            // add an empty row to our data array.
+            arrData.push([]);
+          }
+
+          var strMatchedValue;
+
+          // Now that we have our delimiter out of the way,
+          // let's check to see which kind of value we
+          // captured (quoted or unquoted).
+          if (arrMatches[2]) {
+            // We found a quoted value. When we capture
+            // this value, unescape any double quotes.
+            strMatchedValue = arrMatches[2].replace(new RegExp('""', "g"), '"');
+          } else {
+            // We found a non-quoted value.
+            strMatchedValue = arrMatches[3];
+          }
+
+          // Now that we have our value string, let's add
+          // it to the data array.
+          arrData[arrData.length - 1].push(strMatchedValue);
+        }
+
+        // Return the parsed data.
+        return arrData;
+      }
+
+      let results = [],
+        i = 0;
+      var getJSON = function (url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.onload = function () {
+          var status = xhr.status;
+          if (status === 200) {
+            callback(null, xhr.response);
+          } else {
+            callback(status, xhr.response);
+          }
+        };
+        xhr.send();
+        console.log("sent");
+      };
+      function simpleMovingAverage(prices, window = 4) {
+        if (!prices || prices.length < window) {
+          return [];
+        }
+
+        let index = window - 1;
+        const length = prices.length + 1;
+
+        const simpleMovingAverages = [];
+
+        while (++index < length) {
+          const windowSlice = prices.slice(index - window, index);
+          const sum = windowSlice.reduce((prev, curr) => prev + curr, 0);
+          simpleMovingAverages.push(sum / window);
+        }
+
+        return simpleMovingAverages;
+      }
+
+      function updateCases(a){
+        document.querySelector("#cases").innerHTML = a;
+      }
+      function updateState(a){
+        document.querySelector("#state").innerHTML = a[0];
+        document.querySelector("#stateText").innerHTML = a[1];
+      }
+
+
+      getJSON(
+        "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
+        (status, response) => {
+          if (status) return;
+          var cases = CSVToArray(response).filter((a) => a[1] == "Taiwan*")[0].slice(4).map(a => Number(a));
+          var daily = [], flag = 1, closures = [], inBetween = false;
+          for(var i = cases.length -1; i > 0; i--){
+            //purge begining zeros
+            if(flag & cases[i] - cases[i - 1] == 0) continue;
+            if(flag) flag = 0;
+
+            //record lost data
+            if(cases[i] - cases[i - 1] == 0 && !inBetween){
+                closures.push([daily.length - 1]);
+                inBetween = true;
+            }
+            if(inBetween && cases[i] - cases[i - 1] != 0){
+                inBetween = false;
+                closures[closures.length - 1][1] = daily.length;
+            }
+
+            daily.push([cases[i] - cases[i - 1], cases[i]]);
+          }
+          closures.pop();
+          closures.forEach((a, b) => {
+            var m0 = daily[a[0]][0], totalWeight = a[1] - a[0];
+            for(let i = a[0]; i < a[1]; i++){
+                daily[i][0] = m0 / totalWeight;
+                daily[i][1] = daily[a[1]][1] + (a[0] - i + 2) / totalWeight * m0
+            }
+          })
+          let X = simpleMovingAverage(daily.map(a => a[0])), Y = simpleMovingAverage(daily.map(a => a[1]))
+          let today = daily[0][0]
+
+          daily = daily.map((a, b) => [X[b], Y[b]])
+          console.table(daily)
+
+          daily = daily.map(a => [Math.log10(a[0]), Math.log10(a[1])])
+
+          function getState(daysAgo){
+            let endX = daily[0 + daysAgo][0], endY =  daily[0 + daysAgo][1],
+                midX = daily[7 + daysAgo][0], midY = daily[7 + daysAgo][1],
+                startX = daily[14 + daysAgo][0], startY = daily[14 + daysAgo][1]
+
+            let slope = (endX - midX) / (endY - midY), longSlope = (endX - startX) / (endY - startY)
+              if(endX / endY < 0.25) {
+                return ["health_and_safety", "安全"]
+              }
+              if(slope < -4 && longSlope < -2){
+                return ["trending_down", "直線下降"]
+              }
+              if((slope > 0.85 && endX / endY > 0.65) || (longSlope > 5 && slope > 1 && endX / endY > 0.5)) {
+                return ["trending_up", "指數成長"]
+              }
+              if(longSlope > 4 && slope > 8){
+                return ["error", "危險"]
+              }
+              if(endX / endY < 0.6){
+                return ["done", "受控"]
+              }
+              return (["trending_flat", "停滯"])
+          }
+          var currentState = getState(0);
+          updateState(currentState);
+          currentState = JSON.stringify(currentState)
+          var i = 0;
+          while(i <= daily.length){
+            if(JSON.stringify(getState(i)) != currentState) break;
+            i++;
+          }
+          updateCases(`<span class="indigo">${i}</span> 天前進入此階段</br>增加 <span class="indigo">${today}</span> 例`);
+        }
+
+
+      );
+    </script>
+    <div class="container">
+      <div class="stateContainer">
+        <div id="state" class="material-symbols-outlined"></div>
+        <div id="stateText"></div>
+      </div>
+
+      <div id="cases"></div>
+    </div>
+
+  </body>
+</html>
