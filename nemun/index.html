@@ -1,0 +1,629 @@
+<head>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 1,
+                'wght' 700,
+                'GRAD' 200,
+                'opsz' 48
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+            margin: 0;
+            --sw: min(100vw, calc(900px - 40px));
+            background-image: url("./banner.jpg");
+            background-size: 500px;
+            font-family: 'Baskerville', 'Times New Roman', Times, serif;
+
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .banner {
+            font-weight: 500;
+            color: rgb(240, 221, 195);
+            height: 200px;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            background-image: url("./banner.jpg");
+            background-size: 500px;
+            padding: 20px 0
+        }
+
+        .wrapper {
+            width: calc(var(--sw));
+            margin: 0 auto;
+            margin-bottom: 40px
+        }
+
+        .outer-wrapper {
+
+
+            /*background-size: 1000px;
+            background: linear-gradient(to top, rgba(40,45,40, 1), rgba(0,0,0,0));
+            backdrop-filter: blur(5px);*/
+            background-color: rgba(5, 15, 10, 1);
+            height: 100vh;
+            width: 100vw;
+            z-index: -1;
+            top: 0;
+            position: fixed;
+            opacity: 0.7;
+            backdrop-filter: blur(4px);
+        }
+
+        .giant-text {
+
+            font-size: 60px;
+
+
+
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: row;
+            width: 80%;
+            gap: 20px;
+            font-style: italic;
+            justify-content: center;
+            color: rgb(240, 221, 195);
+            margin-top: 10px;
+
+            font-size: 20px;
+        }
+
+        .item {
+            transition: color 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+
+        .item:hover {
+            color: #ddd
+        }
+
+        .icon {
+            font-size: 48px;
+            clip-path: polygon(0 25px, 25px 0, calc(100% - 25px) 0, 100% 25px, 100% calc(100% - 25px), calc(100% - 25px) 100%, 25px 100%, 0 calc(100% - 25px));
+            background-color: rgb(240, 221, 195);
+            padding: 20px;
+            margin-bottom: 20px
+        }
+
+
+
+
+        .group {
+            position: relative;
+            height: calc(0.48 * var(--sw) + 40px)
+        }
+
+        .title,
+        .content {
+            width: calc(0.48 * var(--sw));
+            height: calc(0.48 * var(--sw));
+            display: inline-block;
+            margin-bottom: -5px;
+            margin-top: 40px;
+            filter: brightness(0.2);
+        }
+
+
+        .show {
+            filter: brightness(1);
+        }
+
+        .inner-space {
+            clip-path: polygon(0 16.00px, 16.00px 0, calc(100% - 16.00px) 0, 100% 16.00px, 100% calc(100% - 16.00px), calc(100% - 16.00px) 100%, 16.00px 100%, 0 calc(100% - 16.00px));
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+
+        .title {
+            float: left;
+            transition: filter cubic-bezier(.66, .37, .83, .67) 0.5s;
+        }
+
+        .title .inner-space::after {
+            background-image: url("./banner.jpg");
+            background-size: 500px;
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            filter: grayscale(0.5) brightness(1.2);
+
+        }
+
+        .content .inner-space {
+            background-color: #ccc;
+            padding: 40px
+        }
+
+        .content {
+            float: right;
+            transition: filter cubic-bezier(.66, .37, .83, .67) 0.5s;
+        }
+
+        .inverted .title {
+            float: right
+        }
+
+        .inverted .content {
+            float: left
+        }
+
+        .title-text {
+            font-size: 40px;
+            color: rgb(240, 221, 195);
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .content-text {
+
+            font-size: 20px;
+            line-height: 1.8;
+        }
+
+        @media only screen and (max-width: 800px) {
+            .committee-grid {
+                padding: 40px 10px !important
+            }
+
+            .title,
+            .content {
+                float: none;
+                width: calc(1 * var(--sw));
+                height: calc(1 * var(--sw));
+            }
+
+            .group{
+                min-height: 500px;
+            }
+
+
+
+            .title {
+                max-height: 120px;
+                margin-top: 0px;
+
+            }
+
+            .icon {
+                background-color: transparent;
+                color: white;
+                padding: 0;
+                clip-path: none;
+                margin: 0;
+            }
+
+            .content {
+                margin-top: 0;
+
+            }
+
+            .banner {
+                height: 200px
+            }
+
+            .inner-space {
+                clip-path: none;
+            }
+
+            .title .inner-space::after {
+                /*background: rgb(26, 56, 47)*/
+                background-size: 800px;
+                filter: brightness(1.2) grayscale(0.8)
+            }
+
+            .title .inner-space {
+                flex-direction: row;
+                gap: 20px
+            }
+
+            .giant-text {
+                font-size: 40px
+            }
+
+            .title-text {
+                font-size: 30px;
+                line-height: 1.2;
+                color: white;
+                text-align: left;
+            }
+            
+            .register{
+                margin-bottom: 20px!important;
+            }
+
+            @media only screen and (min-width: 500px) {
+                .content{
+                    height: calc(0.8 * var(--sw))
+                }
+
+            }
+        }
+
+        
+
+        .container {
+            height: 100%;
+            width: 100%;
+            flex-direction: column;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .c-item {
+            width: 50%;
+            display: inline-flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            height: 45%;
+            gap: 10px
+        }
+
+        .c-icon {
+            font-size: 32px;
+            padding: 15px;
+            background-color: black;
+            color: #ddd;
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 500,
+                'GRAD' 200,
+                'opsz' 48
+        }
+
+        .c-title {
+            font-size: 28px
+        }
+
+        .c-caption {
+            font-size: 16px;
+            text-align: center;
+            margin-top: -5px;
+            width: 140px;
+        }
+
+        .d-item {
+            display: flex;
+            justify-content: space-around;
+            font-size: 20px;
+
+        }
+
+        .date {
+            width: 100px;
+        }
+
+        .date+div {
+            width: 250px;
+            text-align: right;
+            line-height: 1.5;
+            margin-top: -3px;
+        }
+
+        .border {
+            height: 2px;
+            width: 100%;
+            background-color: #343;
+            color: transparent;
+            user-select: none;
+        }
+
+
+        .dates{
+            gap: 10px; flex-wrap: nowrap; overflow: scroll; padding-right: 10px;
+            background: linear-gradient(#ccc 30%, transparent),
+                radial-gradient(at 50%, rgba(32, 48, 32, .3), transparent 70%);
+            background-repeat: no-repeat;
+            background-size: 100% 50px, calc(100%) 20px;
+            background-attachment: local, scroll;
+            background-position: 0px 0px, 0px -7px
+        }
+
+        .learn-more{
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            text-transform: uppercase;
+        }
+
+
+        .learn-more span{
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 200,
+                'opsz' 48!important;
+            font-size: 16px;
+            padding-left: 4px;
+        }
+
+        .p-item img{
+            height: 120px;
+            border-radius: 50%;
+        }
+
+        .p-item{
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .p-item > div{
+            display: flex;
+            flex-direction: column;
+            width: 150px;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .register{
+            background-color:rgb(240, 221, 195);
+            padding: 30px 40px;
+            width: 250px;
+            text-transform: uppercase;
+            height: 60px;
+            margin: 20px auto -20px;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            flex-direction: column;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner">
+        <div class="giant-text">NEMUN 2023</div>
+        <div class="menu">
+            <div class="item">About</div>
+            <div class="item">Schedule</div>
+            <div class="item">Student Officers</div>
+        </div>
+    </div>
+    <div class="outer-wrapper">
+
+    </div>
+    <div class="wrapper">
+        <div class="register">Register Now</div>
+        <div class="group">
+            <div class="title">
+                <div class="inner-space">
+                    <span class="material-symbols-outlined icon">
+                        gavel
+                    </span>
+                    <span class="title-text">About <br>NEMUN 2023</span>
+                </div>
+            </div>
+            <div class="content">
+                <div class="inner-space">
+                    <div class="content-text">NEMUN is an annual Model United Nations conference held by NEHS MUN club.
+                        NEHS has so far successfully hosted NEMUN, once named EMUN, from 2013-2021. This year, NEMUN is
+                        a brand new start with a bigger dream.</div>
+                </div>
+            </div>
+        </div>
+        <div class="group inverted">
+            <div class="title">
+                <div class="inner-space">
+                    <span class="material-symbols-outlined icon">
+                        format_quote
+                    </span>
+                    <span class="title-text">Be a voice, <br>not an echo.</span>
+                </div>
+            </div>
+            <div class="content">
+                <div class="inner-space">
+                    <div class="content-text">
+                        We are aiming for an innovative and high-quality conference, with talented students from all
+                        across the island to come together and contribute to our society with inquisitive minds. We
+                        hereby welcome you to join the conference, and look forward to seeing you in NEMUN 2022!
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="group">
+            <div class="title">
+                <div class="inner-space">
+                    <span class="material-symbols-outlined icon">
+                        account_balance
+                    </span>
+                    <span class="title-text">Committees</span>
+                </div>
+            </div>
+            <div class="content" style="min-height: 400px">
+                <div class="inner-space committee-grid" style="padding: 25px 30px;">
+                    
+                    <div class="container" style="flex-direction: row;">
+                        <span class="c-item">
+
+                            <span class="material-symbols-outlined c-icon">
+                                handshake
+                            </span>
+                            <div class="c-title">
+                                GA1
+                            </div>
+                            <div class="c-caption">General Assembly First Committee</div>
+                        </span>
+                        <span class="c-item">
+                            <span class="material-symbols-outlined c-icon">
+                                work
+                            </span>
+                            <div class="c-title">
+                                WTO
+                            </div>
+                            <div class="c-caption">
+                                World Trade <br>Organization
+                            </div>
+                        </span>
+                        <span class="c-item">
+                            <span class="material-symbols-outlined c-icon">
+                                timeline
+                            </span>
+                            <div class="c-title">
+                                UNDP
+                            </div>
+                            <div class="c-caption">
+                                Development Programme
+                            </div>
+
+                        </span>
+                        <span class="c-item">
+                            <span class="material-symbols-outlined c-icon">
+                                shield
+                            </span>
+                            <div class="c-title">
+                                UNSC
+                            </div>
+                            <div class="c-caption">
+                                Security Council
+                            </div>
+                        </span>
+                        <div class="learn-more">Learn more <span class="material-symbols-outlined" style="">arrow_forward_ios</span></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="group inverted">
+            <div class="title">
+                <div class="inner-space">
+                    <span class="material-symbols-outlined icon">
+                        event
+                    </span>
+                    <span class="title-text">Important dates</span>
+                </div>
+            </div>
+            <div class="content">
+                <div class="inner-space" style="padding-right: 30px">
+                    <div class="container dates">
+                        <div class="d-item">
+                            <div class="date">October</div>
+                            <div>Chair application</div>
+                        </div>
+                        <div class="border">a</div>
+                        <div class="d-item">
+                            <div class="date">November</div>
+                            <div>Form 1</div>
+                        </div>
+                        <div class="border">a</div>
+                        <div class="d-item">
+                            <div class="date">December</div>
+                            <div>Chair Application Results<br>Early Bird Registration<br>Form 2</div>
+                        </div>
+                        <div class="border">a</div>
+                        <div class="d-item">
+                            <div class="date">January</div>
+                            <div>Chair Application Results Due
+                            </div>
+                        </div>
+                        <div class="border">a</div>
+                        <div class="d-item">
+                            <div class="date">February</div>
+                            <div>Regular Registration<br>Form 2 Due
+                            </div>
+                        </div>
+                        <div class="border">a</div>
+                        <div class="d-item">
+                            <div class="date">March</div>
+                            <div>Regular Registration Due<br>Payment Due
+                            </div>
+                        </div>
+                        <div class="border">a</div>
+                        <div class="d-item">
+                            <div class="date">April</div>
+                            <div>Background Guide Release<br>Training Conference
+                            </div>
+                        </div>
+                        <div class="border">a</div>
+                        <div class="d-item">
+                            <div class="date">May</div>
+                            <div>NEMUN
+                            </div>
+                        </div>
+                        <div class="border">a</div>
+                        <div class="d-item">
+                            <div class="date">June</div>
+                            <div>JMUN
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+        <div class="group">
+            <div class="title">
+                <div class="inner-space">
+                    <span class="material-symbols-outlined icon">
+                        emoji_people
+                    </span>
+                    <span class="title-text">Student Officers</span>
+                </div>
+            </div>
+            <div class="content">
+                <div class="inner-space">
+                    <div class="container" style="justify-content: space-between">
+                        <div class="p-item">
+                            <img src="./Carina.jpg">
+                            <div>
+                                <div>Secretary General</div>
+                                <div style="font-size: 24px">Carina Chang</div>
+                            </div>
+                        </div>
+                        <div class="p-item">
+                            <img src="./Christine.jpg">
+                            <div>
+                                <div>Deputy Secretary General</div>
+                                <div style="font-size: 24px">Christine Wu</div>
+                            </div>
+                        </div>
+                        <div class="learn-more">Learn more <span class="material-symbols-outlined" style="">arrow_forward_ios</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="register" style="margin-top: 20px">Register Now</div>
+    </div>
+    
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting)
+                    entry.target.classList.add("show");
+                //else
+                //entry.target.classList.remove("show")
+            })
+        })
+        const groups = document.querySelectorAll(".title, .content")
+        groups.forEach(a => observer.observe(a))
+    </script>
+</body>
